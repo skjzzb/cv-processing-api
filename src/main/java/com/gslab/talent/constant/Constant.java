@@ -10,7 +10,7 @@ public class Constant {
 	public static final String ADD_CANDIDATE = "/candidiate";
 	public static final String DELETE_CANDIDATE_BY_ID = "/candidiate/{id}";
 
-	public static final String UPDATE_CANDIDATE =" /candidate/update";
+	public static final String UPDATE_CANDIDATE ="/candidate/update";
 	
 	public static final String DOCUMENT_ID = "id";
 	public static final String GET_LIST_OF_DOCUMENTS = "/doc";
@@ -18,5 +18,5 @@ public class Constant {
 	public static final String ADD_DOCUMENT = "/doc";
 	public static final String DELETE_DOCUMENT_BY_ID = "/doc/{id}";
 
-	public static final String UPDATE_DOCUMENT =" /doc/update";
+	public static final String UPDATE_DOCUMENT ="/doc/update";
 }
