@@ -44,7 +44,7 @@ public class DocumentController {
 
 
 	@PostMapping(value = Constant.ADD_DOCUMENT, headers = Constant.ACCEPT_JSON)
-	public ResponseEntity<Void> createEmployee(@RequestBody Document obj, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<Void> createDocument(@RequestBody Document obj, UriComponentsBuilder ucBuilder) {
 		ServiceObj.createDocument(obj);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path(Constant.GET_CANDIDATE_BY_ID).buildAndExpand(obj.getId()).toUri());
