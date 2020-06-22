@@ -19,4 +19,27 @@ public class Constant {
 	public static final String DELETE_DOCUMENT_BY_ID = "/doc/{id}";
 
 	public static final String UPDATE_DOCUMENT ="/doc/update";
+	
+	public static final String GET_LIST_OF_USERS = "/user";
+	public static final String ADD_USER = "/user";
+	public static final String GET_USER_BY_ID = "/user/{userId}";
+	public static final String UPDATE_USER =  "/user/{userId}";
+
+	public static final String DELETE_USER = "/user/{userId}";
+	
+	public static final String TECHNOLOGY_ID = "technologyId";
+	public static final String GET_LIST_OF_TECHNOLOGY = "/technology";
+	public static final String ADD_TECHNOLOGY = "/technology";
+	public static final String GET_TECHNOLOGY_BY_ID = "/technology/{technologyId}";
+	public static final String UPDATE_TECHNOLOGY =  "/technology/{technologyId}";
+
+	public static final String DELETE_TECHNOLOGY = "/technology/{technologyId}";
+	
+	public static final String SUBTECHNOLOGY_ID = "subTechnologyId";
+	public static final String GET_LIST_OF_SUBTECHNOLOGY = "/subtechnology";
+	public static final String ADD_SUBTECHNOLOGY = "/subtechnology";
+	public static final String GET_SUBTECHNOLOGY_BY_ID = "/subtechnology/{subTechnologyId}";
+	public static final String UPDATE_SUBTECHNOLOGY =  "/subtechnology/{subTechnologyId}";
+
+	public static final String DELETE_SUBTECHNOLOGY = "/subtechnology/{subTechnologyId}";
 }
