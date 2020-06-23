@@ -23,8 +23,9 @@ import com.gslab.talent.model.Candidate;
 import com.gslab.talent.model.User;
 import com.gslab.talent.service.UserService;
 
-@CrossOrigin
+
 @RestController
+@CrossOrigin(allowedHeaders = "*")
 @RequestMapping(value = "/v1")
 public class UserController {
 	
