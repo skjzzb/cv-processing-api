@@ -46,4 +46,8 @@ public class Constant {
 	public static final String UPDATE_SUBTECHNOLOGY =  "/subtechnology/{subTechnologyId}";
 
 	public static final String DELETE_SUBTECHNOLOGY = "/subtechnology/{subTechnologyId}";
+
+	public static final String GET_LIST_OF_VACANCY= "/vacancy";
+
+	public static final String GET_VACANCY_BY_ID = "/vacancy/{vacancyId}";
 }

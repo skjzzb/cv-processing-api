@@ -13,7 +13,7 @@ public class Technology {
 	
 	
 	public Technology() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public Technology(int technologyId, String technologyName) {
