@@ -9,7 +9,6 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Data
 @Table(name="users")
 public class User {
 	
@@ -28,6 +27,7 @@ public class User {
 	String password;
 	String role;
 	String url;
+
 	public Integer getUserId() {
 		return userId;
 	}
@@ -106,6 +106,4 @@ public class User {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-	
 }
