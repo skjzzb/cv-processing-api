@@ -36,6 +36,11 @@ public class SubTechnologyController {
 	public List<SubTechnology> getAllSubTechnology() {
 		return ServiceObj.getAllSubTechnology();
 	}
+	
+	@GetMapping(value = Constant.GET_SUBTECHNOLOGY_BY_TECHNOLOGY_ID, headers = Constant.ACCEPT_JSON, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<SubTechnology> getAllSubTechnologyByTechnologyId(@PathVariable(Constant.TECHNOLOGY_ID) int id) {
+		return ServiceObj.getAllByTechnologyId(id);
+	}
 
 	@GetMapping(value = Constant.GET_SUBTECHNOLOGY_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SubTechnology> getSubTechnologyById(@PathVariable(Constant.SUBTECHNOLOGY_ID) long id) {
