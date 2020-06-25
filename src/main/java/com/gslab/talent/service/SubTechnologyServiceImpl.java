@@ -1,7 +1,10 @@
 package com.gslab.talent.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.persistence.criteria.From;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +47,24 @@ public class SubTechnologyServiceImpl implements SubTechnologyService {
 	public void deleteSubTechnologyById(long id) {
 		this.repoObj.deleteById(id);
 		
+	}
+
+	@Override
+	public List<SubTechnology> getAllByTechnologyId(int id) {
+		
+		List<SubTechnology> selected = new ArrayList<SubTechnology>();
+		
+		List<SubTechnology> list=repoObj.findAll();
+		
+		for(SubTechnology l :list)
+		{
+			if(l.getTechnologyId()==id)
+			{
+				selected.add(l);
+			}
+		}
+		
+		return selected;
 	}
 
 }

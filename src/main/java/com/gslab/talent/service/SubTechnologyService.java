@@ -11,5 +11,6 @@ public interface SubTechnologyService {
 	public  SubTechnology update(SubTechnology Obj);
 	public SubTechnology findById(long id);
 	public void deleteSubTechnologyById(long id);
+	public List<SubTechnology> getAllByTechnologyId(int id);
 
 }
