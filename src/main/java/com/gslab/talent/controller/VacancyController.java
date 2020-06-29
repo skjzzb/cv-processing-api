@@ -31,7 +31,7 @@ public class VacancyController {
 
 	@GetMapping(value = Constant.GET_LIST_OF_VACANCY)
 	public ResponseEntity<List<Vacancy>> getAllVacancy(){
-		return new ResponseEntity<List<Vacancy>>(vacancyServiceObj.getAllVacancy(), HttpStatus.FOUND);
+		return new ResponseEntity<List<Vacancy>>(vacancyServiceObj.getAllVacancy(), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = Constant.GET_VACANCY_BY_ID)
