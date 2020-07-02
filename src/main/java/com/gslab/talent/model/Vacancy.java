@@ -2,11 +2,15 @@ package com.gslab.talent.model;
 
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,15 +33,16 @@ public class Vacancy {
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(pattern = "yyyy-MM-dd",timezone="IST")
 	Date posOnBoardDate;
+	
 	String jd;
 	Integer noOfVacancy;
 	
+	@OneToMany(mappedBy = "vacancy", orphanRemoval = true)
+	List<Candidate> candidateList = new ArrayList<>();
 	public Vacancy() {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
 	public Vacancy(Integer vacancyId, String jobTitle, String projectName, Date posOpenDate, Date posOnBoardDate,
 			String jd, Integer noOfVacancy) {
 		super();
@@ -111,8 +116,25 @@ public class Vacancy {
 	public void setJd(String jd) {
 		this.jd = jd;
 	}
+	
+	public List<Candidate> getCandidateList() {
+		return candidateList;
+	}
+	public void setCandidateList(List<Candidate> candidateList) {
+		this.candidateList = candidateList;
+	}
 
-
+    //helper methods
+	public void addCandidate(Candidate candidate) {
+		this.candidateList.add(candidate);
+		candidate.setVacancy(this);
+	}
+	public void removeCandidate(Candidate candidate )
+	{
+		candidateList.remove(candidate);
+		candidate.setVacancy(null);
+	}
+	
 
 	@Override
 	public String toString() {
