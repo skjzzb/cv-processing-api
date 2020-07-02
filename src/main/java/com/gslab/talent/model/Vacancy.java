@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,20 +34,21 @@ public class Vacancy {
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(pattern = "yyyy-MM-dd",timezone="IST")
 	Date posOnBoardDate;
+	
 	String jd;
 	Integer noOfVacancy;
 	String shortSummary;
 	
 	//@JsonBackReference
 	//@JsonIgnore
-	public List<Candidate> candidateList=new ArrayList<>();
 	
+	@OneToMany(mappedBy = "vacancy", orphanRemoval = true)
+	List<Candidate> candidateList = new ArrayList<>();
+
 	public Vacancy() {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
 	public Vacancy(Integer vacancyId, String jobTitle, String projectName, Date posOpenDate, Date posOnBoardDate,
 			String jd, Integer noOfVacancy,String shortSummary) {
 		super();
@@ -122,6 +124,7 @@ public class Vacancy {
 		this.jd = jd;
 	}
 	
+
 	public String getShortSummary() {
 		return shortSummary;
 	}
@@ -130,27 +133,24 @@ public class Vacancy {
 		this.shortSummary = shortSummary;
 	}
 	
-	@OneToMany(targetEntity=Candidate.class, mappedBy ="vacancy", cascade = CascadeType.ALL,orphanRemoval=true)
-	public List<Candidate> getCandidateList() {
-	return candidateList;
-		}
-
-	public void setCandidateList(List<Candidate> candidateList) {
-	this.candidateList = candidateList;
-		}	
-
-
-	  public void addCandidate(Candidate c) {
-			candidateList.add(c);
-			c.setVacancy(this);
-		
-		}
-
-		public void removeCandidate(Candidate c) {
-			candidateList.remove(c);
-			c.setVacancy(null);
-		}
 	
+	public List<Candidate> getCandidateList() {
+		return candidateList;
+	}
+	public void setCandidateList(List<Candidate> candidateList) {
+		this.candidateList = candidateList;
+	}
+
+    //helper methods
+	public void addCandidate(Candidate candidate) {
+		this.candidateList.add(candidate);
+		candidate.setVacancy(this);
+	}
+	public void removeCandidate(Candidate candidate )
+	{
+		candidateList.remove(candidate);
+		candidate.setVacancy(null);
+	}
 	
 	@Override
 	public String toString() {

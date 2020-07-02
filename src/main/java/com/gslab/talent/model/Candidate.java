@@ -25,10 +25,11 @@ public class Candidate {
 	
 	@Column(name="technologyStack")
 	private String technologyStack;
-
+	
+	
 	@ManyToOne
 	@JoinColumn(name = "vacancyId")
-	Vacancy vacancy;
+	private Vacancy vacancy;
 	
 	public long getId() {
 		return id;
@@ -62,6 +63,15 @@ public class Candidate {
 		this.technologyStack = technologyStack;
 	}
 
+	public Vacancy getVacancy() {
+		return vacancy;
+	}
+
+	public void setVacancy(Vacancy vacancy) {
+		this.vacancy = vacancy;
+	}
+
+	
 	public Candidate(String candidateName, String contactNo, String technologyStack) {
 		super();
 		this.candidateName = candidateName;
@@ -72,17 +82,5 @@ public class Candidate {
 	public Candidate() {
 		super();
 	}
-
-	
-	public Vacancy getVacancy() {
-		return vacancy;
-	}
-
-	public void setVacancy(Vacancy vacancy) {
-		this.vacancy = vacancy;
-	}
-
-	
-	
 	
 }
