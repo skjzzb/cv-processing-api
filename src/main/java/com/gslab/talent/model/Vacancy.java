@@ -1,16 +1,20 @@
 package com.gslab.talent.model;
 
-
-
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -31,6 +35,11 @@ public class Vacancy {
 	Date posOnBoardDate;
 	String jd;
 	Integer noOfVacancy;
+	String shortSummary;
+	
+	//@JsonBackReference
+	//@JsonIgnore
+	public List<Candidate> candidateList=new ArrayList<>();
 	
 	public Vacancy() {
 		// TODO Auto-generated constructor stub
@@ -39,7 +48,7 @@ public class Vacancy {
 	
 	
 	public Vacancy(Integer vacancyId, String jobTitle, String projectName, Date posOpenDate, Date posOnBoardDate,
-			String jd, Integer noOfVacancy) {
+			String jd, Integer noOfVacancy,String shortSummary) {
 		super();
 		this.vacancyId = vacancyId;
 		this.jobTitle = jobTitle;
@@ -48,6 +57,7 @@ public class Vacancy {
 		this.posOnBoardDate = posOnBoardDate;
 		this.jd = jd;
 		this.noOfVacancy = noOfVacancy;
+		this.shortSummary=shortSummary;
 	}
 
 
@@ -111,17 +121,43 @@ public class Vacancy {
 	public void setJd(String jd) {
 		this.jd = jd;
 	}
+	
+	public String getShortSummary() {
+		return shortSummary;
+	}
+
+	public void setShortSummary(String shortSummary) {
+		this.shortSummary = shortSummary;
+	}
+	
+	@OneToMany(targetEntity=Candidate.class, mappedBy ="vacancy", cascade = CascadeType.ALL,orphanRemoval=true)
+	public List<Candidate> getCandidateList() {
+	return candidateList;
+		}
+
+	public void setCandidateList(List<Candidate> candidateList) {
+	this.candidateList = candidateList;
+		}	
 
 
+	  public void addCandidate(Candidate c) {
+			candidateList.add(c);
+			c.setVacancy(this);
+		
+		}
 
+		public void removeCandidate(Candidate c) {
+			candidateList.remove(c);
+			c.setVacancy(null);
+		}
+	
+	
 	@Override
 	public String toString() {
 		return "Vacancy [vacancyId=" + vacancyId + ", jobTitle=" + jobTitle + ", projectName=" + projectName
 				+ ", posOpenDate=" + posOpenDate + ", posOnBoardDate=" + posOnBoardDate + ", jd=" + jd
-				+ ", noOfVacancy=" + noOfVacancy + "]";
+				+ ", noOfVacancy=" + noOfVacancy + ", shortSummary=" + shortSummary + "]";
 	}
 
-	
-	
 	
 }

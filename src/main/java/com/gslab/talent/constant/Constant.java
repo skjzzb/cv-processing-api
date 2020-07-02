@@ -18,7 +18,6 @@ public class Constant {
 	public static final String ADD_DOCUMENT = "/doc";
 	public static final String DELETE_DOCUMENT_BY_ID = "/doc/{id}";
 
-
 	public static final String UPDATE_DOCUMENT ="/doc/update";
 
 	

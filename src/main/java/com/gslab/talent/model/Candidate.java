@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +26,10 @@ public class Candidate {
 	@Column(name="technologyStack")
 	private String technologyStack;
 
+	@ManyToOne
+	@JoinColumn(name = "vacancyId")
+	Vacancy vacancy;
+	
 	public long getId() {
 		return id;
 	}
@@ -66,6 +72,16 @@ public class Candidate {
 	public Candidate() {
 		super();
 	}
+
+	
+	public Vacancy getVacancy() {
+		return vacancy;
+	}
+
+	public void setVacancy(Vacancy vacancy) {
+		this.vacancy = vacancy;
+	}
+
 	
 	
 	
