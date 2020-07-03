@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,9 +23,19 @@ public class Candidate {
 	@Column(name="contactNo")
 	private String contactNo;
 	
+	@Column(name="email")
+	private String email;
+	
 	@Column(name="technologyStack")
 	private String technologyStack;
-
+	
+	@Column(name="reqMatchingPercent")
+	private int reqMatchingPercent;
+	
+	@ManyToOne
+	@JoinColumn(name = "vacancyId")
+	private Vacancy vacancy;
+	
 	public long getId() {
 		return id;
 	}
@@ -56,17 +68,45 @@ public class Candidate {
 		this.technologyStack = technologyStack;
 	}
 
-	public Candidate(String candidateName, String contactNo, String technologyStack) {
+	public Vacancy getVacancy() {
+		return vacancy;
+	}
+
+	public void setVacancy(Vacancy vacancy) {
+		this.vacancy = vacancy;
+	}
+
+	public int getReqMatchingPercent() {
+		return reqMatchingPercent;
+	}
+
+	public void setReqMatchingPercent(int reqMatchingPercent) {
+		this.reqMatchingPercent = reqMatchingPercent;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	
+	
+	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
+			int reqMatchingPercent) {
 		super();
+		this.id = id;
 		this.candidateName = candidateName;
 		this.contactNo = contactNo;
+		this.email = email;
 		this.technologyStack = technologyStack;
+		this.reqMatchingPercent = reqMatchingPercent;
 	}
 
 	public Candidate() {
 		super();
 	}
-	
-	
 	
 }

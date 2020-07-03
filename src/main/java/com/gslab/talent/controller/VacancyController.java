@@ -37,7 +37,7 @@ public class VacancyController {
 	@GetMapping(value = Constant.GET_VACANCY_BY_ID)
 	public ResponseEntity<Vacancy> getVacancyById(@PathVariable int vacancyId){
 		System.out.println("VacancyController.getVacancyById()");
-		return new ResponseEntity<Vacancy>(vacancyServiceObj.getVacancyById(vacancyId), HttpStatus.FOUND);
+		return new ResponseEntity<Vacancy>(vacancyServiceObj.getVacancyById(vacancyId), HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/vacancy")
