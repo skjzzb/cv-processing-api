@@ -10,5 +10,4 @@ import com.gslab.talent.model.Vacancy;
 @Repository
 public interface VacancyRepository extends JpaRepository<Vacancy, Integer> {
 
-	List<Vacancy> findAll();
 }

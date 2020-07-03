@@ -23,9 +23,14 @@ public class Candidate {
 	@Column(name="contactNo")
 	private String contactNo;
 	
+	@Column(name="email")
+	private String email;
+	
 	@Column(name="technologyStack")
 	private String technologyStack;
 	
+	@Column(name="reqMatchingPercent")
+	private int reqMatchingPercent;
 	
 	@ManyToOne
 	@JoinColumn(name = "vacancyId")
@@ -71,12 +76,33 @@ public class Candidate {
 		this.vacancy = vacancy;
 	}
 
+	public int getReqMatchingPercent() {
+		return reqMatchingPercent;
+	}
+
+	public void setReqMatchingPercent(int reqMatchingPercent) {
+		this.reqMatchingPercent = reqMatchingPercent;
+	}
 	
-	public Candidate(String candidateName, String contactNo, String technologyStack) {
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	
+	
+	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
+			int reqMatchingPercent) {
 		super();
+		this.id = id;
 		this.candidateName = candidateName;
 		this.contactNo = contactNo;
+		this.email = email;
 		this.technologyStack = technologyStack;
+		this.reqMatchingPercent = reqMatchingPercent;
 	}
 
 	public Candidate() {

@@ -5,9 +5,11 @@ public class Constant {
 	public static final String ACCEPT_JSON = "Accept=application/json";
 
 	public static final String CANDIDATE_ID = "id";
+	public static final String VACANCY_ID = "id";
 	public static final String GET_LIST_OF_CANDIDATES = "/candidiate";
 	public static final String GET_CANDIDATE_BY_ID = "/candidiate/{id}";
-	public static final String ADD_CANDIDATE = "/candidiate";
+	public static final String GET_CANDIDATE_BY_VACANCY_ID = "/candidiate/vacancy/{id}";
+	public static final String ADD_CANDIDATE = "/candidiate/{id}";
 	public static final String DELETE_CANDIDATE_BY_ID = "/candidiate/{id}";
 
 	public static final String UPDATE_CANDIDATE ="/candidate/update";

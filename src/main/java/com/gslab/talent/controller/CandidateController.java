@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,10 +47,9 @@ public class CandidateController {
 	}
 
 
-	@PostMapping(value = Constant.ADD_CANDIDATE, headers = Constant.ACCEPT_JSON)
-	public ResponseEntity<Void> createCandidate(@RequestBody Candidate candidateObj, UriComponentsBuilder ucBuilder) {
-		System.out.println(candidateObj);
-		ServiceObj.createCandidate(candidateObj);
+	@PutMapping(value = Constant.ADD_CANDIDATE, headers = Constant.ACCEPT_JSON)
+	public ResponseEntity<Void> createCandidate(@PathVariable int id,@RequestBody Candidate candidateObj, UriComponentsBuilder ucBuilder) {
+		ServiceObj.createCandidate(candidateObj,id);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path(Constant.GET_CANDIDATE_BY_ID).buildAndExpand(candidateObj.getId()).toUri());
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
@@ -70,5 +70,10 @@ public class CandidateController {
 		return new ResponseEntity<Void>(headers, HttpStatus.OK);
 	}
 	
+	@GetMapping(value = Constant.GET_CANDIDATE_BY_VACANCY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Candidate> getCandidateByVacancyId(@PathVariable(Constant.VACANCY_ID) int id)
+	{
+		return ServiceObj.getCandidateByVacancyId(id);
+	}
 
 }

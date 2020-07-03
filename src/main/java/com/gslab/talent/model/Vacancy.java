@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="vacancy")
@@ -39,9 +40,8 @@ public class Vacancy {
 	Integer noOfVacancy;
 	String shortSummary;
 	
-	//@JsonBackReference
+	@JsonBackReference
 	//@JsonIgnore
-	
 	@OneToMany(mappedBy = "vacancy", orphanRemoval = true)
 	List<Candidate> candidateList = new ArrayList<>();
 
