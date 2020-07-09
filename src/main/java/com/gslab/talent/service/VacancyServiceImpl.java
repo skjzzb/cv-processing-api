@@ -1,5 +1,9 @@
 package com.gslab.talent.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +18,40 @@ public class VacancyServiceImpl implements VacancyService {
 	VacancyRepository vacancyRepoObj;
 
 	@Override
-	public List<Vacancy> getAllVacancy() {
-		System.out.println("VacancyServiceImpl.getAllVacancy()");
-		return vacancyRepoObj.findAll();
+	public List<Vacancy> getAllVacancy(String sort) {
+		List<Vacancy> list1=new ArrayList<Vacancy>();
+		
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
+		   LocalDateTime now = LocalDateTime.now();
+		
+		   List<Vacancy> list=vacancyRepoObj.findAll();
+		
+		if(sort.equalsIgnoreCase("avalible")) {
+			System.out.println(sort); 
+			   
+			   for(Vacancy l:list)
+			   {
+				   if(dtf.format(now).compareTo(l.getPosOnBoardDate().toString())<=0)
+				   {
+					   list1.add(l);
+				   }
+			   }
+			return list1;
+		}else if(sort.equalsIgnoreCase("closed"))
+		{
+			System.out.println(sort);  
+			   for(Vacancy l:list)
+			   {
+				   if(dtf.format(now).compareTo(l.getPosOnBoardDate().toString())>0)
+				   {
+					   list1.add(l);
+				   }
+			   }
+			return list1;
+		}else {
+			return list;		
+		}
+		
 	}
 
 	@Override

@@ -39,6 +39,7 @@ public class Vacancy {
 	String jd;
 	Integer noOfVacancy;
 	String shortSummary;
+	Integer experienceRequired;
 	
 	@JsonBackReference
 	//@JsonIgnore
@@ -61,8 +62,20 @@ public class Vacancy {
 		this.noOfVacancy = noOfVacancy;
 		this.shortSummary=shortSummary;
 	}
-
-
+	
+	public Vacancy(Integer vacancyId, String jobTitle, String projectName, Date posOpenDate, Date posOnBoardDate,
+			String jd, Integer noOfVacancy, String shortSummary, Integer experienceRequired) {
+		super();
+		this.vacancyId = vacancyId;
+		this.jobTitle = jobTitle;
+		this.projectName = projectName;
+		this.posOpenDate = posOpenDate;
+		this.posOnBoardDate = posOnBoardDate;
+		this.jd = jd;
+		this.noOfVacancy = noOfVacancy;
+		this.shortSummary = shortSummary;
+		this.experienceRequired = experienceRequired;
+	}
 
 	public Integer getNoOfVacancy() {
 		return noOfVacancy;
@@ -133,7 +146,14 @@ public class Vacancy {
 		this.shortSummary = shortSummary;
 	}
 	
-	
+	public Integer getExperienceRequired() {
+		return experienceRequired;
+	}
+
+	public void setExperienceRequired(Integer experienceRequired) {
+		this.experienceRequired = experienceRequired;
+	}
+
 	public List<Candidate> getCandidateList() {
 		return candidateList;
 	}
@@ -151,13 +171,14 @@ public class Vacancy {
 		candidateList.remove(candidate);
 		candidate.setVacancy(null);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Vacancy [vacancyId=" + vacancyId + ", jobTitle=" + jobTitle + ", projectName=" + projectName
 				+ ", posOpenDate=" + posOpenDate + ", posOnBoardDate=" + posOnBoardDate + ", jd=" + jd
-				+ ", noOfVacancy=" + noOfVacancy + ", shortSummary=" + shortSummary + "]";
+				+ ", noOfVacancy=" + noOfVacancy + ", shortSummary=" + shortSummary + ", experienceRequired="
+				+ experienceRequired + "]";
 	}
 
-	
+		
 }
