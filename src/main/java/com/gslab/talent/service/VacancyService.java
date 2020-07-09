@@ -5,7 +5,7 @@ import java.util.List;
 import com.gslab.talent.model.Vacancy;
 
 public interface VacancyService {
-	List<Vacancy> getAllVacancy();
+	List<Vacancy> getAllVacancy(String sort);
 	Vacancy getVacancyById(Integer vacancyId);
 	void createNewVacancy(Vacancy vacancy);
 	void updateVacancy(Vacancy vacancy);

@@ -3,6 +3,7 @@ package com.gslab.talent.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gslab.talent.constant.Constant;
 import com.gslab.talent.model.User;
@@ -30,8 +32,8 @@ public class VacancyController {
 	VacancyService vacancyServiceObj;
 
 	@GetMapping(value = Constant.GET_LIST_OF_VACANCY)
-	public ResponseEntity<List<Vacancy>> getAllVacancy(){
-		return new ResponseEntity<List<Vacancy>>(vacancyServiceObj.getAllVacancy(), HttpStatus.OK);
+	public ResponseEntity<List<Vacancy>> getAllVacancy(@RequestParam String sort){
+		return new ResponseEntity<List<Vacancy>>(vacancyServiceObj.getAllVacancy(sort), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = Constant.GET_VACANCY_BY_ID)
