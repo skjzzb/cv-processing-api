@@ -46,7 +46,7 @@ def send(pdf_file):
         "email":emailAddress,
         "contactNo":contactNo,
         "technologyStack":listToString(candidate_tech_stack),
-        "reqMatchingPercent":'',
+        "reqMatchingPercent":0,
         "yearOfExperience":candidate_experience
         }
 
@@ -54,7 +54,7 @@ def send(pdf_file):
 
         vacancies=updatedVacancy.getVacancies()
         for i in range(len(vacancies.json())):
-                reqMatchingPercent=skillMatching.skillMatching(candidate_data.get('technologyStack'),vacancies.json()[i].get('jd'))
+                reqMatchingPercent=skillMatching.skillMatching(candidate_tech_stack,vacancies.json()[i].get('jd'))
                 candidate_reqMatching={"reqMatchingPercent":reqMatchingPercent}
                 candidate_data.update(candidate_reqMatching)
                 print(candidate_data)
