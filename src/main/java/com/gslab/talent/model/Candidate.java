@@ -129,5 +129,13 @@ public class Candidate {
 	public Candidate() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "Candidate [id=" + id + ", candidateName=" + candidateName + ", contactNo=" + contactNo + ", email="
+				+ email + ", technologyStack=" + technologyStack + ", reqMatchingPercent=" + reqMatchingPercent
+				+ ", yearOfExperience=" + yearOfExperience + "]";
+	}
+	
 	
 }

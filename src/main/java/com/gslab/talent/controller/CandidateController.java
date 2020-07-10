@@ -55,11 +55,11 @@ public class CandidateController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 	
-	@PostMapping(value = Constant.UPDATE_CANDIDATE ,headers = Constant.ACCEPT_JSON)
-	public ResponseEntity<Void> updateCandidateInfo(@RequestBody Candidate candidateObj )
+	@PutMapping(value = Constant.UPDATE_CANDIDATE ,headers = Constant.ACCEPT_JSON)
+	public ResponseEntity<Void> updateCandidateInfo(@PathVariable int id,@RequestBody Candidate candidateObj )
 	{
-		ServiceObj.update(candidateObj);
-		return new ResponseEntity<Void>(HttpStatus.FOUND);
+		ServiceObj.update(candidateObj,id);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping(Constant.DELETE_CANDIDATE_BY_ID)
