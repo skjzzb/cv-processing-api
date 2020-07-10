@@ -12,7 +12,7 @@ public class Constant {
 	public static final String ADD_CANDIDATE = "/candidiate/{id}";
 	public static final String DELETE_CANDIDATE_BY_ID = "/candidiate/{id}";
 
-	public static final String UPDATE_CANDIDATE ="/candidate/update";
+	public static final String UPDATE_CANDIDATE ="/candidate/update/{id}";
 	
 	public static final String DOCUMENT_ID = "id";
 	public static final String GET_LIST_OF_DOCUMENTS = "/doc";

@@ -62,8 +62,9 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public Candidate update(Candidate candidateObj) {
-		return candidateRepoObj.save(candidateObj);
+	public void update(Candidate candidateObj,int id) {
+		createCandidate(candidateObj, id);
+		//return candidateRepoObj.save(candidateObj);
 	}
 
 	@Override

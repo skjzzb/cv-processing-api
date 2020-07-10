@@ -9,7 +9,7 @@ public interface CandidateService {
 	public void createCandidate(Candidate candidateObj,int id);
 	public  List<Candidate> getAllCandidate();
 	public Candidate findById(long id);
-	public  Candidate update(Candidate candidateObj);
+	public  void update(Candidate candidateObj,int id);
 	public void deleteCandidateById(long id);
 	public List<Candidate> getCandidateByVacancyId(int id);
 }
