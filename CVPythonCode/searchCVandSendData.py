@@ -16,9 +16,9 @@ def searchCVandSendData(folder_id,folder_name, service):
     if folder_name!=yesterdays_folder_name:
         yesterdays_folder_name=folder_name
         url = 'https://cv-processing-api.herokuapp.com/v1/doc'
-        #x = requests.post(url, json=doc_data,headers=headers)
+        x = requests.post(url, json=doc_data,headers=headers)
         
     elif folder_name==yesterdays_folder_name:
         url = 'https://cv-processing-api.herokuapp.com/v1/doc/update'
-        #x = requests.put(url, json=doc_data,headers=headers)
+        x = requests.put(url, json=doc_data,headers=headers)
         
