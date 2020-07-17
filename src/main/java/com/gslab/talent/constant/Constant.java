@@ -52,4 +52,13 @@ public class Constant {
 	public static final String GET_LIST_OF_VACANCY= "/vacancy";
 
 	public static final String GET_VACANCY_BY_ID = "/vacancy/{vacancyId}";
+	
+	public static final String FEATURE_NAME = "roleName";
+	public static final String FEATURE_ID = "featureId";
+	public static final String GET_LIST_OF_FEATURE = "/feature";
+	public static final String ADD_FEATURE = "/feature";
+	public static final String GET_FEATURE_BY_ROLE = "/feature/{roleName}";
+	public static final String UPDATE_FEATURE =  "/feature/update";
+	
+	public static final String DELETE_FEATURE = "/feature/{featureId}";
 }

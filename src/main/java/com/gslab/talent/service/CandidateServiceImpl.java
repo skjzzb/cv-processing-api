@@ -32,6 +32,15 @@ public class CandidateServiceImpl implements CandidateService {
 	@Transactional
 	@Override
 	public void createCandidate(Candidate candidateObj,int id) {
+		
+		List<Candidate> list =getCandidateByVacancyId(id);
+		for (Candidate candidate : list) {
+			
+			if(candidate.getEmail().equalsIgnoreCase(candidateObj.getEmail()))
+			{
+			candidateObj.setId(candidate.getId());	
+			}
+		}
 			Optional<Vacancy> vacancy= vacancyRepository.findById(id); 
 			Vacancy v=vacancy.get();
 			v.addCandidate(candidateObj);
