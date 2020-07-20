@@ -35,6 +35,8 @@ public class Candidate {
 	
 	Integer yearOfExperience;
 	
+	String employmentStatus;
+	
 	@ManyToOne
 	@JoinColumn(name = "vacancyId")
 	private Vacancy vacancy;
@@ -102,18 +104,24 @@ public class Candidate {
 	public void setYearOfExperience(Integer yearOfExperience) {
 		this.yearOfExperience = yearOfExperience;
 	}
+	
+	public String getEmploymentStatus() {
+		return employmentStatus;
+	}
 
-	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
-			int reqMatchingPercent) {
+	public void setEmploymentStatus(String employmentStatus) {
+		this.employmentStatus = employmentStatus;
+	}
+	
+	public Candidate(long id, String candidateName, String contactNo, String email, String employmentStatus) {
 		super();
 		this.id = id;
 		this.candidateName = candidateName;
 		this.contactNo = contactNo;
 		this.email = email;
-		this.technologyStack = technologyStack;
-		this.reqMatchingPercent = reqMatchingPercent;
+		this.employmentStatus = employmentStatus;
 	}
-	
+
 	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
 			int reqMatchingPercent, Integer yearOfExperience) {
 		super();
@@ -134,7 +142,7 @@ public class Candidate {
 	public String toString() {
 		return "Candidate [id=" + id + ", candidateName=" + candidateName + ", contactNo=" + contactNo + ", email="
 				+ email + ", technologyStack=" + technologyStack + ", reqMatchingPercent=" + reqMatchingPercent
-				+ ", yearOfExperience=" + yearOfExperience + "]";
+				+ ", yearOfExperience=" + yearOfExperience + ", employmentStatus=" + employmentStatus + "]";
 	}
 	
 	
