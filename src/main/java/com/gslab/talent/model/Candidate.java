@@ -38,8 +38,8 @@ public class Candidate {
 	@Column(name="shortSummaryMatchingPercent")
 	private int shortSummaryMatchingPercent;
 	
-	//@Column(name="")
-	//Boolean interview ;
+	@Column(name="interviewStatus")
+	private String interviewStatus;
 	
 	Integer yearOfExperience;
 	
@@ -136,6 +136,14 @@ public class Candidate {
 	public void setShortSummaryMatchingPercent(int shortSummaryMatchingPercent) {
 		this.shortSummaryMatchingPercent = shortSummaryMatchingPercent;
 	}
+	
+	public String getInterviewStatus() {
+		return interviewStatus;
+	}
+
+	public void setInterviewStatus(String interviewStatus) {
+		this.interviewStatus = interviewStatus;
+	}
 
 	public Candidate(long id, String candidateName, String contactNo, String email, String employmentStatus) {
 		super();
@@ -144,18 +152,6 @@ public class Candidate {
 		this.contactNo = contactNo;
 		this.email = email;
 		this.employmentStatus = employmentStatus;
-	}
-
-	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
-			int reqMatchingPercent, Integer yearOfExperience) {
-		super();
-		this.id = id;
-		this.candidateName = candidateName;
-		this.contactNo = contactNo;
-		this.email = email;
-		this.technologyStack = technologyStack;
-		this.reqMatchingPercent = reqMatchingPercent;
-		this.yearOfExperience = yearOfExperience;
 	}
 	
 	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
@@ -172,6 +168,25 @@ public class Candidate {
 		this.shortSummaryMatchingPercent = shortSummaryMatchingPercent;
 		this.yearOfExperience = yearOfExperience;
 	}
+	
+	
+
+	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
+			int reqMatchingPercent, int technologyStackMatchingPercent, int shortSummaryMatchingPercent,
+			String interviewStatus, Integer yearOfExperience, String employmentStatus) {
+		super();
+		this.id = id;
+		this.candidateName = candidateName;
+		this.contactNo = contactNo;
+		this.email = email;
+		this.technologyStack = technologyStack;
+		this.reqMatchingPercent = reqMatchingPercent;
+		this.technologyStackMatchingPercent = technologyStackMatchingPercent;
+		this.shortSummaryMatchingPercent = shortSummaryMatchingPercent;
+		this.interviewStatus = interviewStatus;
+		this.yearOfExperience = yearOfExperience;
+		this.employmentStatus = employmentStatus;
+	}
 
 	public Candidate() {
 		super();
@@ -182,8 +197,10 @@ public class Candidate {
 		return "Candidate [id=" + id + ", candidateName=" + candidateName + ", contactNo=" + contactNo + ", email="
 				+ email + ", technologyStack=" + technologyStack + ", reqMatchingPercent=" + reqMatchingPercent
 				+ ", technologyStackMatchingPercent=" + technologyStackMatchingPercent
-				+ ", shortSummaryMatchingPercent=" + shortSummaryMatchingPercent + ", yearOfExperience="
-				+ yearOfExperience + ", employmentStatus=" + employmentStatus + "]";
+				+ ", shortSummaryMatchingPercent=" + shortSummaryMatchingPercent + ", interviewStatus="
+				+ interviewStatus + ", yearOfExperience=" + yearOfExperience + ", employmentStatus=" + employmentStatus
+				+ "]";
 	}
-	
+
+
 }
