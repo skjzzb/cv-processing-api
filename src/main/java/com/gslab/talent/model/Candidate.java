@@ -30,13 +30,11 @@ public class Candidate {
 	private String technologyStack;
 	
 	@Column(name="reqMatchingPercent")
-	private int reqMatchingPercent;
+	private Integer reqMatchingPercent;
 	
-	@Column(name="technologyStackMatchingPercent")
-	private int technologyStackMatchingPercent;
+	private Integer technologyStackMatchingPercent;
 	
-	@Column(name="shortSummaryMatchingPercent")
-	private int shortSummaryMatchingPercent;
+	private Integer shortSummaryMatchingPercent;
 	
 	@Column(name="interviewStatus")
 	private String interviewStatus;
@@ -88,14 +86,6 @@ public class Candidate {
 	public void setVacancy(Vacancy vacancy) {
 		this.vacancy = vacancy;
 	}
-
-	public int getReqMatchingPercent() {
-		return reqMatchingPercent;
-	}
-
-	public void setReqMatchingPercent(int reqMatchingPercent) {
-		this.reqMatchingPercent = reqMatchingPercent;
-	}
 	
 	public String getEmail() {
 		return email;
@@ -120,29 +110,37 @@ public class Candidate {
 	public void setEmploymentStatus(String employmentStatus) {
 		this.employmentStatus = employmentStatus;
 	}
-	
-	public int getTechnologyStackMatchingPercent() {
-		return technologyStackMatchingPercent;
-	}
-
-	public void setTechnologyStackMatchingPercent(int technologyStackMatchingPercent) {
-		this.technologyStackMatchingPercent = technologyStackMatchingPercent;
-	}
-
-	public int getShortSummaryMatchingPercent() {
-		return shortSummaryMatchingPercent;
-	}
-
-	public void setShortSummaryMatchingPercent(int shortSummaryMatchingPercent) {
-		this.shortSummaryMatchingPercent = shortSummaryMatchingPercent;
-	}
-	
+		
 	public String getInterviewStatus() {
 		return interviewStatus;
 	}
 
 	public void setInterviewStatus(String interviewStatus) {
 		this.interviewStatus = interviewStatus;
+	}
+
+	public Integer getReqMatchingPercent() {
+		return reqMatchingPercent;
+	}
+
+	public void setReqMatchingPercent(Integer reqMatchingPercent) {
+		this.reqMatchingPercent = reqMatchingPercent;
+	}
+
+	public Integer getTechnologyStackMatchingPercent() {
+		return technologyStackMatchingPercent;
+	}
+
+	public void setTechnologyStackMatchingPercent(Integer technologyStackMatchingPercent) {
+		this.technologyStackMatchingPercent = technologyStackMatchingPercent;
+	}
+
+	public Integer getShortSummaryMatchingPercent() {
+		return shortSummaryMatchingPercent;
+	}
+
+	public void setShortSummaryMatchingPercent(Integer shortSummaryMatchingPercent) {
+		this.shortSummaryMatchingPercent = shortSummaryMatchingPercent;
 	}
 
 	public Candidate(long id, String candidateName, String contactNo, String email, String employmentStatus) {
@@ -154,8 +152,12 @@ public class Candidate {
 		this.employmentStatus = employmentStatus;
 	}
 	
+	
+	
+	
+
 	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
-			int reqMatchingPercent, int technologyStackMatchingPercent, int shortSummaryMatchingPercent,
+			Integer reqMatchingPercent, Integer technologyStackMatchingPercent, Integer shortSummaryMatchingPercent,
 			Integer yearOfExperience) {
 		super();
 		this.id = id;
@@ -168,11 +170,9 @@ public class Candidate {
 		this.shortSummaryMatchingPercent = shortSummaryMatchingPercent;
 		this.yearOfExperience = yearOfExperience;
 	}
-	
-	
 
 	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
-			int reqMatchingPercent, int technologyStackMatchingPercent, int shortSummaryMatchingPercent,
+			Integer reqMatchingPercent, Integer technologyStackMatchingPercent, Integer shortSummaryMatchingPercent,
 			String interviewStatus, Integer yearOfExperience, String employmentStatus) {
 		super();
 		this.id = id;
@@ -201,6 +201,5 @@ public class Candidate {
 				+ interviewStatus + ", yearOfExperience=" + yearOfExperience + ", employmentStatus=" + employmentStatus
 				+ "]";
 	}
-
 
 }
