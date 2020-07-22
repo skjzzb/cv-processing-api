@@ -32,6 +32,14 @@ public class Candidate {
 	@Column(name="reqMatchingPercent")
 	private int reqMatchingPercent;
 	
+	@Column(name="technologyStackMatchingPercent")
+	private int technologyStackMatchingPercent;
+	
+	@Column(name="shortSummaryMatchingPercent")
+	private int shortSummaryMatchingPercent;
+	
+	//@Column(name="")
+	//Boolean interview ;
 	
 	Integer yearOfExperience;
 	
@@ -113,6 +121,22 @@ public class Candidate {
 		this.employmentStatus = employmentStatus;
 	}
 	
+	public int getTechnologyStackMatchingPercent() {
+		return technologyStackMatchingPercent;
+	}
+
+	public void setTechnologyStackMatchingPercent(int technologyStackMatchingPercent) {
+		this.technologyStackMatchingPercent = technologyStackMatchingPercent;
+	}
+
+	public int getShortSummaryMatchingPercent() {
+		return shortSummaryMatchingPercent;
+	}
+
+	public void setShortSummaryMatchingPercent(int shortSummaryMatchingPercent) {
+		this.shortSummaryMatchingPercent = shortSummaryMatchingPercent;
+	}
+
 	public Candidate(long id, String candidateName, String contactNo, String email, String employmentStatus) {
 		super();
 		this.id = id;
@@ -133,6 +157,21 @@ public class Candidate {
 		this.reqMatchingPercent = reqMatchingPercent;
 		this.yearOfExperience = yearOfExperience;
 	}
+	
+	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
+			int reqMatchingPercent, int technologyStackMatchingPercent, int shortSummaryMatchingPercent,
+			Integer yearOfExperience) {
+		super();
+		this.id = id;
+		this.candidateName = candidateName;
+		this.contactNo = contactNo;
+		this.email = email;
+		this.technologyStack = technologyStack;
+		this.reqMatchingPercent = reqMatchingPercent;
+		this.technologyStackMatchingPercent = technologyStackMatchingPercent;
+		this.shortSummaryMatchingPercent = shortSummaryMatchingPercent;
+		this.yearOfExperience = yearOfExperience;
+	}
 
 	public Candidate() {
 		super();
@@ -142,8 +181,9 @@ public class Candidate {
 	public String toString() {
 		return "Candidate [id=" + id + ", candidateName=" + candidateName + ", contactNo=" + contactNo + ", email="
 				+ email + ", technologyStack=" + technologyStack + ", reqMatchingPercent=" + reqMatchingPercent
-				+ ", yearOfExperience=" + yearOfExperience + ", employmentStatus=" + employmentStatus + "]";
+				+ ", technologyStackMatchingPercent=" + technologyStackMatchingPercent
+				+ ", shortSummaryMatchingPercent=" + shortSummaryMatchingPercent + ", yearOfExperience="
+				+ yearOfExperience + ", employmentStatus=" + employmentStatus + "]";
 	}
-	
 	
 }
