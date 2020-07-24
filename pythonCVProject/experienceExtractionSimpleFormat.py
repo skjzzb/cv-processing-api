@@ -40,4 +40,5 @@ def experience(filepath):
         patternForYear=r"\d{1,2}"
         yearOfExperience=re.findall(patternForYear,experience[0])
         return int(yearOfExperience[0])
-    else: return 0
+    else:
+        return 0
