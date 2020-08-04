@@ -5,11 +5,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gslab.talent.model.Candidate;
+import com.gslab.talent.model.Level;
 import com.gslab.talent.model.Vacancy;
+import com.gslab.talent.repository.LevelRepository;
 import com.gslab.talent.repository.VacancyRepository;
 
 @Service
@@ -17,6 +26,12 @@ public class VacancyServiceImpl implements VacancyService {
 	@Autowired
 	VacancyRepository vacancyRepoObj;
 
+	@Autowired
+	LevelRepository levelRepository;
+	
+	@PersistenceUnit
+	private EntityManagerFactory emf;
+	
 	@Override
 	public List<Vacancy> getAllVacancy(String sort) {
 		List<Vacancy> list1=new ArrayList<Vacancy>();
@@ -72,6 +87,16 @@ public class VacancyServiceImpl implements VacancyService {
 	@Override
 	public void deleteVacancy(int vacancyId) {
 		vacancyRepoObj.deleteById(vacancyId);
+	}
+
+	@Override
+	public void updateVacancyList(String levelList) {
+		 vacancyRepoObj.save(levelList);
+	}
+
+	@Override
+	public String getLevelList(int vacancyId) {
+		return vacancyRepoObj.findByLevelList(vacancyId);
 	}
 
 }

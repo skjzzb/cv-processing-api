@@ -1,19 +1,28 @@
 package com.gslab.talent.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -41,11 +50,13 @@ public class Vacancy {
 	String shortSummary;
 	Integer experienceRequired;
 	
+    String levelList;
+
 	@JsonBackReference
 	//@JsonIgnore
 	@OneToMany(mappedBy = "vacancy", orphanRemoval = true)
 	List<Candidate> candidateList = new ArrayList<>();
-
+	
 	public Vacancy() {
 		// TODO Auto-generated constructor stub
 	}
@@ -64,7 +75,7 @@ public class Vacancy {
 	}
 	
 	public Vacancy(Integer vacancyId, String jobTitle, String projectName, Date posOpenDate, Date posOnBoardDate,
-			String jd, Integer noOfVacancy, String shortSummary, Integer experienceRequired) {
+			String jd, Integer noOfVacancy, String shortSummary, Integer experienceRequired,String levelList) {
 		super();
 		this.vacancyId = vacancyId;
 		this.jobTitle = jobTitle;
@@ -75,19 +86,16 @@ public class Vacancy {
 		this.noOfVacancy = noOfVacancy;
 		this.shortSummary = shortSummary;
 		this.experienceRequired = experienceRequired;
+		this.levelList = levelList;
 	}
 
 	public Integer getNoOfVacancy() {
 		return noOfVacancy;
 	}
 
-
-
 	public void setNoOfVacancy(Integer noOfVacancy) {
 		this.noOfVacancy = noOfVacancy;
 	}
-
-
 
 	public Integer getVacancyId() {
 		return vacancyId;
@@ -137,7 +145,6 @@ public class Vacancy {
 		this.jd = jd;
 	}
 	
-
 	public String getShortSummary() {
 		return shortSummary;
 	}
@@ -160,20 +167,32 @@ public class Vacancy {
 	public void setCandidateList(List<Candidate> candidateList) {
 		this.candidateList = candidateList;
 	}
+	
+	public String getlevelList() {
+		return levelList;
+	}
 
-    //helper methods
+	public void setlevelList(String levelList) {
+		this.levelList = levelList;
+	}
+	
+	
+	//helper methods
 	public void addCandidate(Candidate candidate) {
 		this.candidateList.add(candidate);
 		candidate.setVacancy(this);
 	}
+
 	public void removeCandidate(Candidate candidate )
 	{
 		candidateList.remove(candidate);
 		candidate.setVacancy(null);
 	}
+	
 
 	@Override
 	public String toString() {
+		
 		return "Vacancy [vacancyId=" + vacancyId + ", jobTitle=" + jobTitle + ", projectName=" + projectName
 				+ ", posOpenDate=" + posOpenDate + ", posOnBoardDate=" + posOnBoardDate + ", jd=" + jd
 				+ ", noOfVacancy=" + noOfVacancy + ", shortSummary=" + shortSummary + ", experienceRequired="

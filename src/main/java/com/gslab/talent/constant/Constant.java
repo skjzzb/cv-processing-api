@@ -22,7 +22,7 @@ public class Constant {
 
 	public static final String UPDATE_DOCUMENT ="/doc/update";
 
-	
+	public static final String GET_LEVEL_BY_ID = "/level/{id}";
 	
 
 	public static final String GET_LIST_OF_USERS = "/user";
