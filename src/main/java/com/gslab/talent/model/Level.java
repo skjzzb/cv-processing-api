@@ -24,8 +24,8 @@ public class Level {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 	
-	@Column(name="level")
-	String level;
+	/*@Column(name="level")
+	String level;*/
 	
 	@Column(name="description")
 	String description;
@@ -34,9 +34,9 @@ public class Level {
 		
 	}
 	
-	Level(int id,String level,String description){
+	Level(int id,String description){
 		this.id=id;
-		this.level=level;
+		//this.level=level;
 		this.description=description;
 	}
 	
@@ -49,13 +49,13 @@ public class Level {
 		this.id = id;
 	}
 
-	public String getLevel() {
+	/*public String getLevel() {
 		return level;
 	}
 
 	public void setLevel(String level) {
 		this.level = level;
-	}
+	}*/
 
 	public String getDescription() {
 		return description;
@@ -67,7 +67,7 @@ public class Level {
 
 	@Override
 	public String toString() {
-		return "Level [id=" + id + ", level=" + level + ", description=" + description + "]";
+		return "Level [id=" + id + ", description=" + description + "]";
 	}
 	
 }

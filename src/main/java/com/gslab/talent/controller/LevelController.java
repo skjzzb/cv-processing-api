@@ -50,10 +50,10 @@ public class LevelController {
 		return levelServiceObj.getUserById(levelId);
 	}
 	
-	@DeleteMapping(value = "/deleteByLevel/{level}")
-	public ResponseEntity<Void> deleteLevel(@PathVariable String level)
+	@DeleteMapping(value = "/deleteByDescription/{level}")
+	public ResponseEntity<Void> deleteLevel(@PathVariable String description)
 	{
-		Level l = levelServiceObj.findByLevel(level);
+		Level l = levelServiceObj.findByDescription(description);
 		System.out.println("level is "+l);
 		Integer i = l.getId();
 		levelServiceObj.deleteLevelById(i);

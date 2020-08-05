@@ -24,7 +24,7 @@ public class Question {
 	String question;
 
 	Question(){
-		
+		super();
 	}
 	
 	@ManyToOne
@@ -41,6 +41,7 @@ public class Question {
 	}
 
 	Question(int id,String concept,String question){
+		super();
 		this.id=id;
 		this.concept=concept;
 		this.question=question;
@@ -68,6 +69,11 @@ public class Question {
 
 	public void setQuestion(String question) {
 		this.question = question;
+	}
+	
+	@Override
+	public String toString() {
+		return "Question [id=" + id + ", concept=" + concept + ", question=" + question + "]";
 	}
 	
 }

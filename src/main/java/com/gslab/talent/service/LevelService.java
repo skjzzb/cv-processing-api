@@ -19,7 +19,7 @@ public interface LevelService {
 
 	Level deleteByDescription(Level l);
 
-	Level findByLevel(String level);
+	Level findByDescription(String description);
 
 	void deleteLevelById(Integer i);
 

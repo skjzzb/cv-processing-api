@@ -45,6 +45,16 @@ public class LevelServiceImpl implements LevelService{
 	
 	@Override
 	public void createLevel(Level level) {
+		
+		List<Level> list =getAllLevel();
+		for (Level level1 : list) {
+			
+			if(level1.getDescription().equalsIgnoreCase(level.getDescription()))
+			{
+				int lid=level1.getId();
+				level.setId(lid);
+			}
+		}
 		levelRepoObj.save(level);
 
 	}
@@ -60,12 +70,12 @@ public class LevelServiceImpl implements LevelService{
 	}
 
 	@Override
-	public Level findByLevel(String level) {
+	public Level findByDescription(String description) {
 		Level f=null;
 		List<Level> list = getAllLevel(); 
 		for(Level l:list)
 		{
-			if(l.getLevel().equalsIgnoreCase(level))
+			if(l.getDescription().equalsIgnoreCase(description))
 			{
 				f=l;
 			}
