@@ -18,6 +18,7 @@ public class TechnologyServiceImpl implements TechnologyService {
 	
 	@Override
 	public void createTechnology(Technology Obj) {
+		
 		this.repoObj.save(Obj);
 		
 	}
