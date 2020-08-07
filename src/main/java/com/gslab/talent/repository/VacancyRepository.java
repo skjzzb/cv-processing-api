@@ -10,4 +10,7 @@ import com.gslab.talent.model.Vacancy;
 @Repository
 public interface VacancyRepository extends JpaRepository<Vacancy, Integer> {
 
+	void save(String levelList);
+	String findByLevelList(int vacancyId);
+
 }

@@ -43,7 +43,6 @@ public class UserController {
 		return userServiceObj.getUserById(userId);
 	}
 	
-	
 	@PostMapping(value = Constant.ADD_USER, headers = Constant.ACCEPT_JSON)
 	public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
 		
