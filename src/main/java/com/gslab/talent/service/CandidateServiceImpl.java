@@ -206,7 +206,24 @@ public class CandidateServiceImpl implements CandidateService {
 		return applicationDetail;
 	}
 
-	
+	public HashMap<String,Integer> getCountOfApplicationForProject(){
+		List<Candidate> listOfCandidate = candidateRepoObj.findAll();
+		
+		HashMap<String,Integer> hashmap = new HashMap<String,Integer>();
+		for (Candidate candidate : listOfCandidate) {
+			String projectName = candidate.getVacancy().getProjectName();
+			System.out.println("projectName :"+projectName);
+			
+			if(hashmap.containsKey(projectName)) {
+			    hashmap.put(projectName, hashmap.get(projectName)+1);
+				
+			}
+			else
+				hashmap.put(projectName,1);
+		}
+		return hashmap;
+		
+	}
 }
 	
 

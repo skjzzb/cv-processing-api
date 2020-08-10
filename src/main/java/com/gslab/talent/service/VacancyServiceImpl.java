@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.TreeMap;
@@ -101,4 +102,23 @@ public class VacancyServiceImpl implements VacancyService {
 		return vacancyRepoObj.findByLevelList(vacancyId);
 	}
 	
+	@Override
+	public HashMap<String,Integer> getCountOfVacancyForProject(){
+		List<Vacancy> listOfVacancy = vacancyRepoObj.findAll();
+		
+		HashMap<String,Integer> hashmap = new HashMap<String,Integer>();
+		for (Vacancy vacancy : listOfVacancy) {
+			String projectName = vacancy.getProjectName();
+			System.out.println("projectName :"+projectName);
+			
+			if(hashmap.containsKey(projectName)) {
+			    hashmap.put(projectName, hashmap.get(projectName)+1);
+				System.out.println("hashmap :"+hashmap);
+			}
+			else
+				hashmap.put(projectName,1);
+		}
+		return hashmap;
+		
+	}
 }

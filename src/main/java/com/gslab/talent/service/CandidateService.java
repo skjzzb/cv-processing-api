@@ -1,5 +1,6 @@
 package com.gslab.talent.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -14,4 +15,5 @@ public interface CandidateService {
 	public void deleteCandidateById(long id);
 	public List<Candidate> getCandidateByVacancyId(int id);
 	public TreeMap<Integer, Integer> getAllApplicationInMonth();
+	public HashMap<String, Integer> getCountOfApplicationForProject();
 }

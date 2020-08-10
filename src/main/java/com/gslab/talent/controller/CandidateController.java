@@ -1,5 +1,6 @@
 package com.gslab.talent.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -81,7 +82,6 @@ public class CandidateController {
 	@GetMapping(value = "/getCandidateCountByVacancyId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String getCandidateCountByVacancyId(@PathVariable(Constant.VACANCY_ID) int id)
 	{
-		
 		List<Candidate> list = ServiceObj.getCandidateByVacancyId(id);
 		for(Candidate c : list) {
 			 exp = c.getYearOfExperience();
@@ -101,5 +101,11 @@ public class CandidateController {
 	@GetMapping(value="/monthapplication")
 	public ResponseEntity<TreeMap<Integer, Integer>> getAllApplicationInMonth(){
 		return new ResponseEntity<TreeMap<Integer,Integer>>(ServiceObj.getAllApplicationInMonth(),HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/getCountOfApplicationForProject")
+	public HashMap<String,Integer> getCountOfApplicationForProject(){
+		return ServiceObj.getCountOfApplicationForProject();
+		
 	}
 }

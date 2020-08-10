@@ -72,17 +72,13 @@ public class SubTechnologyServiceImpl implements SubTechnologyService {
 	@Override
 	public Set<Integer> getTechnologyFromSubtechnology(List<String> list1) {
 		
-		System.out.println("user list :"+list1);
 		Set<Integer> set = new HashSet();
 		List<SubTechnology> list=repoObj.findAll();
-		//System.out.println("list of subtechnology :"+list);
 		for(String l1 : list1)
 		{
-			System.out.println("String l1 :"+l1);
 			for(SubTechnology l :list) {
 				if(l.getSubTechnologyName().equalsIgnoreCase(l1)) {
 					set.add(l.getTechnologyId());
-					System.out.println("technology :"+set);
 				}
 			}
 			

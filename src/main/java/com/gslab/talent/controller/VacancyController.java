@@ -1,5 +1,6 @@
 package com.gslab.talent.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.TreeMap;
@@ -127,4 +128,9 @@ public class VacancyController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/getCountOfVacancyForProject")
+	public HashMap<String,Integer> getCountOfVacancyForProject(){
+		return vacancyServiceObj.getCountOfVacancyForProject();
+
+	}
 }

@@ -1,5 +1,6 @@
 package com.gslab.talent.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -13,4 +14,5 @@ public interface VacancyService {
 	void updateVacancyList(String levelList);
 	String getLevelList(int vacancyId);
 	void createNewVacancy(Vacancy vacancy);
+	HashMap<String, Integer> getCountOfVacancyForProject();
 }
