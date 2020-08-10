@@ -1,6 +1,7 @@
 package com.gslab.talent.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.gslab.talent.model.SubTechnology;
 
@@ -12,5 +13,6 @@ public interface SubTechnologyService {
 	public SubTechnology findById(long id);
 	public void deleteSubTechnologyById(long id);
 	public List<SubTechnology> getAllByTechnologyId(int id);
+	Set<Integer> getTechnologyFromSubtechnology(List<String> list1);
 
 }
