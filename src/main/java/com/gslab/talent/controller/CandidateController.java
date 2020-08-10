@@ -1,6 +1,7 @@
 package com.gslab.talent.controller;
 
 import java.util.List;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -28,7 +29,8 @@ import com.gslab.talent.service.CandidateService;
 @CrossOrigin(allowedHeaders = "*")
 @RequestMapping(value = "/v1")
 public class CandidateController {
-
+	static int  exp5 = 0,exp10 = 0,exp15 = 0,exp20 = 0;
+	Integer exp;
 	@Autowired
 	private CandidateService ServiceObj;
 	
@@ -72,8 +74,32 @@ public class CandidateController {
 	
 	@GetMapping(value = Constant.GET_CANDIDATE_BY_VACANCY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Candidate> getCandidateByVacancyId(@PathVariable(Constant.VACANCY_ID) int id)
-	{
+	{   
 		return ServiceObj.getCandidateByVacancyId(id);
 	}
-
+	
+	@GetMapping(value = "/getCandidateCountByVacancyId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String getCandidateCountByVacancyId(@PathVariable(Constant.VACANCY_ID) int id)
+	{
+		
+		List<Candidate> list = ServiceObj.getCandidateByVacancyId(id);
+		for(Candidate c : list) {
+			 exp = c.getYearOfExperience();
+			if(exp >= 0 && exp <=5) 
+				exp5++;
+				
+			else if (exp >=6 && exp <=10) 
+				exp10++;
+			else if (exp >=11 && exp <=15) 
+				exp15++;
+			else 
+				exp20++;
+		}
+		return "experience 0 to 5 = "+exp5+" \nexperience 5 to 10 = "+exp10+" \nexperience 11 to 15 = "+exp15+" \nexperience 15 and above = "+exp20;
+	}
+	
+	@GetMapping(value="/monthapplication")
+	public ResponseEntity<TreeMap<Integer, Integer>> getAllApplicationInMonth(){
+		return new ResponseEntity<TreeMap<Integer,Integer>>(ServiceObj.getAllApplicationInMonth(),HttpStatus.OK);
+	}
 }

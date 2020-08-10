@@ -29,15 +29,15 @@ public class Question {
 	
 	@ManyToOne
 	@JoinColumn(name = "technologyId")
-	private Technology Technology;
+	private Technology technology;
 	
 	
 	public Technology getTechnology() {
-		return Technology;
+		return technology;
 	}
 
 	public void setTechnology(Technology technology) {
-		Technology = technology;
+		this.technology = technology;
 	}
 
 	Question(int id,String concept,String question){

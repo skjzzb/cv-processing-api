@@ -2,6 +2,7 @@ package com.gslab.talent.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.TreeMap;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -87,23 +88,18 @@ public class VacancyController {
 		String levels;
 		
 		Vacancy vacancy = vacancyServiceObj.getVacancyById(vacancyId);
-		System.out.println("vacancy "+vacancy);
-		System.out.println("vacancy.getlevelList() :"+vacancy.getlevelList());
 		
 		if(vacancy.getlevelList() == null ) {
 		vacancy.setlevelList(levelList);
 		
 		}
 		else {
-		   levels = vacancy.getlevelList();
-			System.out.println("else levels :"+levels);
+			levels = vacancy.getlevelList();
+
+			String split[] = levels.split("\\s");
+			str = levels.concat(" " + levelList);
+			vacancy.setlevelList(str);
 			
-		String split[] = levels.split("\\s");
-		str = levels.concat(" "+levelList);
-		System.out.println("str :"+str);
-		
-		vacancy.setlevelList(str);
-		System.out.println("vacancy set :"+vacancy);
 		}
 		vacancyServiceObj.updateVacancy(vacancy);
 

@@ -8,4 +8,6 @@ import com.gslab.talent.model.Technology;
 @Repository
 public interface TechnologyRepository extends JpaRepository<Technology, Integer> {
 
+	Technology findByTechnologyName(String technologyName);
+
 }

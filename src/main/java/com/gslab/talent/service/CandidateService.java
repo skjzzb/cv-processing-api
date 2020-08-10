@@ -1,6 +1,7 @@
 package com.gslab.talent.service;
 
 import java.util.List;
+import java.util.TreeMap;
 
 import com.gslab.talent.model.Candidate;
 
@@ -12,4 +13,5 @@ public interface CandidateService {
 	public  void update(Candidate candidateObj,int id);
 	public void deleteCandidateById(long id);
 	public List<Candidate> getCandidateByVacancyId(int id);
+	public TreeMap<Integer, Integer> getAllApplicationInMonth();
 }

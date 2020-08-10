@@ -1,7 +1,12 @@
 package com.gslab.talent.service;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.TreeMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -28,6 +33,9 @@ public class CandidateServiceImpl implements CandidateService {
 	
 	@PersistenceUnit
 	private EntityManagerFactory emf;
+	String newTech[] ;
+	Candidate candidate;
+	static int j=0;
 	
 	@Transactional
 	@Override
@@ -80,6 +88,125 @@ public class CandidateServiceImpl implements CandidateService {
 	public void deleteCandidateById(long id) {
 		candidateRepoObj.deleteById(id);
 	}
+
+
+	@Override
+	public TreeMap<Integer, Integer> getAllApplicationInMonth() {
+		List<Candidate> listOfCandidate = candidateRepoObj.findAll();
+
+		TreeMap<Integer, Integer> applicationDetail = new TreeMap<>();
+
+		System.out.println(listOfCandidate.size());
+		for (Candidate candidate : listOfCandidate) {
+			Date posDate = candidate.getVacancy().getPosOpenDate();
+			Integer date1 = posDate.getMonth();
+
+			switch (date1) {
+			case 1:
+				if (applicationDetail.get(1) != null) {
+					applicationDetail.put(1, applicationDetail.get(1) + 1);
+				} else {
+					applicationDetail.put(1, 1);
+				}
+
+				break;
+			case 2:
+				if (applicationDetail.get(2) != null) {
+					applicationDetail.put(2, applicationDetail.get(2) + 1);
+				} else {
+					applicationDetail.put(2, 1);
+				}
+
+				break;
+			case 3:
+				if (applicationDetail.get(3) != null) {
+					applicationDetail.put(3, applicationDetail.get(3) + 1);
+				} else {
+					applicationDetail.put(3, 1);
+				}
+
+				break;
+			case 4:
+				if (applicationDetail.get(4) != null) {
+					applicationDetail.put(4, applicationDetail.get(4) + 1);
+				} else {
+					applicationDetail.put(4, 1);
+				}
+
+				break;
+			case 5:
+				if (applicationDetail.get(5) != null) {
+					applicationDetail.put(5, applicationDetail.get(5) + 1);
+				} else {
+					applicationDetail.put(5, 1);
+				}
+				
+				break;
+			case 6:
+				if (applicationDetail.get(6) != null) {
+					applicationDetail.put(6, applicationDetail.get(6) + 1);
+				} else {
+					applicationDetail.put(6, 1);
+				}
+				
+				break;
+			case 7:
+				if (applicationDetail.get(7) != null) {
+					applicationDetail.put(7, applicationDetail.get(7) + 1);
+				} else {
+					applicationDetail.put(7, 1);
+				}
+				
+				break;
+			case 8:
+				if (applicationDetail.get(8) != null) {
+					applicationDetail.put(8, applicationDetail.get(8) + 1);
+				} else {
+					applicationDetail.put(8, 1);
+				}
+				
+				break;
+			case 9:
+				if (applicationDetail.get(9) != null) {
+					applicationDetail.put(9, applicationDetail.get(9) + 1);
+				} else {
+					applicationDetail.put(9, 1);
+				}
+
+				break;
+			case 10:
+				if (applicationDetail.get(10) != null) {
+					applicationDetail.put(10, applicationDetail.get(10) + 1);
+				} else {
+					applicationDetail.put(10, 1);
+				}
+
+				break;
+			case 11:
+				if (applicationDetail.get(11) != null) {
+					applicationDetail.put(11, applicationDetail.get(11) + 1);
+				} else {
+					applicationDetail.put(11, 1);
+				}
+
+				break;
+			case 12:
+				if (applicationDetail.get(12) != null) {
+					applicationDetail.put(12, applicationDetail.get(12) + 1);
+				} else {
+					applicationDetail.put(12, 1);
+				}
+
+				break;
+
+			default:
+				break;
+			}
+		}
+		return applicationDetail;
+	}
+
+	
+}
 	
 
-}
