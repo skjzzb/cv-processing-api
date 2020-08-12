@@ -128,9 +128,11 @@ public class VacancyController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/getCountOfVacancyForProject")
-	public HashMap<String,Integer> getCountOfVacancyForProject(){
-		return vacancyServiceObj.getCountOfVacancyForProject();
+	@GetMapping(value = "/getCountOfVacancyForProject/{str}")
+	public ResponseEntity<?> getCountOfVacancyForProject(@RequestParam String str){
+		
+		System.out.println("final output :"+vacancyServiceObj.getCountOfVacancyForProject(str));
+		return new ResponseEntity<HashMap<String,Integer>>(vacancyServiceObj.getCountOfVacancyForProject(str), HttpStatus.OK);
 
 	}
 }

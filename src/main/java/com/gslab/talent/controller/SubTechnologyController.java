@@ -78,7 +78,7 @@ public class SubTechnologyController {
 	}
 	
 	@GetMapping(value="/getTechnologyFromSubtechnology/{list1}")
-	public Set<Integer> getTechnologyFromSubtechnology(@PathVariable List<String> list1){
+	public Set<String> getTechnologyFromSubtechnology(@PathVariable List<String> list1){
 		return ServiceObj.getTechnologyFromSubtechnology(list1);
 		
 	}

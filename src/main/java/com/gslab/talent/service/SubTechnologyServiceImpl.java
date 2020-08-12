@@ -15,12 +15,16 @@ import com.gslab.talent.model.Document;
 import com.gslab.talent.model.SubTechnology;
 import com.gslab.talent.model.Technology;
 import com.gslab.talent.repository.SubTechnologyRepository;
+import com.gslab.talent.repository.TechnologyRepository;
 
 @Service
 public class SubTechnologyServiceImpl implements SubTechnologyService {
 
 	@Autowired
 	SubTechnologyRepository repoObj;
+	
+	@Autowired
+	TechnologyRepository techRepoObj;
 	
 	@Override
 	public void createSubTechnology(SubTechnology Obj) {
@@ -70,20 +74,30 @@ public class SubTechnologyServiceImpl implements SubTechnologyService {
 		return selected;
 	}
 	@Override
-	public Set<Integer> getTechnologyFromSubtechnology(List<String> list1) {
+	public Set<String> getTechnologyFromSubtechnology(List<String> list1) {
 		
-		Set<Integer> set = new HashSet();
+		Set<String> set = new HashSet();
 		List<SubTechnology> list=repoObj.findAll();
 		for(String l1 : list1)
 		{
 			for(SubTechnology l :list) {
 				if(l.getSubTechnologyName().equalsIgnoreCase(l1)) {
-					set.add(l.getTechnologyId());
+					int id = l.getTechnologyId();
+					Optional<Technology> t = techRepoObj.findById(id);
+					System.out.println("technology name : "+t);
+					String techName = t.get().getTechnologyName();
+					System.out.println("techName : "+techName);
+					//set.add(l.getTechnologyId());
+					set.add(techName);
+					
 				}
 			}
 			
 		}
+		System.out.println("set : "+set);
 		return set;
 	}
+	
+	
 
 }

@@ -2,6 +2,7 @@ package com.gslab.talent.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +18,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gslab.talent.model.Candidate;
 import com.gslab.talent.model.Level;
@@ -103,22 +105,50 @@ public class VacancyServiceImpl implements VacancyService {
 	}
 	
 	@Override
-	public HashMap<String,Integer> getCountOfVacancyForProject(){
+	public HashMap<String,Integer> getCountOfVacancyForProject(String str){
 		List<Vacancy> listOfVacancy = vacancyRepoObj.findAll();
-		
 		HashMap<String,Integer> hashmap = new HashMap<String,Integer>();
-		for (Vacancy vacancy : listOfVacancy) {
-			String projectName = vacancy.getProjectName();
-			System.out.println("projectName :"+projectName);
-			
-			if(hashmap.containsKey(projectName)) {
-			    hashmap.put(projectName, hashmap.get(projectName)+1);
-				System.out.println("hashmap :"+hashmap);
+		
+		switch(str) {
+		
+		case "year": {
+			for (Vacancy vacancy : listOfVacancy) {
+				String projectName = vacancy.getProjectName();
+				
+				if (hashmap.containsKey(projectName)) {
+					hashmap.put(projectName, hashmap.get(projectName) + 1);
+				} else
+					hashmap.put(projectName, 1);
 			}
-			else
-				hashmap.put(projectName,1);
+			break;
+		}
+		
+		case "month": {
+			long millis = System.currentTimeMillis();
+			java.sql.Date date = new java.sql.Date(millis);
+			int month = date.getMonth();
+
+			for (Vacancy vacancy : listOfVacancy) {
+				Date date1 = vacancy.getPosOnBoardDate();
+				int date1mon = date1.getMonth();
+				String projectName = vacancy.getProjectName();
+				hashmap.put(projectName, 0);
+
+				if (month == date1mon) {
+					if (hashmap.containsKey(projectName)) {
+						hashmap.put(projectName, hashmap.get(projectName) + 1);
+					} else
+						hashmap.put(projectName, 1);
+				}
+
+				else
+					continue;
+			}
+
+			break;
+		}
 		}
 		return hashmap;
-		
+
 	}
 }

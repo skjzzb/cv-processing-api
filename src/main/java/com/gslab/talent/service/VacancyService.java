@@ -12,7 +12,7 @@ public interface VacancyService {
 	void updateVacancy(Vacancy vacancy);
 	void deleteVacancy(int vacancyId);
 	void updateVacancyList(String levelList);
-	String getLevelList(int vacancyId);
+	public String getLevelList(int vacancyId);
 	void createNewVacancy(Vacancy vacancy);
-	HashMap<String, Integer> getCountOfVacancyForProject();
+	public HashMap<String, Integer> getCountOfVacancyForProject(String str);
 }

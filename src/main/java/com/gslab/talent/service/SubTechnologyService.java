@@ -13,6 +13,6 @@ public interface SubTechnologyService {
 	public SubTechnology findById(long id);
 	public void deleteSubTechnologyById(long id);
 	public List<SubTechnology> getAllByTechnologyId(int id);
-	Set<Integer> getTechnologyFromSubtechnology(List<String> list1);
+	Set<String> getTechnologyFromSubtechnology(List<String> list1);
 
 }
