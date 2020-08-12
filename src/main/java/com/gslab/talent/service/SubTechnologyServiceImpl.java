@@ -1,6 +1,7 @@
 package com.gslab.talent.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +12,11 @@ import javax.persistence.criteria.From;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gslab.talent.model.Candidate;
 import com.gslab.talent.model.Document;
 import com.gslab.talent.model.SubTechnology;
 import com.gslab.talent.model.Technology;
+import com.gslab.talent.repository.CandidateRepository;
 import com.gslab.talent.repository.SubTechnologyRepository;
 import com.gslab.talent.repository.TechnologyRepository;
 
@@ -25,6 +28,11 @@ public class SubTechnologyServiceImpl implements SubTechnologyService {
 	
 	@Autowired
 	TechnologyRepository techRepoObj;
+	
+	@Autowired
+	CandidateRepository candidateRepoObj;
+	
+	String experience1TO5="experience1TO5" ,experience6TO10="experience6TO10" ,experience11TO15="experience11TO15",experience15AndAbove="experience15AndAbove" ;
 	
 	@Override
 	public void createSubTechnology(SubTechnology Obj) {
@@ -95,6 +103,49 @@ public class SubTechnologyServiceImpl implements SubTechnologyService {
 		return set;
 	}
 	
-	
+	@Override
+	public HashMap<String,Integer> getExperienceOfCandiatesFromSubtechnology(String subTechName) {
+		
+		List<Candidate> candidate = candidateRepoObj.findAll();
+		System.out.println("candidate size " + candidate.size());
+		HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
+
+		for (Candidate cad : candidate) {
+			String techStack = cad.getTechnologyStack();
+			String split[] = techStack.split("\\s");
+			for (int i = 0; i < split.length; i++) {
+				String subtech = split[i];
+				if (subTechName.equalsIgnoreCase(subtech)) {
+
+					int experience = cad.getYearOfExperience();
+					if (experience >= 0 && experience <= 5) {
+						if (hashmap.containsKey(experience1TO5)) {
+							hashmap.put(experience1TO5, hashmap.get(experience1TO5) + 1);
+						} else
+							hashmap.put(experience1TO5, 1);
+					} else if (experience >= 6 && experience <= 10) {
+						if (hashmap.containsKey(experience6TO10)) {
+							hashmap.put(experience6TO10, hashmap.get(experience6TO10) + 1);
+						} else
+							hashmap.put(experience6TO10, 1);
+					} else if (experience >= 11 && experience <= 15) {
+						if (hashmap.containsKey(experience11TO15)) {
+							hashmap.put(experience11TO15, hashmap.get(experience11TO15) + 1);
+						} else
+							hashmap.put(experience11TO15, 1);
+					} else if (experience >= 16 && experience <= 50) {
+						if (hashmap.containsKey(experience15AndAbove)) {
+							hashmap.put(experience15AndAbove, hashmap.get(experience15AndAbove) + 1);
+						} else
+							hashmap.put(experience15AndAbove, 1);
+					}
+
+				}
+			}
+
+		}
+		return hashmap;
+
+	}
 
 }

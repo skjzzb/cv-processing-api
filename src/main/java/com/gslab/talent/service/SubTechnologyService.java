@@ -1,5 +1,6 @@
 package com.gslab.talent.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -14,5 +15,6 @@ public interface SubTechnologyService {
 	public void deleteSubTechnologyById(long id);
 	public List<SubTechnology> getAllByTechnologyId(int id);
 	Set<String> getTechnologyFromSubtechnology(List<String> list1);
-
+	public HashMap<String,Integer> getExperienceOfCandiatesFromSubtechnology(String str);
+	
 }
