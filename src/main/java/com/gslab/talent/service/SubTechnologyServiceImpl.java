@@ -84,10 +84,7 @@ public class SubTechnologyServiceImpl implements SubTechnologyService {
 				if(l.getSubTechnologyName().equalsIgnoreCase(l1)) {
 					int id = l.getTechnologyId();
 					Optional<Technology> t = techRepoObj.findById(id);
-					System.out.println("technology name : "+t);
 					String techName = t.get().getTechnologyName();
-					System.out.println("techName : "+techName);
-					//set.add(l.getTechnologyId());
 					set.add(techName);
 					
 				}
