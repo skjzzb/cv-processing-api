@@ -43,6 +43,28 @@ public class Candidate {
 	
 	String employmentStatus;
 	
+	String finalStatus;
+	
+	String evaluationReport;
+	
+	
+	
+	public String getFinalStatus() {
+		return finalStatus;
+	}
+
+	public void setFinalStatus(String finalStatus) {
+		this.finalStatus = finalStatus;
+	}
+
+	public String getEvaluationReport() {
+		return evaluationReport;
+	}
+
+	public void setEvaluationReport(String evaluationReport) {
+		this.evaluationReport = evaluationReport;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "vacancyId")
 	private Vacancy vacancy;
@@ -186,6 +208,29 @@ public class Candidate {
 		this.interviewStatus = interviewStatus;
 		this.yearOfExperience = yearOfExperience;
 		this.employmentStatus = employmentStatus;
+	}
+	
+	
+
+	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
+			Integer reqMatchingPercent, Integer technologyStackMatchingPercent, Integer shortSummaryMatchingPercent,
+			String interviewStatus, Integer yearOfExperience, String employmentStatus, String finalStatus,
+			String evaluationReport, Vacancy vacancy) {
+		super();
+		this.id = id;
+		this.candidateName = candidateName;
+		this.contactNo = contactNo;
+		this.email = email;
+		this.technologyStack = technologyStack;
+		this.reqMatchingPercent = reqMatchingPercent;
+		this.technologyStackMatchingPercent = technologyStackMatchingPercent;
+		this.shortSummaryMatchingPercent = shortSummaryMatchingPercent;
+		this.interviewStatus = interviewStatus;
+		this.yearOfExperience = yearOfExperience;
+		this.employmentStatus = employmentStatus;
+		this.finalStatus = finalStatus;
+		this.evaluationReport = evaluationReport;
+		this.vacancy = vacancy;
 	}
 
 	public Candidate() {
