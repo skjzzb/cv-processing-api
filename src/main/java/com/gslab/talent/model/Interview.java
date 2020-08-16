@@ -31,11 +31,8 @@ public class Interview {
 	  String candidateResponseStatus;
 	  
 	  String interviewStatus;
-	  	  
-	  Long candidateId;
 	  
-	  Long vacancyId;
-	  
+	 
 	  public Interview() {}
 	  
 
@@ -50,27 +47,9 @@ public class Interview {
 		this.hrEmail = hrEmail;
 	}
 	
-	
-	
-
-	
-	public Interview(String panelEmail, String candidateEmail, String hrEmail, String scheduledOn,
-			String scheduledEndTime, String level, Long candidateId, Long vacancyId) {
-		super();
-		this.panelEmail = panelEmail;
-		this.candidateEmail = candidateEmail;
-		this.hrEmail = hrEmail;
-		this.scheduledOn = scheduledOn;
-		this.scheduledEndTime = scheduledEndTime;
-		this.level = level;
-		this.candidateId = candidateId;
-		this.vacancyId = vacancyId;
-	}
-
-
 	public Interview(Long interviewId, String panelEmail, String candidateEmail, String hrEmail, String scheduledOn,
 			String scheduledEndTime, String level, String calEventId, String panelResponseStatus,
-			String candidateResponseStatus, String interviewStatus, Long candidateId, Long vacancyId) {
+			String candidateResponseStatus, String interviewStatus) {
 		super();
 		InterviewId = interviewId;
 		this.panelEmail = panelEmail;
@@ -83,11 +62,8 @@ public class Interview {
 		this.panelResponseStatus = panelResponseStatus;
 		this.candidateResponseStatus = candidateResponseStatus;
 		this.interviewStatus = interviewStatus;
-		this.candidateId = candidateId;
-		this.vacancyId = vacancyId;
 	}
-
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getInterviewId() {
@@ -188,36 +164,14 @@ public class Interview {
 	public void setInterviewStatus(String interviewStatus) {
 		this.interviewStatus = interviewStatus;
 	}
-	
-	public Long getCandidateId() {
-		return candidateId;
-	}
-
-
-	public void setCandidateId(Long candidateId) {
-		this.candidateId = candidateId;
-	}
-
-
-	public Long getVacancyId() {
-		return vacancyId;
-	}
-
-
-	public void setVacancyId(Long vacancyId) {
-		this.vacancyId = vacancyId;
-	}
 
 
 	@Override
 	public String toString() {
-		return "Interview [InterviewId=" + InterviewId + ", panelEmail=" + panelEmail + ", candidateEmail="
+		return "intreview [InterviewId=" + InterviewId + ", panelEmail=" + panelEmail + ", candidateEmail="
 				+ candidateEmail + ", hrEmail=" + hrEmail + ", scheduledOn=" + scheduledOn + ", scheduledEndTime="
 				+ scheduledEndTime + ", level=" + level + ", calEventId=" + calEventId + ", panelResponseStatus="
 				+ panelResponseStatus + ", candidateResponseStatus=" + candidateResponseStatus + ", interviewStatus="
-				+ interviewStatus + ", candidateId=" + candidateId + ", vacancyId=" + vacancyId + "]";
-	}
-
-
-	    	
+				+ interviewStatus + "]";
+	}	    	
 }
