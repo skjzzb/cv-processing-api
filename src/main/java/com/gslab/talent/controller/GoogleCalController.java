@@ -219,8 +219,8 @@ public class GoogleCalController {
 	@RequestMapping(value = "/setMeeting", method = RequestMethod.POST)
 	public String setMeeting(@RequestBody Interview it)
 	{
-		it.setPanelEmail("dakhilesh95@gmail.com");
-		it.setCandidateEmail("deshmukha816@gmail.com");
+// 		it.setPanelEmail("dakhilesh95@gmail.com");
+// 		it.setCandidateEmail("deshmukha816@gmail.com");
 		System.out.println(it);
 		Event event = new Event();
 	    event.setSummary("Interview Call From GSlab, give response in the form of yes or no")
