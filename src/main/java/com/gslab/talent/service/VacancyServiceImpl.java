@@ -93,8 +93,6 @@ public class VacancyServiceImpl implements VacancyService {
 	public void deleteVacancy(int vacancyId) {
 		vacancyRepoObj.deleteById(vacancyId);
 	}
-	
-	
 
 	@Override
 	public void updateVacancyList(String levelList) {

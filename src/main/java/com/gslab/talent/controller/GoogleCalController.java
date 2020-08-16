@@ -322,12 +322,9 @@ public class GoogleCalController {
 		event.setRecurrence(Arrays.asList(recurrence));
 		
 		EventAttendee[] attendees = new EventAttendee[] {
-			//new EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
-		    //new EventAttendee().setEmail("dakhilesh95@gmail.com"),
-		    //new EventAttendee().setEmail("deshmukha816@gmail.com"),
-		    new EventAttendee().setOrganizer(true).setEmail(it.getHrEmail()),
-		    new EventAttendee().setEmail(it.getPanelEmail()),
-		    new EventAttendee().setEmail(it.getCandidateEmail()),
+			new EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
+		    new EventAttendee().setEmail("dakhilesh95@gmail.com"),
+		    new EventAttendee().setEmail("deshmukha816@gmail.com"),
 		};
 		
 		event.setAttendees(Arrays.asList(attendees));
@@ -358,8 +355,8 @@ public class GoogleCalController {
 		}
 		 
 		System.out.printf("Event created: %s\n", eventOutput.getId());	
-		i.setPanelEmail(it.getPanelEmail());
-		i.setCandidateEmail(it.getCandidateEmail());
+		i.setPanelEmail("dakhiles95@gmail.com");
+		i.setCandidateEmail("deshmukha816@gmail.com");
 		i.setScheduledOn(it.getScheduledOn());
 		i.setScheduledEndTime(it.getScheduledEndTime());
 		i.setCalEventId(eventOutput.getId());
@@ -438,12 +435,9 @@ public class GoogleCalController {
 	event.setRecurrence(Arrays.asList(recurrence));
 
 	EventAttendee[] attendees = new EventAttendee[] {
-		//new EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
-	    //new EventAttendee().setEmail("dakhilesh95@gmail.com"),
-	    //new EventAttendee().setEmail("deshmukha816@gmail.com"),
-	    new EventAttendee().setOrganizer(true).setEmail(it.getHrEmail()),
-	    new EventAttendee().setEmail(it.getPanelEmail()),
-	    new EventAttendee().setEmail(it.getCandidateEmail()),
+		new EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
+	    new EventAttendee().setEmail("dakhilesh95@gmail.com"),
+	    new EventAttendee().setEmail("deshmukha816@gmail.com"),
 	};
 	
 	event.setAttendees(Arrays.asList(attendees));
