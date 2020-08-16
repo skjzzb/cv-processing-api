@@ -322,9 +322,12 @@ public class GoogleCalController {
 		event.setRecurrence(Arrays.asList(recurrence));
 		
 		EventAttendee[] attendees = new EventAttendee[] {
-			new EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
-		    new EventAttendee().setEmail("dakhilesh95@gmail.com"),
-		    new EventAttendee().setEmail("deshmukha816@gmail.com"),
+			//new EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
+		    //new EventAttendee().setEmail("dakhilesh95@gmail.com"),
+		    //new EventAttendee().setEmail("deshmukha816@gmail.com"),
+				new EventAttendee().setOrganizer(true).setEmail(it.getHrEmail()),
+			    new EventAttendee().setEmail(it.getPanelEmail()),
+			    new EventAttendee().setEmail(it.getCandidateEmail()),
 		};
 		
 		event.setAttendees(Arrays.asList(attendees));
@@ -355,8 +358,8 @@ public class GoogleCalController {
 		}
 		 
 		System.out.printf("Event created: %s\n", eventOutput.getId());	
-		i.setPanelEmail("dakhiles95@gmail.com");
-		i.setCandidateEmail("deshmukha816@gmail.com");
+		i.setPanelEmail(it.getPanelEmail());
+		i.setCandidateEmail(it.getCandidateEmail());
 		i.setScheduledOn(it.getScheduledOn());
 		i.setScheduledEndTime(it.getScheduledEndTime());
 		i.setCalEventId(eventOutput.getId());
@@ -410,8 +413,8 @@ public class GoogleCalController {
 			exp.printStackTrace();
 		}	
 		
-		it.setPanelEmail("dakhilesh95@gmail.com");
-		it.setCandidateEmail("deshmukha816@gmail.com");
+		//it.setPanelEmail("dakhilesh95@gmail.com");
+		//it.setCandidateEmail("deshmukha816@gmail.com");
 		System.out.println(it);
 		Event event = new Event();
 	    event.setSummary("Interview Call From GSlab is rescheduled reason:- "+reason+" , give response in the form of yes or no")
@@ -435,9 +438,12 @@ public class GoogleCalController {
 	event.setRecurrence(Arrays.asList(recurrence));
 
 	EventAttendee[] attendees = new EventAttendee[] {
-		new EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
-	    new EventAttendee().setEmail("dakhilesh95@gmail.com"),
-	    new EventAttendee().setEmail("deshmukha816@gmail.com"),
+		//new EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
+	    //new EventAttendee().setEmail("dakhilesh95@gmail.com"),
+	    //new EventAttendee().setEmail("deshmukha816@gmail.com"),
+			new EventAttendee().setOrganizer(true).setEmail(it.getHrEmail()),
+		    new EventAttendee().setEmail(it.getPanelEmail()),
+		    new EventAttendee().setEmail(it.getCandidateEmail()),
 	};
 	
 	event.setAttendees(Arrays.asList(attendees));
