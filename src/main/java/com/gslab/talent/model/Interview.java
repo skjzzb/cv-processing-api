@@ -220,8 +220,7 @@ public class Interview {
 
 
 	    	
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> 52996e1a806dcde0b322e22108b4f5a400ebe8ac
+
+

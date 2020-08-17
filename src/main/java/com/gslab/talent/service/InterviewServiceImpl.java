@@ -35,8 +35,6 @@ public class InterviewServiceImpl implements InterviewService{
 	public List getTodaysInterview() {
 		ArrayList<String> list = new ArrayList<String>();
 		LocalDateTime now = LocalDateTime.now();
-		System.out.println("now is :"+now);
-		//String today = "2020-08-25";
 		String today = now.toString().substring(0,10);
 		System.out.println("today is :"+today);
 		
@@ -46,11 +44,8 @@ public class InterviewServiceImpl implements InterviewService{
 			String date = interview.getScheduledOn();
 			if(date.contains(today)) {
 				Long id = interview.getCandidateId();
-				//String email = interview.getCandidateEmail();
 				System.out.println("candidate id  is :"+id);
 				Optional<Candidate> candidate= candidateRepoObj.findById(id);
-				System.out.println("candidate info  :"+candidate);
-				
 				list.add(candidate.get().getCandidateName());
 				
 			}
@@ -67,20 +62,15 @@ public class InterviewServiceImpl implements InterviewService{
 		
 		List<Interview> interviewList = interviewRepoObj.findAll();
 		for(Interview interview : interviewList){
-			System.out.println("interview = "+interview);
 			String interviewStatus = interview.getInterviewStatus();
-			System.out.println("interviewStatus is = "+interviewStatus);
 			if(interviewStatus.equalsIgnoreCase("rejected")) {
 				rejected1++;
-				System.out.println("rejected : "+rejected1);
 			}
 			else if(interviewStatus.equalsIgnoreCase("scheduled")) {
 				scheduled1++;
-				System.out.println("scheduled : "+scheduled1);
 			}
 			else if(interviewStatus.equalsIgnoreCase("waiting")) {
 				waiting1++;
-				System.out.println("waiting : "+waiting1);
 			}
 				
 		}
