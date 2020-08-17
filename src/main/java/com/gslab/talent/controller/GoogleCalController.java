@@ -403,6 +403,20 @@ public class GoogleCalController {
 	return list;
 	}
 	
+	@GetMapping("/interview/confirmed")
+	public List<?> getAllCinfirmedEvent()
+	{
+		List<Interview> list=new ArrayList<Interview>();
+	interviewRepository.findAll().forEach(i->{
+		if(i.getInterviewStatus().equalsIgnoreCase("scheduled"))
+		{
+			list.add(i);
+		}
+	});
+	return list;
+	}
+	
+	
 	@PostMapping("/rescheduledMeeting")
 	public void rescheduledMeeting(@RequestBody Interview it,@RequestParam String reason)
 	{
