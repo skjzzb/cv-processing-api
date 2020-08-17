@@ -13,5 +13,7 @@ import com.gslab.talent.model.Vacancy;
 
 @Repository
 public interface CandidateRepository extends JpaRepository<Candidate, Long> {
+
+	public Candidate findByEmail(String email);
 	
 }

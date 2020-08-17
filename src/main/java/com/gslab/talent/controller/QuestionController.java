@@ -22,6 +22,8 @@ import com.gslab.talent.model.Question;
 import com.gslab.talent.model.Technology;
 import com.gslab.talent.model.Vacancy;
 import com.gslab.talent.service.QuestionService;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -45,14 +47,18 @@ public class QuestionController {
 	}
 	
 	@GetMapping(value = "/getAllQuestion/{id}")
-	public ResponseEntity<?> getAllQuestion(@PathVariable Integer id) {
+	public ArrayList<String> getAllQuestion(@PathVariable Integer id) {
+		ArrayList<String> list = new ArrayList<String>();
+		
 		Question question = questionServiceObj.getQuestionById(id);
 		String que = question.getQuestion();
 		String split[] = que.split(",");
 		for(int i=0;i<split.length;i++) {
 			System.out.println(split[i]);
+			list.add(split[i]);
+			
 		}
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		return list;
 	}
 }
 	

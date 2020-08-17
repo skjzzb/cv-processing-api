@@ -256,6 +256,12 @@ public class CandidateServiceImpl implements CandidateService {
 		return hashmap;
 		
 	}
+	
+	public Candidate findByEmailId(String email) {
+//		return employeeRepoObj.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
+		Optional<Candidate> optionObj = Optional.ofNullable(candidateRepoObj.findByEmail(email));
+		return optionObj.get();
+	}
 }
 	
 
