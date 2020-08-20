@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import com.gslab.talent.model.Interview;
 import com.gslab.talent.model.Vacancy;
 import com.gslab.talent.repository.CandidateRepository;
 import com.gslab.talent.repository.InterviewRepository;
+import com.gslab.talent.repository.VacancyRepository;
 
 @Service
 public class InterviewServiceImpl implements InterviewService{
@@ -30,6 +32,15 @@ public class InterviewServiceImpl implements InterviewService{
 	
 	@Autowired
 	CandidateRepository candidateRepoObj;
+	
+	@Autowired
+	VacancyRepository vacancyRepoObj;
+	
+	@Autowired
+	CandidateServiceImpl candidateServiceObj;
+	
+	@Autowired
+	VacancyServiceImpl vacancyServiceObj;
 	
 	@Override
 	public List getTodaysInterview() {
@@ -211,5 +222,53 @@ public class InterviewServiceImpl implements InterviewService{
 
 		return applicationDetail;
 	}
+	
+	@Override
+	 public TreeMap<String, TreeMap<String, Integer>> getCountOfInterviewLevelForProject() {
+		List<Interview> listOfInterview = interviewRepoObj.findAll();
+		
+		TreeMap<String, Integer> hashmap = new TreeMap<>();
+		TreeMap<String, Integer> hashmap3 = new TreeMap<>();
+		TreeMap<String, TreeMap<String, Integer>> hashmap1 = new TreeMap<>();
+		
+		for(Interview interview : listOfInterview) {
+			int vacancyId = interview.getVacancyId();
+			Vacancy vacancy = vacancyRepoObj.findById(vacancyId).orElse(null);
+			String projectName = vacancy.getProjectName();
+			String levelName = interview.getLevel();
+
+			if(hashmap1.containsKey(projectName)) {
+		
+				if (hashmap3.containsKey(levelName)) {
+					hashmap3.put(levelName, hashmap3.get(levelName) + 1);
+					hashmap1.put(projectName, hashmap3);
+				} 
+				else {
+					hashmap3.put(levelName, 1);
+					hashmap3.putAll(hashmap);
+					if(hashmap1.containsKey(projectName)) {
+						hashmap1.put(projectName,hashmap3);
+					}
+				}
+				}
+			else {
+				hashmap1.put(projectName, null);
+				if (hashmap1.containsValue(levelName)) {
+					hashmap.put(levelName, hashmap.get(levelName) + 1);
+					hashmap1.replace(projectName, hashmap);
+				} 
+				else {
+					hashmap.put(levelName, 1);
+					hashmap1.put(projectName, hashmap);
+				}
+			}
+			
+		}
+		
+		System.out.println("hashmap1 is :"+hashmap1);
+		return hashmap1;
+		
+	
+}
 }
 	

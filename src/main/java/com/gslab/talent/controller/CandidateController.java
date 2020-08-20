@@ -93,7 +93,9 @@ public class CandidateController {
 		List<Candidate> list = ServiceObj.getCandidateByVacancyId(id);
 		for(Candidate c : list) {
 			 exp = c.getYearOfExperience();
-			if(exp >= 0 && exp <=5) 
+			if (exp == null)
+				continue;
+			else if(exp >= 0 && exp <=5) 
 				exp5++;
 				
 			else if (exp >=6 && exp <=10) 

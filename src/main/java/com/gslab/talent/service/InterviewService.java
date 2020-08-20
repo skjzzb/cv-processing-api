@@ -14,4 +14,6 @@ public interface InterviewService {
 
 	public TreeMap<Integer, Integer> getRejectedMonthly();
 
+	public TreeMap<String, TreeMap<String, Integer>> getCountOfInterviewLevelForProject();
+
 }

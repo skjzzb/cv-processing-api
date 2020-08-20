@@ -40,4 +40,8 @@ public class InterviewController {
 		 return new ResponseEntity<TreeMap<Integer, Integer>>(interviewServiceObj.getRejectedMonthly(),HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/getCountOfInterviewLevelForProject")
+	public ResponseEntity<TreeMap<String, TreeMap<String, Integer>>> getCountOfInterviewLevelForProject() {
+		return new ResponseEntity<TreeMap<String, TreeMap<String, Integer>>>(interviewServiceObj.getCountOfInterviewLevelForProject(),HttpStatus.OK);
+	}
 }
