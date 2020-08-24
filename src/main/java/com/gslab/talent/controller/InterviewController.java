@@ -6,14 +6,18 @@ import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gslab.talent.constant.Constant;
 import com.gslab.talent.model.Candidate;
 import com.gslab.talent.model.Interview;
+import com.gslab.talent.model.User;
 import com.gslab.talent.service.InterviewService;
 
 @Controller
@@ -29,6 +33,7 @@ public class InterviewController {
 		 List interview = interviewServiceObj.getTodaysInterview();
 		 return new ResponseEntity<List<Interview>>(interview,HttpStatus.OK);
 	}
+
 	
 	@GetMapping(value = "/getCandidateInterviewStatus")
 	public ResponseEntity<String> getCandidateInterviewStatus() {

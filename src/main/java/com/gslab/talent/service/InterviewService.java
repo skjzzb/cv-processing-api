@@ -11,6 +11,7 @@ public interface InterviewService {
 	public List<Interview> getTodaysInterview();
 
 	public String getInterviewStatus();
+	
 
 	public TreeMap<Integer, Integer> getRejectedMonthly();
 

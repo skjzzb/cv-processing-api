@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -380,6 +381,11 @@ public class GoogleCalController {
 			}
 		});
 		return list;
+	}
+	@GetMapping(value = "/interview/{interviewId}")
+	public Optional<Interview> getInterviewByInterviewID(@PathVariable long interviewId) {
+		
+		 return interviewRepository.findById(interviewId);
 	}
 
 	@GetMapping("/interview/confirmed")
