@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,13 +21,34 @@ public class EvaluationReport {
 
 	String averageRating;
 	
+	String interviewLevel;
+	
+	public String getInterviewLevel() {
+		return interviewLevel;
+	}
+
+	public void setInterviewLevel(String interviewLevel) {
+		this.interviewLevel = interviewLevel;
+	}
+
+	/*@ManyToOne
+	@JoinColumn(name = "candidateId")
+	private Candidate candidate;*/
 	int candidateId;
 	
+	public int getCandidate() {
+		return candidateId;
+	}
+
+	public void setCandidate(int candidateId) {
+		this.candidateId = candidateId;
+	}
+
 	EvaluationReport(){
 		
 	}
 	
-	EvaluationReport(int id,String question,String averageRating,int cacandidateId){
+	EvaluationReport(int id,String question,String averageRating,int candidateId){
 		this.id = id;
 		this.question = question;
 		this.averageRating = averageRating;
@@ -54,14 +77,6 @@ public class EvaluationReport {
 
 	public void setAverageRating(String averageRating) {
 		this.averageRating = averageRating;
-	}
-
-	public int getCandidateId() {
-		return candidateId;
-	}
-
-	public void setCandidateId(int candidateId) {
-		this.candidateId = candidateId;
 	}
 	
 	@Override

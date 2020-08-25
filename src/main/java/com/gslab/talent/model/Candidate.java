@@ -1,5 +1,6 @@
 package com.gslab.talent.model;
 
+import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="Candidate")
@@ -45,10 +50,10 @@ public class Candidate {
 	
 	String finalStatus;
 	
-	String evaluationReport;
 	
 	
 	
+
 	public String getFinalStatus() {
 		return finalStatus;
 	}
@@ -57,13 +62,7 @@ public class Candidate {
 		this.finalStatus = finalStatus;
 	}
 
-	public String getEvaluationReport() {
-		return evaluationReport;
-	}
-
-	public void setEvaluationReport(String evaluationReport) {
-		this.evaluationReport = evaluationReport;
-	}
+	
 
 	@ManyToOne
 	@JoinColumn(name = "vacancyId")
@@ -214,8 +213,7 @@ public class Candidate {
 
 	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
 			Integer reqMatchingPercent, Integer technologyStackMatchingPercent, Integer shortSummaryMatchingPercent,
-			String interviewStatus, Integer yearOfExperience, String employmentStatus, String finalStatus,
-			String evaluationReport, Vacancy vacancy) {
+			String interviewStatus, Integer yearOfExperience, String employmentStatus, String finalStatus,Vacancy vacancy) {
 		super();
 		this.id = id;
 		this.candidateName = candidateName;
@@ -229,7 +227,6 @@ public class Candidate {
 		this.yearOfExperience = yearOfExperience;
 		this.employmentStatus = employmentStatus;
 		this.finalStatus = finalStatus;
-		this.evaluationReport = evaluationReport;
 		this.vacancy = vacancy;
 	}
 
