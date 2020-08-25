@@ -13,4 +13,5 @@ public interface InterviewRepository extends JpaRepository<Interview, Long>{
 
 	Optional<Interview> findByCandidateId(Long candidateId);
 
+
 }

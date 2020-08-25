@@ -34,7 +34,7 @@ public class Interview {
 	  	  
 	  Long candidateId;
 	  
-	  Long vacancyId;
+	  Integer vacancyId;
 	  
 	  public Interview() {}
 	  
@@ -55,7 +55,7 @@ public class Interview {
 
 	
 	public Interview(String panelEmail, String candidateEmail, String hrEmail, String scheduledOn,
-			String scheduledEndTime, String level, Long candidateId, Long vacancyId) {
+			String scheduledEndTime, String level, Long candidateId, Integer vacancyId) {
 		super();
 		this.panelEmail = panelEmail;
 		this.candidateEmail = candidateEmail;
@@ -70,7 +70,7 @@ public class Interview {
 
 	public Interview(Long interviewId, String panelEmail, String candidateEmail, String hrEmail, String scheduledOn,
 			String scheduledEndTime, String level, String calEventId, String panelResponseStatus,
-			String candidateResponseStatus, String interviewStatus, Long candidateId, Long vacancyId) {
+			String candidateResponseStatus, String interviewStatus, Long candidateId, Integer vacancyId) {
 		super();
 		this.InterviewId = interviewId;
 		this.panelEmail = panelEmail;
@@ -199,12 +199,12 @@ public class Interview {
 	}
 
 
-	public Long getVacancyId() {
+	public Integer getVacancyId() {
 		return vacancyId;
 	}
 
 
-	public void setVacancyId(Long vacancyId) {
+	public void setVacancyId(Integer vacancyId) {
 		this.vacancyId = vacancyId;
 	}
 
@@ -219,8 +219,5 @@ public class Interview {
 	}
 
 
-	    	
-
+	
 }
-
-

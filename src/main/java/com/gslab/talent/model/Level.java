@@ -24,9 +24,6 @@ public class Level {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 	
-	/*@Column(name="level")
-	String level;*/
-	
 	@Column(name="description")
 	String description;
 
@@ -36,7 +33,6 @@ public class Level {
 	
 	Level(int id,String description){
 		this.id=id;
-		//this.level=level;
 		this.description=description;
 	}
 	
@@ -48,14 +44,6 @@ public class Level {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	/*public String getLevel() {
-		return level;
-	}
-
-	public void setLevel(String level) {
-		this.level = level;
-	}*/
 
 	public String getDescription() {
 		return description;
