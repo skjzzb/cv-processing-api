@@ -61,4 +61,13 @@ public class Constant {
 	public static final String UPDATE_FEATURE =  "/feature/update";
 	
 	public static final String DELETE_FEATURE = "/feature/{featureId}";
+	
+	//project
+	public static final String GET_ALL_PROJECT = "/project";
+	public static final String GET_PROJECT_BY_ID = "/project/{projId}";
+	public static final String CREATE_PROJECT = "/project";
+	public static final String DLEETE_PROJECT_BY_ID = "/project/{projId}";
+	public static final String DELETE_ALL_PROJECT= "project";
+	
 }
+	
