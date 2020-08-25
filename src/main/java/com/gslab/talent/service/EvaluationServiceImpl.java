@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gslab.talent.model.Candidate;
-import com.gslab.talent.model.EvaluationReport;
+import com.gslab.talent.model.Evaluation;
 import com.gslab.talent.repository.EvaluationRepository;
 
 @Service
@@ -23,19 +23,14 @@ public class EvaluationServiceImpl implements EvaluationService{
 	EvaluationRepository evaluationRepoObj;
 	
 	@Override
-	public void createNewEvaluation(EvaluationReport evaluation) {
+	public void createNewEvaluation(Evaluation evaluation) {
 		evaluationRepoObj.save(evaluation);
 	}
 
 	@Override
-	public List<EvaluationReport> getEvaluationReport(int id)
+	public List<Evaluation> getEvaluationReport(int id)
 	{   
-		/*String jpql="select e from EvaluationReport where candidateId=:id";
-		 EntityManager em = emf.createEntityManager();
-	        List<EvaluationReport> listOfReport = em
-	        		.createQuery(jpql,EvaluationReport.class).setParameter("id", id)
-	                .getResultList();	        
-	        System.out.println("EvaluationReport :"+listOfReport);*/
-		return null;	
+		List<Evaluation> evaluationList= evaluationRepoObj.findByCandidateId(id);
+		return evaluationList;
 	}
 }

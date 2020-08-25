@@ -5,12 +5,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.gslab.talent.model.EvaluationReport;
+import com.gslab.talent.model.Evaluation;
 
 
-public interface EvaluationRepository extends JpaRepository<EvaluationReport,Integer>{
+public interface EvaluationRepository extends JpaRepository<Evaluation,Integer>{
 
-	//@Query("select e from EvaluationReport where candidate_id=:id")
-	List<EvaluationReport> findByCandidateId(int id);
+	List<Evaluation> findByCandidateId(int id);
 
 }

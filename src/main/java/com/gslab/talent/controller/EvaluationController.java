@@ -3,6 +3,8 @@ package com.gslab.talent.controller;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gslab.talent.model.EvaluationReport;
+import com.gslab.talent.model.Evaluation;
 import com.gslab.talent.service.EvaluationService;
 
 @RestController
@@ -26,16 +28,16 @@ public class EvaluationController {
 	EvaluationService evaluationServiceObj;
 	
 	@PostMapping(value = "/evaluation")
-	public ResponseEntity<Void> createNewEvaluation(@RequestBody EvaluationReport evaluation)
+	public ResponseEntity<Void> createNewEvaluation(@RequestBody Evaluation evaluation)
 	{
 		evaluationServiceObj.createNewEvaluation(evaluation);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	
 	@GetMapping(value = "/GetEvaluationReport/{id}")
-	public List<EvaluationReport> GetEvaluationReport(@PathVariable int id)
+	public List<Evaluation> GetEvaluationReport(@PathVariable int id)
 	{
-		evaluationServiceObj.getEvaluationReport(id);
-		return (List<EvaluationReport>) new ResponseEntity<Void>(HttpStatus.CREATED);
+		return evaluationServiceObj.getEvaluationReport(id);
+		
 	}
 }

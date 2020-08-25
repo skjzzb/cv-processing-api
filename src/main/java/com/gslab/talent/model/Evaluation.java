@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Evaluation")
-public class EvaluationReport {
+public class Evaluation {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,8 @@ public class EvaluationReport {
 	
 	String interviewLevel;
 	
+	int candidateId;
+	
 	public String getInterviewLevel() {
 		return interviewLevel;
 	}
@@ -31,11 +33,6 @@ public class EvaluationReport {
 		this.interviewLevel = interviewLevel;
 	}
 
-	/*@ManyToOne
-	@JoinColumn(name = "candidateId")
-	private Candidate candidate;*/
-	int candidateId;
-	
 	public int getCandidate() {
 		return candidateId;
 	}
@@ -44,11 +41,11 @@ public class EvaluationReport {
 		this.candidateId = candidateId;
 	}
 
-	EvaluationReport(){
+	Evaluation(){
 		
 	}
 	
-	EvaluationReport(int id,String question,String averageRating,int candidateId){
+	Evaluation(int id,String question,String averageRating,int candidateId){
 		this.id = id;
 		this.question = question;
 		this.averageRating = averageRating;
