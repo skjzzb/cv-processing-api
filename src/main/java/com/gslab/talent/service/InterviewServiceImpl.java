@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import com.google.api.client.util.DateTime;
 import com.gslab.talent.model.Candidate;
 import com.gslab.talent.model.Interview;
+import com.gslab.talent.model.Level;
 import com.gslab.talent.model.Vacancy;
 import com.gslab.talent.repository.CandidateRepository;
 import com.gslab.talent.repository.InterviewRepository;
@@ -270,5 +271,9 @@ public class InterviewServiceImpl implements InterviewService{
 		
 	
 }
+
+
+
+
 }
 	
