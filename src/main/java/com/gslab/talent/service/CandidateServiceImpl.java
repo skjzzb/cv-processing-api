@@ -96,18 +96,18 @@ public class CandidateServiceImpl implements CandidateService {
 		List<Candidate> listOfCandidate = candidateRepoObj.findAll();
 
 		TreeMap<String, Integer> applicationDetail = new TreeMap<>();
-		applicationDetail.put("January", 0);
-		applicationDetail.put("February", 0);
-		applicationDetail.put("March", 0);
-		applicationDetail.put("April", 0);
-		applicationDetail.put("May", 0);
-		applicationDetail.put("June", 0);
-		applicationDetail.put("July", 0);
-		applicationDetail.put("August", 0);
-		applicationDetail.put("September", 0);
-		applicationDetail.put("October", 0);
-		applicationDetail.put("November", 0);
-		applicationDetail.put("December", 0);
+		applicationDetail.put("1_January", 0);
+		applicationDetail.put("2_February", 0);
+		applicationDetail.put("3_March", 0);
+		applicationDetail.put("4_April", 0);
+		applicationDetail.put("5_May", 0);
+		applicationDetail.put("6_June", 0);
+		applicationDetail.put("7_July", 0);
+		applicationDetail.put("8_August", 0);
+		applicationDetail.put("9_September", 0);
+		applicationDetail.put("10_October", 0);
+		applicationDetail.put("11_November", 0);
+		applicationDetail.put("12_December", 0);
 		
 		
 		System.out.println(listOfCandidate.size());
