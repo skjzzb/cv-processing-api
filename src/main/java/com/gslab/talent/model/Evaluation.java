@@ -25,31 +25,18 @@ public class Evaluation {
 	
 	int candidateId;
 	
-	public String getInterviewLevel() {
-		return interviewLevel;
-	}
-
-	public void setInterviewLevel(String interviewLevel) {
-		this.interviewLevel = interviewLevel;
-	}
-
-	public int getCandidate() {
-		return candidateId;
-	}
-
-	public void setCandidate(int candidateId) {
-		this.candidateId = candidateId;
-	}
-
+	String feedback;
+	
 	Evaluation(){
 		
 	}
 	
-	Evaluation(int id,String question,String averageRating,int candidateId){
+	Evaluation(int id,String question,String averageRating,int candidateId,String feedback){
 		this.id = id;
 		this.question = question;
 		this.averageRating = averageRating;
 		this.candidateId = candidateId;
+		this.feedback = feedback;
 	}
 
 	public int getId() {
@@ -74,6 +61,30 @@ public class Evaluation {
 
 	public void setAverageRating(String averageRating) {
 		this.averageRating = averageRating;
+	}
+	
+	public int getCandidateId() {
+		return candidateId;
+	}
+
+	public void setCandidateId(int candidateId) {
+		this.candidateId = candidateId;
+	}
+
+	public String getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+
+	public String getInterviewLevel() {
+		return interviewLevel;
+	}
+
+	public void setInterviewLevel(String interviewLevel) {
+		this.interviewLevel = interviewLevel;
 	}
 	
 	@Override

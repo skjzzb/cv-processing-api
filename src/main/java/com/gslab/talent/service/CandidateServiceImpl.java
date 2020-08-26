@@ -1,6 +1,8 @@
 package com.gslab.talent.service;
 
+
 import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -103,110 +105,125 @@ public class CandidateServiceImpl implements CandidateService {
 
 
 	@Override
-	public TreeMap<Integer, Integer> getAllApplicationInMonth() {
+	public TreeMap<String, Integer> getAllApplicationInMonth() {
 		List<Candidate> listOfCandidate = candidateRepoObj.findAll();
 
-		TreeMap<Integer, Integer> applicationDetail = new TreeMap<>();
-
+		TreeMap<String, Integer> applicationDetail = new TreeMap<>();
+		applicationDetail.put("1_January", 0);
+		applicationDetail.put("2_February", 0);
+		applicationDetail.put("3_March", 0);
+		applicationDetail.put("4_April", 0);
+		applicationDetail.put("5_May", 0);
+		applicationDetail.put("6_June", 0);
+		applicationDetail.put("7_July", 0);
+		applicationDetail.put("8_August", 0);
+		applicationDetail.put("9_September", 0);
+		applicationDetail.put("10_October", 0);
+		applicationDetail.put("11_November", 0);
+		applicationDetail.put("12_December", 0);
+		
+		
 		System.out.println(listOfCandidate.size());
 		for (Candidate candidate : listOfCandidate) {
 			Date posDate = candidate.getVacancy().getPosOpenDate();
 			Integer date1 = posDate.getMonth();
+			String month = date1.toString();
+			System.out.println("month is :"+month);
 
 			switch (date1) {
 			case 1:
-				if (applicationDetail.get(1) != null) {
-					applicationDetail.put(1, applicationDetail.get(1) + 1);
+				if (applicationDetail.get("1_January") != null) {
+					applicationDetail.put("1_January", applicationDetail.get("1_January") + 1);
 				} else {
-					applicationDetail.put(1, 1);
+					applicationDetail.put("1_January", 1);
 				}
 
 				break;
 			case 2:
-				if (applicationDetail.get(2) != null) {
-					applicationDetail.put(2, applicationDetail.get(2) + 1);
+				if (applicationDetail.get("2_February") != null) {
+					applicationDetail.put("2_February", applicationDetail.get("2_February") + 1);
 				} else {
-					applicationDetail.put(2, 1);
+					applicationDetail.put("2_February", 1);
 				}
 
 				break;
 			case 3:
-				if (applicationDetail.get(3) != null) {
-					applicationDetail.put(3, applicationDetail.get(3) + 1);
+				if (applicationDetail.get("3_March") != null) {
+					applicationDetail.put("3_March", applicationDetail.get("3_March") + 1);
 				} else {
-					applicationDetail.put(3, 1);
+					applicationDetail.put("3_March", 1);
 				}
 
 				break;
 			case 4:
-				if (applicationDetail.get(4) != null) {
-					applicationDetail.put(4, applicationDetail.get(4) + 1);
+				if (applicationDetail.get("4_April") != null) {
+					applicationDetail.put("4_April", applicationDetail.get("4_April") + 1);
 				} else {
-					applicationDetail.put(4, 1);
+					applicationDetail.put("4_April", 1);
 				}
 
 				break;
 			case 5:
-				if (applicationDetail.get(5) != null) {
-					applicationDetail.put(5, applicationDetail.get(5) + 1);
+				if (applicationDetail.get("5_May") != null) {
+					applicationDetail.put("5_May", applicationDetail.get("5_May") + 1);
 				} else {
-					applicationDetail.put(5, 1);
+					applicationDetail.put("5_May", 1);
 				}
 				
 				break;
 			case 6:
-				if (applicationDetail.get(6) != null) {
-					applicationDetail.put(6, applicationDetail.get(6) + 1);
+				if (applicationDetail.get("6_June") != null) {
+					applicationDetail.put("6_June", applicationDetail.get("6_June") + 1);
 				} else {
-					applicationDetail.put(6, 1);
+					applicationDetail.put("6_June", 1);
 				}
 				
 				break;
 			case 7:
-				if (applicationDetail.get(7) != null) {
-					applicationDetail.put(7, applicationDetail.get(7) + 1);
+				if (applicationDetail.get("7_July") != null) {
+					applicationDetail.put("7_July", applicationDetail.get("7_July") + 1);
 				} else {
-					applicationDetail.put(7, 1);
+					applicationDetail.put("7_July", 1);
 				}
 				
 				break;
 			case 8:
-				if (applicationDetail.get(8) != null) {
-					applicationDetail.put(8, applicationDetail.get(8) + 1);
+				if (applicationDetail.get("8_August") != null) {
+					applicationDetail.put("8_August", applicationDetail.get("8_August") + 1);
 				} else {
-					applicationDetail.put(8, 1);
+					applicationDetail.put("8_August", 1);
 				}
 				
 				break;
 			case 9:
-				if (applicationDetail.get(9) != null) {
-					applicationDetail.put(9, applicationDetail.get(9) + 1);
+				if (applicationDetail.get("9_September") != null) {
+					applicationDetail.put("9_September", applicationDetail.get("9_September") + 1);
 				} else {
-					applicationDetail.put(9, 1);
+					applicationDetail.put("9_September", 1);
 				}
 
 				break;
 			case 10:
-				if (applicationDetail.get(10) != null) {
-					applicationDetail.put(10, applicationDetail.get(10) + 1);
+				if (applicationDetail.get("10_October") != null) {
+					applicationDetail.put("10_October", applicationDetail.get("10_October") + 1);
 				} else {
-					applicationDetail.put(10, 1);
+					applicationDetail.put("10_October", 1);
 				}
 
 				break;
 			case 11:
-				if (applicationDetail.get(11) != null) {
-					applicationDetail.put(11, applicationDetail.get(11) + 1);
+				if (applicationDetail.get("11_November") != null) {
+					applicationDetail.put("11_November", applicationDetail.get("11_November") + 1);
 				} else {
-					applicationDetail.put(11, 1);
+					applicationDetail.put("11_November", 1);
 				}
 
 				break;
 			case 12:
-				if (applicationDetail.get(12) != null) {
-					applicationDetail.put(12, applicationDetail.get(12) + 1);
+				if (applicationDetail.get("12_December") != null) {
+					applicationDetail.put("12_December", applicationDetail.get("12_December") + 1);
 				} else {
-					applicationDetail.put(12, 1);
+					applicationDetail.put("12_December", 1);
 				}
 
 				break;
