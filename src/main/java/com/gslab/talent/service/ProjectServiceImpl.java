@@ -38,4 +38,10 @@ public class ProjectServiceImpl implements ProjectService {
 		projectRepoObj.deleteAll();
 	}
 
+	@Override
+	public void updateProject(Project project) {
+		projectRepoObj.save(project);
+		
+	}
+
 }
