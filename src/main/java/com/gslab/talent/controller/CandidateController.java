@@ -113,8 +113,8 @@ public class CandidateController {
 	}
 	
 	@GetMapping(value="/monthapplication")
-	public ResponseEntity<TreeMap<Integer, Integer>> getAllApplicationInMonth(){
-		return new ResponseEntity<TreeMap<Integer,Integer>>(ServiceObj.getAllApplicationInMonth(),HttpStatus.OK);
+	public ResponseEntity<TreeMap<String, Integer>> getAllApplicationInMonth(){
+		return new ResponseEntity<TreeMap<String,Integer>>(ServiceObj.getAllApplicationInMonth(),HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/getCountOfApplicationForProject/{str}")

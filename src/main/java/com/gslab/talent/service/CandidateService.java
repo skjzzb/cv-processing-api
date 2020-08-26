@@ -14,6 +14,6 @@ public interface CandidateService {
 	public  void update(Candidate candidateObj,int id);
 	public void deleteCandidateById(long id);
 	public List<Candidate> getCandidateByVacancyId(int id);
-	public TreeMap<Integer, Integer> getAllApplicationInMonth();
+	public TreeMap<String, Integer> getAllApplicationInMonth();
 	public HashMap<String, Integer> getCountOfApplicationForProject(String str);
 }
