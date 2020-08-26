@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 import com.gslab.talent.model.Candidate;
+import com.gslab.talent.model.Helper;
 
 public interface CandidateService {
 
@@ -16,4 +17,5 @@ public interface CandidateService {
 	public List<Candidate> getCandidateByVacancyId(int id);
 	public TreeMap<Integer, Integer> getAllApplicationInMonth();
 	public HashMap<String, Integer> getCountOfApplicationForProject(String str);
+	Helper getAllCandidateByProjectAndPosition(String projectName);
 }
