@@ -1,5 +1,7 @@
 package com.gslab.talent.service;
 
+
+import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,8 +20,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gslab.talent.model.Candidate;
+import com.gslab.talent.model.Helper;
+import com.gslab.talent.model.Position;
+import com.gslab.talent.model.Project;
 import com.gslab.talent.model.Vacancy;
 import com.gslab.talent.repository.CandidateRepository;
+import com.gslab.talent.repository.PositionRepository;
+import com.gslab.talent.repository.ProjectRepository;
 import com.gslab.talent.repository.VacancyRepository;
 
 
@@ -31,6 +38,12 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Autowired
 	VacancyRepository vacancyRepository;
+	
+	@Autowired
+	PositionRepository positionRepoObj;
+	
+	@Autowired
+	ProjectRepository projectRepoObject;
 	
 	@PersistenceUnit
 	private EntityManagerFactory emf;
@@ -272,6 +285,79 @@ public class CandidateServiceImpl implements CandidateService {
 		return hashmap;
 		
 	}
+
+
+	@Override
+	public Helper getAllCandidateByProjectAndPosition(String projName) {
+		List<Candidate> candidates = candidateRepoObj.findAll();
+		List<Position> positions = positionRepoObj.findAll();
+		List <Project> projects = projectRepoObject.findAll();
+		Helper helperObj = new Helper();
+		//counts
+		int applicationCnt = 0;
+        int cntTech_1 = 0;
+        int cntTech_2 = 0;
+        int cntTech_3 = 0;
+        int cntManager = 0;
+        int cntHr = 0;
+        
+        //list of all conuts
+        List<String> posName = new ArrayList<>();
+        List<Integer> application = new ArrayList<>();
+        List<Integer> tech1 = new ArrayList<>();
+        List<Integer> tech2 = new ArrayList<>();
+        List<Integer> tech3 = new ArrayList<>();
+        List<Integer> mgr = new ArrayList<>();
+        List<Integer> hr = new ArrayList<>();
+        //for each project
+			for (Position pos : positions) 
+			{
+				applicationCnt = 0;
+	        	cntTech_1 = 0;
+	        	cntTech_2 = 0;
+	        	cntTech_3 = 0;
+	        	cntManager = 0;
+	        	cntHr = 0;
+				for (Candidate c : candidates)
+				{
+					if(c.getVacancy().getJobTitle().equalsIgnoreCase(pos.getName()) &&
+				       c.getVacancy().getProjectName().equalsIgnoreCase(projName))
+					{
+						applicationCnt++;
+						if(c.getInterviewStatus().contains("Technical - 1"))
+							cntTech_1++;
+						if(c.getInterviewStatus().contains("Technical - 2"))
+							cntTech_2++;
+						if(c.getInterviewStatus().contains("Technical - 3"))
+							cntTech_3++;
+						if(c.getInterviewStatus().contains("Manager"))
+							cntManager++;
+						if(c.getInterviewStatus().contains("HR"))
+							cntHr++;
+					}
+				}
+				posName.add(pos.getName());
+				application.add(applicationCnt);
+				tech1.add(cntTech_1);
+				tech2.add(cntTech_2);
+				tech3.add(cntTech_3);
+				mgr.add(cntManager);
+				hr.add(cntHr);
+		}
+		
+		helperObj.setPositionName(posName);
+		helperObj.setApplication(application);
+		helperObj.setTech1(tech1);
+		helperObj.setTech2(tech2);
+		helperObj.setTech3(tech3);
+		helperObj.setManager(mgr);
+		helperObj.setHr(hr);
+		System.out.println(helperObj);
+		return helperObj;
+	}
+
+
+	
 	
 }
 	
