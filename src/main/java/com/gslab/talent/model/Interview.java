@@ -36,7 +36,19 @@ public class Interview {
 	  
 	  Integer vacancyId;
 	  
-	  public Interview() {}
+	  String meetLink;
+	  
+	  public String getMeetLink() {
+		return meetLink;
+	}
+
+
+	public void setMeetLink(String meetLink) {
+		this.meetLink = meetLink;
+	}
+
+
+	public Interview() {}
 	  
 
 	public Interview(String panelEmail, String candidateEmail, String scheduledOn, String scheduledEndTime,
@@ -50,10 +62,32 @@ public class Interview {
 		this.hrEmail = hrEmail;
 	}
 	
-	
+	 
 	
 
 	
+	public Interview(Long interviewId, String panelEmail, String candidateEmail, String hrEmail, String scheduledOn,
+			String scheduledEndTime, String level, String calEventId, String panelResponseStatus,
+			String candidateResponseStatus, String interviewStatus, Long candidateId, Integer vacancyId,
+			String meetLink) {
+		super();
+		InterviewId = interviewId;
+		this.panelEmail = panelEmail;
+		this.candidateEmail = candidateEmail;
+		this.hrEmail = hrEmail;
+		this.scheduledOn = scheduledOn;
+		this.scheduledEndTime = scheduledEndTime;
+		this.level = level;
+		this.calEventId = calEventId;
+		this.panelResponseStatus = panelResponseStatus;
+		this.candidateResponseStatus = candidateResponseStatus;
+		this.interviewStatus = interviewStatus;
+		this.candidateId = candidateId;
+		this.vacancyId = vacancyId;
+		this.meetLink = meetLink;
+	}
+
+
 	public Interview(String panelEmail, String candidateEmail, String hrEmail, String scheduledOn,
 			String scheduledEndTime, String level, Long candidateId, Integer vacancyId) {
 		super();
