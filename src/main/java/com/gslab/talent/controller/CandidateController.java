@@ -23,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.gslab.talent.constant.Constant;
 import com.gslab.talent.model.Candidate;
+import com.gslab.talent.model.Helper;
 import com.gslab.talent.repository.CandidateRepository;
 import com.gslab.talent.service.CandidateService;
 
@@ -121,5 +122,11 @@ public class CandidateController {
 	public HashMap<String,Integer> getCountOfApplicationForProject(@RequestParam String str){
 		return ServiceObj.getCountOfApplicationForProject(str);
 		
+	}
+	
+	@GetMapping(value = "/getCountOfCandidateByProjectAndVacancy/{projNanme}")
+	ResponseEntity<Helper> getCandidateByProjectAndPosition(@PathVariable String projNanme ){
+		 ServiceObj.getAllCandidateByProjectAndPosition(projNanme);
+		return new ResponseEntity<>( ServiceObj.getAllCandidateByProjectAndPosition(projNanme),HttpStatus.OK);
 	}
 }

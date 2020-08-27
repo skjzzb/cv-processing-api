@@ -25,16 +25,19 @@ public class PositionController {
 	@Autowired
 	PositionService posServiceObj;
 	
+	//http://localhost:8080/v1/project
 	@GetMapping(Constant.GET_ALL_POSITION)
 	ResponseEntity<?> getAllPosition(){
 		return new ResponseEntity<>(posServiceObj.getAllPositions(), HttpStatus.OK);
 	}
 	
+	//http://localhost:8080/v1/project/1
 	@GetMapping(Constant.GET_POSITION_BY_ID)
 	ResponseEntity<?> getPositionById( @PathVariable int posId){
 		return new ResponseEntity<>(posServiceObj.getPositionById(posId), HttpStatus.OK);
 	}
 	
+	//http://localhost:8080/v1/project
 	@PostMapping(Constant.CREATE_POSITION)
 	ResponseEntity<?> createPosition(@RequestBody Position position){
 		posServiceObj.createNewPosition(position);

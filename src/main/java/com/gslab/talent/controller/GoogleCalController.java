@@ -272,9 +272,10 @@ public class GoogleCalController {
 		it.setCandidateResponseStatus("needsAction");
 		it.setPanelResponseStatus("needsAction");
 		it.setInterviewStatus("waiting");
+		it.setMeetLink(eventOutput.getHangoutLink());
 		interviewRepository.save(it);
 		System.out.printf("Event created: %s\n", eventOutput.getStart());
-
+        System.out.print(eventOutput.getHangoutLink());
 		return "event created";
 	}
 
@@ -352,6 +353,8 @@ public class GoogleCalController {
 		i.setCandidateResponseStatus("needsAction");
 		i.setPanelResponseStatus("needsAction");
 		i.setInterviewStatus("waiting");
+		i.setMeetLink(eventOutput.getHangoutLink());
+		System.out.println(i);
 		interviewRepository.save(i);
 		System.out.printf("Event created: %s\n", eventOutput.getStart());
 
@@ -470,6 +473,7 @@ public class GoogleCalController {
 		it.setCandidateResponseStatus("needsAction");
 		it.setPanelResponseStatus("needsAction");
 		it.setInterviewStatus("waiting");
+		it.setMeetLink(eventOutput.getHangoutLink());
 		interviewRepository.save(it);
 		System.out.printf("Event created: %s\n", eventOutput.getStart());
 
