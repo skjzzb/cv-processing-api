@@ -109,7 +109,11 @@ public class SubTechnologyServiceImpl implements SubTechnologyService {
 		List<Candidate> candidate = candidateRepoObj.findAll();
 		System.out.println("candidate size " + candidate.size());
 		HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
-
+		hashmap.put(experience1TO5, 0);
+		hashmap.put(experience6TO10, 0);
+		hashmap.put(experience11TO15, 0);
+		hashmap.put(experience15AndAbove, 0);
+		
 		for (Candidate cad : candidate) {
 			String techStack = cad.getTechnologyStack();
 			String split[] = techStack.split("\\s");
