@@ -41,13 +41,14 @@ public class Candidate {
 	
 	private Integer shortSummaryMatchingPercent;
 	
-	@Column(name="interviewStatus")
+	@Column(name="interviewStatus", columnDefinition = "varchar(255) default 'Not scheduled any interview'")
 	private String interviewStatus;
 	
 	Integer yearOfExperience;
 	
 	String employmentStatus;
 	
+	 @Column(columnDefinition = "varchar(255) default 'NOT_SELECTED'")
 	String finalStatus;
 	
 	
