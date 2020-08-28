@@ -2,6 +2,8 @@ package com.gslab.talent.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,8 +116,8 @@ public class CandidateController {
 	}
 	
 	@GetMapping(value="/monthapplication")
-	public ResponseEntity<TreeMap<String, Integer>> getAllApplicationInMonth(){
-		return new ResponseEntity<TreeMap<String,Integer>>(ServiceObj.getAllApplicationInMonth(),HttpStatus.OK);
+	public ResponseEntity<Map<Integer, Integer>> getAllApplicationInMonth(){
+		return new ResponseEntity<Map<Integer,Integer>>(ServiceObj.getAllApplicationInMonth(),HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/getCountOfApplicationForProject/{str}")
