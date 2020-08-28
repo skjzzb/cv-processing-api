@@ -63,9 +63,13 @@ public class CandidateController {
 
 	@PutMapping(value = Constant.ADD_CANDIDATE, headers = Constant.ACCEPT_JSON)
 	public ResponseEntity<Void> createCandidate(@PathVariable int id,@RequestBody Candidate candidateObj, UriComponentsBuilder ucBuilder) {
-		if(candidateObj.getFinalStatus().equals(null))
-			candidateObj.setFinalStatus("NOT_SELECTED");
-		if(candidateObj.getInterviewStatus().equals(null))
+//		if(candidateObj.getFinalStatus().equals(""))
+//			candidateObj.setFinalStatus("NOT_SELECTED");
+//		if(candidateObj.getInterviewStatus().equals(""))
+//			candidateObj.setInterviewStatus("Not scheduled any round");
+//		if(candidateObj.getFinalStatus() == null)
+//			candidateObj.setFinalStatus("NOT_SELECTED");
+		if(candidateObj.getInterviewStatus() == null)
 			candidateObj.setInterviewStatus("Not scheduled any round");
 		ServiceObj.createCandidate(candidateObj,id);
 		HttpHeaders headers = new HttpHeaders();
