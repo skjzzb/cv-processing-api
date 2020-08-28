@@ -86,7 +86,7 @@ public class SubTechnologyController {
 	}
 	
 	@GetMapping(value="/getExperienceOfCandiatesFromSubtechnology/{subTechName}")
-	public HashMap<String,Integer> getExperienceOfCandiatesFromSubtechnology(@RequestParam String subTechName){
+	public HashMap<String,Integer> getExperienceOfCandiatesFromSubtechnology(@PathVariable String subTechName){
 		return ServiceObj.getExperienceOfCandiatesFromSubtechnology(subTechName);
 }
 }
