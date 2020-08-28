@@ -18,6 +18,6 @@ public interface CandidateService {
 	public void deleteCandidateById(long id);
 	public List<Candidate> getCandidateByVacancyId(int id);
 	public Map<Integer, Integer> getAllApplicationInMonth();
-	public HashMap<String, Integer> getCountOfApplicationForProject(String str);
+	public HashMap<String, Integer> getCountOfApplicationForProject();
 	Helper getAllCandidateByProjectAndPosition(String projectName);
 }

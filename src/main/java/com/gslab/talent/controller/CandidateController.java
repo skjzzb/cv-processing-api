@@ -124,9 +124,9 @@ public class CandidateController {
 		return new ResponseEntity<Map<Integer,Integer>>(ServiceObj.getAllApplicationInMonth(),HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/getCountOfApplicationForProject/{str}")
-	public HashMap<String,Integer> getCountOfApplicationForProject(@RequestParam String str){
-		return ServiceObj.getCountOfApplicationForProject(str);
+	@GetMapping(value = "/getCountOfApplicationForProject")
+	public ResponseEntity<HashMap<String,Integer>> getCountOfApplicationForProject(){
+		return new ResponseEntity<HashMap<String,Integer>>(ServiceObj.getCountOfApplicationForProject(),HttpStatus.OK);
 		
 	}
 	

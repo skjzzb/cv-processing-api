@@ -244,51 +244,22 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public HashMap<String, Integer> getCountOfApplicationForProject(String str) {
+	public HashMap<String, Integer> getCountOfApplicationForProject() {
 		List<Candidate> listOfCandidate = candidateRepoObj.findAll();
 		HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
-
-		switch (str) {
-
-		case "year": {
-			for (Candidate candidate : listOfCandidate) {
-				String projectName = candidate.getVacancy().getProjectName();
-				
-				if (hashmap.containsKey(projectName)) {
-					hashmap.put(projectName, hashmap.get(projectName) + 1);
-
-				} else
-					hashmap.put(projectName, 1);
-			}
-			break;
+		List<Project> projects = projectRepoObject.findAll();
+		for (Project project : projects) {
+			String name = project.getName();
+			hashmap.put(name, 0);
 		}
-		
-		case "month": {
-			long millis=System.currentTimeMillis();  
-			Date date = new Date(millis);
-			int month = date.getMonth();
-			
-			for (Candidate candidate : listOfCandidate) {
-				
-				String projectName = candidate.getVacancy().getProjectName();
-				Date date1 = candidate.getVacancy().getPosOnBoardDate();
-				int month1 = date1.getMonth();
-				hashmap.put(projectName, 0);
-				
-				if(month == month1) {
-					if (hashmap.containsKey(projectName)) {
-						hashmap.put(projectName, hashmap.get(projectName) + 1);
-					} else
-						hashmap.put(projectName, 1);
- 
-				}
-				else
-					continue;
-				
-			}	
-			
-			break;
-		}
+
+		for (Candidate candidate : listOfCandidate) {
+			String projectName = candidate.getVacancy().getProjectName();
+			if (hashmap.containsKey(projectName)) {
+				hashmap.put(projectName, hashmap.get(projectName) + 1);
+
+			} else
+				hashmap.put(projectName, 1);
 		}
 		return hashmap;
 		
