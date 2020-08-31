@@ -20,6 +20,7 @@ public interface CandidateService {
 	public Map<Integer, Integer> getAllApplicationInMonth();
 	public HashMap<String, Integer> getCountOfApplicationForProject();
 	Helper getAllCandidateByProjectAndPosition(String projectName);
+	HashMap<String, List<Candidate>> getCandidatesByProject(String projName);
 	HashMap<String, Integer> getCountOfSelectedForProject();
 	TreeMap<Integer, Integer> getSelectedMonthly();
 }
