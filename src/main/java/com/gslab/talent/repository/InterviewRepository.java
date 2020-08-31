@@ -1,5 +1,6 @@
 package com.gslab.talent.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,8 @@ import com.gslab.talent.model.Interview;
 public interface InterviewRepository extends JpaRepository<Interview, Long>{
 
 	Optional<Interview> findByCandidateId(Long candidateId);
+
+	List<Interview> findByCandidateEmail(String email);
 
 
 }

@@ -136,9 +136,19 @@ public class CandidateController {
 		return new ResponseEntity<>( ServiceObj.getAllCandidateByProjectAndPosition(projNanme),HttpStatus.OK);
 	}
 	
+
 	@GetMapping(value = "/getCandidateByProject/{projNanme}")
 	ResponseEntity<?> getCandidatesByProject(@PathVariable String projNanme){
 		return new ResponseEntity<>(ServiceObj.getCandidatesByProject(projNanme), HttpStatus.OK);
+     }
 		
+	@GetMapping(value = "/getCountOfSelectedForProject")
+	ResponseEntity<HashMap<String,Integer>> getCountOfSelectedForProject(){
+		return new ResponseEntity<HashMap<String,Integer>>( ServiceObj.getCountOfSelectedForProject(),HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/getSelectedMonthly")
+	ResponseEntity<TreeMap<Integer,Integer>> getSelectedMonthly(){
+		return new ResponseEntity<TreeMap<Integer,Integer>>( ServiceObj.getSelectedMonthly(),HttpStatus.OK);
 	}
 }
