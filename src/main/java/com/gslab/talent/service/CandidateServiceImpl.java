@@ -270,7 +270,6 @@ public class CandidateServiceImpl implements CandidateService {
 	public Helper getAllCandidateByProjectAndPosition(String projName) {
 		List<Candidate> candidates = candidateRepoObj.findAll();
 		List<Position> positions = positionRepoObj.findAll();
-		List <Project> projects = projectRepoObject.findAll();
 		Helper helperObj = new Helper();
 		//counts
 		int applicationCnt = 0;
@@ -336,7 +335,35 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 
-	
+	public HashMap<String, List<Candidate>> getCandidatesByProject(String projName)
+	{
+		List <Project> projects = projectRepoObject.findAll();
+		List<Candidate> candidates = candidateRepoObj.findAll();
+		
+		HashMap<String, List<Candidate>> hashMap = new HashMap<String, List<Candidate>>();
+		
+		for (Candidate c : candidates) {
+			System.out.println(c.getVacancy());
+			if(c.getVacancy().getProjectName().equalsIgnoreCase(projName))
+			{
+				
+				if(hashMap.containsKey(c.getVacancy().getJobTitle()))
+				{
+					List<Candidate> candi = hashMap.get(c.getVacancy().getJobTitle());
+					candi.add(c);
+					hashMap.put(c.getVacancy().getJobTitle(), candi);
+				}
+				else
+				{
+					List<Candidate> newCandi = new ArrayList<Candidate>();
+					newCandi.add(c);
+					hashMap.put(c.getVacancy().getJobTitle(), newCandi);	
+				}		
+			}
+		}
+		System.out.println(hashMap);
+		return hashMap;
+	}
 	
 }
 	

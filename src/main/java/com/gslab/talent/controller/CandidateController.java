@@ -135,4 +135,10 @@ public class CandidateController {
 		 ServiceObj.getAllCandidateByProjectAndPosition(projNanme);
 		return new ResponseEntity<>( ServiceObj.getAllCandidateByProjectAndPosition(projNanme),HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/getCandidateByProject/{projNanme}")
+	ResponseEntity<?> getCandidatesByProject(@PathVariable String projNanme){
+		return new ResponseEntity<>(ServiceObj.getCandidatesByProject(projNanme), HttpStatus.OK);
+		
+	}
 }
