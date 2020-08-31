@@ -109,6 +109,12 @@ public class VacancyServiceImpl implements VacancyService {
 		List<Vacancy> listOfVacancy = vacancyRepoObj.findAll();
 		HashMap<String,Integer> hashmap = new HashMap<String,Integer>();
 		
+		for (Vacancy vacancy : listOfVacancy) {
+			String projectName = vacancy.getProjectName();
+			hashmap.put(projectName, 0);
+		}
+		
+		
 		switch(str) {
 		
 		case "year": {

@@ -24,10 +24,12 @@ import org.springframework.stereotype.Service;
 
 import com.gslab.talent.model.Candidate;
 import com.gslab.talent.model.Helper;
+import com.gslab.talent.model.Interview;
 import com.gslab.talent.model.Position;
 import com.gslab.talent.model.Project;
 import com.gslab.talent.model.Vacancy;
 import com.gslab.talent.repository.CandidateRepository;
+import com.gslab.talent.repository.InterviewRepository;
 import com.gslab.talent.repository.PositionRepository;
 import com.gslab.talent.repository.ProjectRepository;
 import com.gslab.talent.repository.VacancyRepository;
@@ -47,6 +49,9 @@ public class CandidateServiceImpl implements CandidateService {
 	
 	@Autowired
 	ProjectRepository projectRepoObject;
+	
+	@Autowired
+	InterviewRepository interviewrepoObj;
 	
 	@PersistenceUnit
 	private EntityManagerFactory emf;
@@ -335,7 +340,179 @@ public class CandidateServiceImpl implements CandidateService {
 		return helperObj;
 	}
 
+	@Override
+	public HashMap<String,Integer> getCountOfSelectedForProject(){
+		List<Candidate> listOfCandidatate = candidateRepoObj.findAll();
+		List<Vacancy> listOfVacancy = vacancyRepository.findAll();
+		
+		HashMap<String,Integer> hashmap = new HashMap<String,Integer>();
+		
+		for (Vacancy vacancy : listOfVacancy) {
+			String projectName = vacancy.getProjectName();
+			hashmap.put(projectName, 0);
+		}
+		
+			for (Candidate candidate : listOfCandidatate) {
+				String finalStatus = candidate.getFinalStatus();
+				
+				if(finalStatus.equalsIgnoreCase("SELECTED")) {
+					int vacancyId = candidate.getVacancy().getVacancyId();
+					Vacancy vacancy = vacancyRepository.findByVacancyId(vacancyId);
+					String projectName = vacancy.getProjectName();
+				if (hashmap.containsKey(projectName)) {
+					hashmap.put(projectName, hashmap.get(projectName) + 1);
+				} else
+					hashmap.put(projectName, 1);
+			}
+			}
+		
+		return hashmap;
 
+	}
+	
+	@Override
+	public TreeMap<Integer, Integer> getSelectedMonthly() {
+		List<Candidate> listOfCandidate = candidateRepoObj.findAll();
+		TreeMap<Integer, Integer> applicationDetail = new TreeMap<>();
+		applicationDetail.put(1, 0);
+		applicationDetail.put(2, 0);
+		applicationDetail.put(3, 0);
+		applicationDetail.put(4, 0);
+		applicationDetail.put(5, 0);
+		applicationDetail.put(6, 0);
+		applicationDetail.put(7, 0);
+		applicationDetail.put(8, 0);
+		applicationDetail.put(9, 0);
+		applicationDetail.put(10, 0);
+		applicationDetail.put(11, 0);
+		applicationDetail.put(12, 0);
+
+		for (Candidate candidate : listOfCandidate) {
+			//Long candidateId = candidate.getId();
+			String finalStatus = candidate.getFinalStatus();
+
+			if (finalStatus.equalsIgnoreCase("SELECTED")) {
+				String email = candidate.getEmail();
+				int vacancyId = candidate.getVacancy().getVacancyId();
+				List<Interview> interview = interviewrepoObj.findByCandidateEmail(email);
+				
+				for(int j=0;j<interview.size();j++) {
+				Interview interview1= interview.get(j);
+				int interviewVacancyId = interview1.getVacancyId();
+				
+				if(vacancyId == interviewVacancyId) {
+					
+					String date = interview1.getScheduledOn();
+					String selectedDate = date.toString().substring(5, 7);
+					int i = Integer.parseInt(selectedDate);
+				switch (i) {
+				case 1:
+					if (applicationDetail.get(1) != null) {
+						applicationDetail.put(1, applicationDetail.get(1) + 1);
+					} else {
+						applicationDetail.put(1, 1);
+					}
+
+					break;
+				case 2:
+					if (applicationDetail.get(2) != null) {
+						applicationDetail.put(2, applicationDetail.get(2) + 1);
+					} else {
+						applicationDetail.put(2, 1);
+					}
+
+					break;
+				case 3:
+					if (applicationDetail.get(3) != null) {
+						applicationDetail.put(3, applicationDetail.get(3) + 1);
+					} else {
+						applicationDetail.put(3, 1);
+					}
+
+					break;
+				case 4:
+					if (applicationDetail.get(4) != null) {
+						applicationDetail.put(4, applicationDetail.get(4) + 1);
+					} else {
+						applicationDetail.put(4, 1);
+					}
+
+					break;
+				case 5:
+					if (applicationDetail.get(5) != null) {
+						applicationDetail.put(5, applicationDetail.get(5) + 1);
+					} else {
+						applicationDetail.put(5, 1);
+					}
+
+					break;
+				case 6:
+					if (applicationDetail.get(6) != null) {
+						applicationDetail.put(6, applicationDetail.get(6) + 1);
+					} else {
+						applicationDetail.put(6, 1);
+					}
+
+					break;
+				case 7:
+					if (applicationDetail.get(7) != null) {
+						applicationDetail.put(7, applicationDetail.get(7) + 1);
+					} else {
+						applicationDetail.put(7, 1);
+					}
+
+					break;
+				case 8:
+					if (applicationDetail.get(8) != null) {
+						applicationDetail.put(8, applicationDetail.get(8) + 1);
+					} else {
+						applicationDetail.put(8, 1);
+					}
+
+					break;
+				case 9:
+					if (applicationDetail.get(9) != null) {
+						applicationDetail.put(9, applicationDetail.get(9) + 1);
+					} else {
+						applicationDetail.put(9, 1);
+					}
+
+					break;
+				case 10:
+					if (applicationDetail.get(10) != null) {
+						applicationDetail.put(10, applicationDetail.get(10) + 1);
+					} else {
+						applicationDetail.put(10, 1);
+					}
+
+					break;
+				case 11:
+					if (applicationDetail.get(11) != null) {
+						applicationDetail.put(11, applicationDetail.get(11) + 1);
+					} else {
+						applicationDetail.put(11, 1);
+					}
+
+					break;
+				case 12:
+					if (applicationDetail.get(12) != null) {
+						applicationDetail.put(12, applicationDetail.get(12) + 1);
+					} else {
+						applicationDetail.put(12, 1);
+					}
+
+					break;
+
+				default:
+					break;
+				}
+			}
+			}
+		}
+		}
+		return applicationDetail;
+	}
+	
 	
 	
 }
