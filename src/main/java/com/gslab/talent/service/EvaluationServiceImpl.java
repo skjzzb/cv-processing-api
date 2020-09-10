@@ -33,4 +33,16 @@ public class EvaluationServiceImpl implements EvaluationService{
 		List<Evaluation> evaluationList= evaluationRepoObj.findByCandidateId(id);
 		return evaluationList;
 	}
+	
+	@Override
+	public List<Evaluation> getAllEvaluationReport() {
+		return (List<Evaluation>) evaluationRepoObj.findAll();
+	}
+
+	@Override
+	public Void DeleteEvaluationReportByCandidateId(int id) {
+		List<Evaluation> evaluationList = evaluationRepoObj.findByCandidateId(id);
+		evaluationRepoObj.deleteAll(evaluationList);
+		return null;
+	}
 }
