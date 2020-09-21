@@ -24,6 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.gslab.talent.constant.Constant;
 import com.gslab.talent.model.Candidate;
 import com.gslab.talent.service.CandidateService;
+import com.gslab.talent.repository.CandidateRepository;
 
 
 
@@ -35,20 +36,25 @@ public class CandidateController {
 	Integer exp;
 	@Autowired
 	private CandidateService ServiceObj;
+	@Autowired
+	private CandidateRepository CanRepo;
 	
 	@GetMapping(value = Constant.GET_LIST_OF_CANDIDATES, headers = Constant.ACCEPT_JSON, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Candidate> getAllCandidates() {
 		return ServiceObj.getAllCandidate();
 	}
-
 	@GetMapping(value = Constant.GET_CANDIDATE_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Candidate> getCandidateById(@PathVariable(Constant.CANDIDATE_ID) long id) {
-		Candidate candidateObj = ServiceObj.findById(id);
-		if (candidateObj == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<>(candidateObj, HttpStatus.OK);
+	public ResponseEntity<?> getCandidateById(@PathVariable(Constant.GET_CANDIDATE_BY_ID) long userId) {
+		return new ResponseEntity<>(CanRepo.findById(userId), HttpStatus.OK);
 	}
+	// @GetMapping(value = Constant.GET_CANDIDATE_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+	// public ResponseEntity<Candidate> getCandidateById(@PathVariable(Constant.CANDIDATE_ID) long id) {
+	// 	Candidate candidateObj = ServiceObj.findById(id);
+	// 	if (candidateObj == null) {
+	// 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	// 	}
+	// 	return new ResponseEntity<>(candidateObj, HttpStatus.OK);
+	// }
 
 
 	@PutMapping(value = Constant.ADD_CANDIDATE, headers = Constant.ACCEPT_JSON)
