@@ -541,6 +541,7 @@ public class CandidateServiceImpl implements CandidateService {
 			}
 		}
 		}
+		System.out.println("applicationDetail : "+applicationDetail);
 		return applicationDetail;
 	}
 	

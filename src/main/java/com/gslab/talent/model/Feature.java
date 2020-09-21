@@ -15,7 +15,21 @@ public class Feature {
 	Boolean userList;
 	Boolean dashboard;
 	Boolean level;
+	Boolean cv;
 	
+	
+	public Boolean getCv() {
+		return cv;
+	}
+
+
+
+	public void setCv(Boolean cv) {
+		this.cv = cv;
+	}
+
+
+
 	public Boolean getLevel() {
 		return level;
 	}
@@ -34,7 +48,7 @@ public class Feature {
 	
 	
 
-	public Feature(Integer id, String roles, Boolean vacancy, Boolean candidate, Boolean userList, Boolean dashboard,Boolean level) {
+	public Feature(Integer id, String roles, Boolean vacancy, Boolean candidate, Boolean userList, Boolean dashboard,Boolean level,Boolean cv) {
 		super();
 		this.id = id;
 		this.roles = roles;
@@ -43,6 +57,7 @@ public class Feature {
 		this.userList = userList;
 		this.dashboard = dashboard;
 		this.level = level;
+		this.cv = cv;
 	}
 
 
