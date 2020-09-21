@@ -50,11 +50,11 @@ public class CandidateController {
 	public List<Candidate> getAllCandidates() {
 		return ServiceObj.getAllCandidate();
 	}
-<<<<<<< HEAD
-	@GetMapping(value = Constant.GET_CANDIDATE_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getCandidateById(@PathVariable(Constant.GET_CANDIDATE_BY_ID) long userId) {
-		return new ResponseEntity<>(CanRepo.findById(userId), HttpStatus.OK);
-=======
+
+//	@GetMapping(value = Constant.GET_CANDIDATE_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<?> getCandidateById(@PathVariable(Constant.GET_CANDIDATE_BY_ID) long userId) {
+//		return new ResponseEntity<>(CanRepo.findById(userId), HttpStatus.OK);
+
 
 //	@GetMapping(value = Constant.GET_CANDIDATE_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
 //	public ResponseEntity<Candidate> getCandidateById(@PathVariable(Constant.CANDIDATE_ID) long id) {
@@ -67,7 +67,7 @@ public class CandidateController {
 	@GetMapping(value = Constant.GET_CANDIDATE_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getCandidateById(@PathVariable(Constant.CANDIDATE_ID) long userId) {
 		return new ResponseEntity<>(CandidateRepo.findById(userId), HttpStatus.OK);
->>>>>>> 7d8cda76c52b8f69942919472cfbcf7789f115de
+
 	}
 	// @GetMapping(value = Constant.GET_CANDIDATE_BY_ID, produces = MediaType.APPLICATION_JSON_VALUE)
 	// public ResponseEntity<Candidate> getCandidateById(@PathVariable(Constant.CANDIDATE_ID) long id) {
