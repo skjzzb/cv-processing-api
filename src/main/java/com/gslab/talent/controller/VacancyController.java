@@ -129,7 +129,7 @@ public class VacancyController {
 	}
 	
 	@GetMapping(value = "/getCountOfVacancyForProject/{str}")
-	public ResponseEntity<?> getCountOfVacancyForProject(@RequestParam String str){
+	public ResponseEntity<?> getCountOfVacancyForProject(@PathVariable String str){
 		
 		System.out.println("final output :"+vacancyServiceObj.getCountOfVacancyForProject(str));
 		return new ResponseEntity<HashMap<String,Integer>>(vacancyServiceObj.getCountOfVacancyForProject(str), HttpStatus.OK);

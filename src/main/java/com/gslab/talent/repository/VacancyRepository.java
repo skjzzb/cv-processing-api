@@ -12,5 +12,5 @@ public interface VacancyRepository extends JpaRepository<Vacancy, Integer> {
 
 	void save(String levelList);
 	String findByLevelList(int vacancyId);
-
+	Vacancy findByVacancyId(int vacancyId);
 }

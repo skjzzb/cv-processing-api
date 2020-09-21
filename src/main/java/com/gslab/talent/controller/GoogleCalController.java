@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -101,7 +102,7 @@ public class GoogleCalController {
 			Events events = client.events();
 			eventList = events.list("primary").setTimeMin(date1).setTimeMax(date2).execute();
 			message = eventList.getItems().toString();
-			//System.out.println("My:" + eventList.getItems());
+			// System.out.println("My:" + eventList.getItems());
 		} catch (Exception e) {
 			logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."
 					+ " Redirecting to google connection status page.");
@@ -109,10 +110,10 @@ public class GoogleCalController {
 					+ " Redirecting to google connection status page.";
 		}
 
-		//System.out.println("cal message:" + message);
+		// System.out.println("cal message:" + message);
 		System.out.println("cal message:");
-		//this.setMeeting();
-		//System.out.println("after meeting set");
+		// this.setMeeting();
+		// System.out.println("after meeting set");
 		return new ResponseEntity<>(message, HttpStatus.OK);
 	}
 
@@ -135,22 +136,21 @@ public class GoogleCalController {
 		System.out.println("cal authorizationUrl->" + authorizationUrl);
 		return authorizationUrl.build();
 	}
-	
-	//newCode
-	
+
+	// newCode
+
 	@Autowired
 	InterviewRepository interviewRepository;
-	
+
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String getData()
-	{
+	public String getData() {
 		com.google.api.services.calendar.model.Events eventList;
 		Events events = client.events();
-		
-		 try {
-			 //"2q12vhu94iroks0mjeemd3nerc@google.com"
-			 System.out.println(events.get("primary", "2q12vhu94iroks0mjeemd3nerc").execute());
-			 
+
+		try {
+			// "2q12vhu94iroks0mjeemd3nerc@google.com"
+			System.out.println(events.get("primary", "2q12vhu94iroks0mjeemd3nerc").execute());
+
 //			 eventList = events.list("primary").setICalUID("2q12vhu94iroks0mjeemd3nerc@google.com").execute();			 
 //			 eventList.getItems().forEach(e -> {
 //				 System.out.println(e.getICalUID());
@@ -163,183 +163,167 @@ public class GoogleCalController {
 			System.out.println("--------------------");
 			e.printStackTrace();
 		}
-		 return "abc";
+		return "abc";
 	}
-	
+
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-	
+
 	@Scheduled(cron = "0 */59 * * * *")
 	@RequestMapping(value = "/setresponse", method = RequestMethod.GET)
-	public void setResponse()
-	{
-		
+	public void setResponse() {
+
 		Events events = client.events();
-		
-		interviewRepository.findAll().forEach(i->{
-			if(i.getInterviewStatus().equals("waiting"))
-			{
-			Event e=null;	
-			try {
-				
-				System.out.println(i.getCalEventId());
-			 e = events.get("primary",i.getCalEventId()).execute();
-			} catch (IOException exp) {	
-				exp.printStackTrace();
-			}
-			System.out.println(e);
-			System.out.println(i.getPanelEmail());
-			e.getAttendees().forEach(atd->{
-				
-				
-				if(atd.getEmail().equals(i.getPanelEmail()))
-				{
-	
-					i.setPanelResponseStatus(atd.getResponseStatus());
-				}else if(atd.getEmail().equals(i.getCandidateEmail()))
-				{
-					i.setCandidateResponseStatus(atd.getResponseStatus());
-				}
-			});
-			if(i.getPanelResponseStatus().equals("accepted") && i.getCandidateResponseStatus().equals("accepted"))
-			{
-				e.setSummary("interview is conformd");
+
+		interviewRepository.findAll().forEach(i -> {
+			if (i.getInterviewStatus().equals("waiting")) {
+				Event e = null;
 				try {
-					events.update("primary", e.getId(), e).setSendNotifications(true).execute();
-				} catch (IOException e1) {
-					e1.printStackTrace();
+
+					System.out.println(i.getCalEventId());
+					e = events.get("primary", i.getCalEventId()).execute();
+				} catch (IOException exp) {
+					exp.printStackTrace();
 				}
-				i.setInterviewStatus("scheduled");
+				System.out.println(e);
+				System.out.println(i.getPanelEmail());
+				e.getAttendees().forEach(atd -> {
+
+					if (atd.getEmail().equals(i.getPanelEmail())) {
+
+						i.setPanelResponseStatus(atd.getResponseStatus());
+					} else if (atd.getEmail().equals(i.getCandidateEmail())) {
+						i.setCandidateResponseStatus(atd.getResponseStatus());
+					}
+				});
+				if (i.getPanelResponseStatus().equals("accepted")
+						&& i.getCandidateResponseStatus().equals("accepted")) {
+					e.setSummary("interview is conformd");
+					try {
+						events.update("primary", e.getId(), e).setSendNotifications(true).execute();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					i.setInterviewStatus("scheduled");
+				}
+				interviewRepository.save(i);
 			}
-			interviewRepository.save(i);
-			}			
 		});
 		System.out.println(dateFormat.format(new Date()));
 	}
 
 	@RequestMapping(value = "/setMeeting", method = RequestMethod.POST)
-	public String setMeeting(@RequestBody Interview it)
-	{
-		//it.setPanelEmail("dakhilesh95@gmail.com");
-		//it.setCandidateEmail("deshmukha816@gmail.com");
+	public String setMeeting(@RequestBody Interview it) {
+		// it.setPanelEmail("dakhilesh95@gmail.com");
+		// it.setCandidateEmail("deshmukha816@gmail.com");
 		System.out.println(it);
 		Event event = new Event();
-	    event.setSummary("Interview Call From GSlab, give response in the form of yes or no")
-	    .setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
-	    .setDescription("Interview for software Engg");
-
-	DateTime startDateTime = new DateTime(it.getScheduledOn());
-	EventDateTime start = new EventDateTime()
-	    .setDateTime(startDateTime)
-	    .setTimeZone("Asia/Kolkata");
-	
-	event.setStart(start);
-	
-	DateTime endDateTime = new DateTime(it.getScheduledEndTime());
-	EventDateTime end = new EventDateTime()
-	    .setDateTime(endDateTime)
-	    .setTimeZone("Asia/Kolkata");
-	 event.setEnd(end);
-
-	String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=1"};
-	event.setRecurrence(Arrays.asList(recurrence));
-
-	EventAttendee[] attendees = new EventAttendee[] {
-		//new EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
-	    //new EventAttendee().setEmail("dakhilesh95@gmail.com"),
-	    //new EventAttendee().setEmail("deshmukha816@gmail.com"),
-	    new EventAttendee().setOrganizer(true).setEmail(it.getHrEmail()),
-	    new EventAttendee().setEmail(it.getPanelEmail()),
-	    new EventAttendee().setEmail(it.getCandidateEmail()),
-	};
-	
-	event.setAttendees(Arrays.asList(attendees));
-	
-	event.setOriginalStartTime(start);
-	event.setVisibility("private");
-	event.setGuestsCanModify(false);
-	event.setGuestsCanInviteOthers(false);
-	
-	EventReminder[] reminderOverrides = new EventReminder[] {
-	    new EventReminder().setMethod("email").setMinutes(24 * 60),
-	    new EventReminder().setMethod("popup").setMinutes(10),
-	};
-	
-	Event.Reminders reminders = new Event.Reminders()
- 	     .setUseDefault(false)
-	    .setOverrides(Arrays.asList(reminderOverrides));
-	 event.setReminders(reminders);
-
-	 //event.setStatus("confirmed");
-	String calendarId = "primary";
-	System.out.println(event.getId());
-	Event eventOutput=null; 
-	 try {
-	    eventOutput=client.events().insert(calendarId, event).setSendNotifications(true).execute();
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
-	 
-	System.out.printf("Event created: %s\n", eventOutput.getId());	
-	it.setCalEventId(eventOutput.getId());
-	it.setCandidateResponseStatus("needsAction");
-	it.setPanelResponseStatus("needsAction");
-	it.setInterviewStatus("waiting");
-	interviewRepository.save(it);
-	System.out.printf("Event created: %s\n", eventOutput.getStart());
-	
-	return "event created";
-	}
-	
-	@RequestMapping(value = "/UpdateMeeting", method = RequestMethod.POST)
-	public String rescheduleMeeting(@RequestBody Interview it)
-	{
-		Events events = client.events();
-		Interview i=interviewRepository.findById(it.getInterviewId()).get();
-	String eventId=i.getCalEventId();
-	Event event=null;	
-	try {
-	 event = events.get("primary",eventId).execute();
-	} catch (IOException exp) {	
-		exp.printStackTrace();
-	}
-	System.out.println(event);
-	
-	event.setSummary("Interview Call From GSlab, give response in the form of yes or no")
-    .setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
-    .setDescription("Interview for software Engg");
+		event.setSummary("Interview Call From GSlab, give response in the form of yes or no")
+				.setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
+				.setDescription("Interview for software Engg");
 
 		DateTime startDateTime = new DateTime(it.getScheduledOn());
-		EventDateTime start = new EventDateTime()
-		    .setDateTime(startDateTime)
-		    .setTimeZone("Asia/Kolkata");
-		
+		EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("Asia/Kolkata");
+
 		event.setStart(start);
-		
+
 		DateTime endDateTime = new DateTime(it.getScheduledEndTime());
-		EventDateTime end = new EventDateTime()
-		    .setDateTime(endDateTime)
-		    .setTimeZone("Asia/Kolkata");
-		 event.setEnd(end);
-		
-		String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=1"};
+		EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone("Asia/Kolkata");
+		event.setEnd(end);
+
+		String[] recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=1" };
 		event.setRecurrence(Arrays.asList(recurrence));
-		
+
 		EventAttendee[] attendees = new EventAttendee[] {
-			//new EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
-		    //new EventAttendee().setEmail("dakhilesh95@gmail.com"),
-		    //new EventAttendee().setEmail("deshmukha816@gmail.com"),
+				// new
+				// EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
+				// new EventAttendee().setEmail("dakhilesh95@gmail.com"),
+				// new EventAttendee().setEmail("deshmukha816@gmail.com"),
 				new EventAttendee().setOrganizer(true).setEmail(it.getHrEmail()),
-			    new EventAttendee().setEmail(it.getPanelEmail()),
-			    new EventAttendee().setEmail(it.getCandidateEmail()),
-		};
-		
+				new EventAttendee().setEmail(it.getPanelEmail()),
+				new EventAttendee().setEmail(it.getCandidateEmail()), };
+
 		event.setAttendees(Arrays.asList(attendees));
-		
+
 		event.setOriginalStartTime(start);
 		event.setVisibility("private");
 		event.setGuestsCanModify(false);
 		event.setGuestsCanInviteOthers(false);
-		
+
+		EventReminder[] reminderOverrides = new EventReminder[] {
+				new EventReminder().setMethod("email").setMinutes(24 * 60),
+				new EventReminder().setMethod("popup").setMinutes(10), };
+
+		Event.Reminders reminders = new Event.Reminders().setUseDefault(false)
+				.setOverrides(Arrays.asList(reminderOverrides));
+		event.setReminders(reminders);
+
+		// event.setStatus("confirmed");
+		String calendarId = "primary";
+		System.out.println(event.getId());
+		Event eventOutput = null;
+		try {
+			eventOutput = client.events().insert(calendarId, event).setSendNotifications(true).execute();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		System.out.printf("Event created: %s\n", eventOutput.getId());
+		it.setCalEventId(eventOutput.getId());
+		it.setCandidateResponseStatus("needsAction");
+		it.setPanelResponseStatus("needsAction");
+		it.setInterviewStatus("waiting");
+		it.setMeetLink(eventOutput.getHangoutLink());
+		interviewRepository.save(it);
+		System.out.printf("Event created: %s\n", eventOutput.getStart());
+        System.out.print(eventOutput.getHangoutLink());
+		return "event created";
+	}
+
+	@RequestMapping(value = "/UpdateMeeting", method = RequestMethod.POST)
+	public String rescheduleMeeting(@RequestBody Interview it) {
+		Events events = client.events();
+		Interview i = interviewRepository.findById(it.getInterviewId()).get();
+		String eventId = i.getCalEventId();
+		Event event = null;
+		try {
+			event = events.get("primary", eventId).execute();
+		} catch (IOException exp) {
+			exp.printStackTrace();
+		}
+		System.out.println(event);
+
+		event.setSummary("Interview Call From GSlab, give response in the form of yes or no")
+				.setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
+				.setDescription("Interview for software Engg");
+
+		DateTime startDateTime = new DateTime(it.getScheduledOn());
+		EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("Asia/Kolkata");
+
+		event.setStart(start);
+
+		DateTime endDateTime = new DateTime(it.getScheduledEndTime());
+		EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone("Asia/Kolkata");
+		event.setEnd(end);
+
+		String[] recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=1" };
+		event.setRecurrence(Arrays.asList(recurrence));
+
+		EventAttendee[] attendees = new EventAttendee[] {
+				// new
+				// EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
+				// new EventAttendee().setEmail("dakhilesh95@gmail.com"),
+				// new EventAttendee().setEmail("deshmukha816@gmail.com"),
+				new EventAttendee().setOrganizer(true).setEmail(it.getHrEmail()),
+				new EventAttendee().setEmail(it.getPanelEmail()),
+				new EventAttendee().setEmail(it.getCandidateEmail()), };
+
+		event.setAttendees(Arrays.asList(attendees));
+
+		event.setOriginalStartTime(start);
+		event.setVisibility("private");
+		event.setGuestsCanModify(false);
+		event.setGuestsCanInviteOthers(false);
+
 //		EventReminder[] reminderOverrides = new EventReminder[] {
 //		    new EventReminder().setMethod("email").setMinutes(24 * 60),
 //		    new EventReminder().setMethod("popup").setMinutes(10),
@@ -349,18 +333,18 @@ public class GoogleCalController {
 //			     .setUseDefault(false)
 //		    .setOverrides(Arrays.asList(reminderOverrides));
 //		 event.setReminders(reminders);
-		
-		 //event.setStatus("confirmed");
+
+		// event.setStatus("confirmed");
 		String calendarId = "primary";
 		System.out.println(event.getId());
-		Event eventOutput=null; 
-		 try {
-		    eventOutput=client.events().update(calendarId,eventId, event).setSendNotifications(true).execute();
+		Event eventOutput = null;
+		try {
+			eventOutput = client.events().update(calendarId, eventId, event).setSendNotifications(true).execute();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		 
-		System.out.printf("Event created: %s\n", eventOutput.getId());	
+
+		System.out.printf("Event created: %s\n", eventOutput.getId());
 		i.setPanelEmail(it.getPanelEmail());
 		i.setCandidateEmail(it.getCandidateEmail());
 		i.setScheduledOn(it.getScheduledOn());
@@ -369,136 +353,130 @@ public class GoogleCalController {
 		i.setCandidateResponseStatus("needsAction");
 		i.setPanelResponseStatus("needsAction");
 		i.setInterviewStatus("waiting");
+		i.setMeetLink(eventOutput.getHangoutLink());
+		System.out.println(i);
 		interviewRepository.save(i);
 		System.out.printf("Event created: %s\n", eventOutput.getStart());
-		
+
 		return "event updated";
 	}
-	
+
 	@DeleteMapping("/deleteMeeting/{interviewId}")
-	public void deleteEvent(@PathVariable(value = "interviewId") Long interviewId)
-	{
+	public void deleteEvent(@PathVariable(value = "interviewId") Long interviewId) {
 		Interview it;
-		 it= interviewRepository.findById(interviewId).get();
-		Event event=null;	
+		it = interviewRepository.findById(interviewId).get();
+		Event event = null;
 		try {
-		 client.events().delete("primary",it.getCalEventId()).setSendNotifications(true).execute();
-		} catch (IOException exp) {	
+			client.events().delete("primary", it.getCalEventId()).setSendNotifications(true).execute();
+		} catch (IOException exp) {
 			exp.printStackTrace();
 		}
 		it.setInterviewStatus("rejected");
-	interviewRepository.save(it);
+		interviewRepository.save(it);
 	}
 
 	@GetMapping("/interview")
-	public List<?> getAllEvent()
-	{
-		List<Interview> list=new ArrayList<Interview>();
-	interviewRepository.findAll().forEach(i->{
-		if(i.getInterviewStatus().equals("waiting"))
-		{
-			list.add(i);
-		}
-	});
-	return list;
+	public List<?> getAllEvent() {
+		List<Interview> list = new ArrayList<Interview>();
+		interviewRepository.findAll().forEach(i -> {
+			if (i.getInterviewStatus().equals("waiting")) {
+				list.add(i);
+			}
+		});
+		return list;
 	}
-	
+	@GetMapping(value = "/interview/{interviewId}")
+	public Optional<Interview> getInterviewByInterviewID(@PathVariable long interviewId) {
+		
+		 return interviewRepository.findById(interviewId);
+	}
+
 	@GetMapping("/interview/confirmed")
-	public List<?> getAllCinfirmedEvent()
-	{
-		List<Interview> list=new ArrayList<Interview>();
-	interviewRepository.findAll().forEach(i->{
-		if(i.getInterviewStatus().equalsIgnoreCase("scheduled"))
-		{
-			list.add(i);
-		}
-	});
-	return list;
+	public List<?> getAllCinfirmedEvent() {
+		List<Interview> list = new ArrayList<Interview>();
+		interviewRepository.findAll().forEach(i -> {
+			if (i.getInterviewStatus().equalsIgnoreCase("scheduled")) {
+				list.add(i);
+			}
+		});
+		return list;
 	}
-	
-	
+
 	@PostMapping("/rescheduledMeeting")
-	public void rescheduledMeeting(@RequestBody Interview it,@RequestParam String reason)
-	{
-		it= interviewRepository.findById(it.getInterviewId()).get();
-		System.out.println(it);
+	public void rescheduledMeeting(@RequestBody Interview it, @RequestParam String reason) {
+		Interview it1 = interviewRepository.findById(it.getInterviewId()).get();
+		System.out.println(it1.getCalEventId());
 		System.out.println(reason);
-		
 		try {
-		 client.events().delete("primary",it.getCalEventId()).setSendNotifications(true).execute();
-		} catch (IOException exp) {	
+			client.events().delete("primary", it1.getCalEventId()).setSendNotifications(true).execute();
+		} catch (IOException exp) {
 			exp.printStackTrace();
-		}	
-		
-		//it.setPanelEmail("dakhilesh95@gmail.com");
-		//it.setCandidateEmail("deshmukha816@gmail.com");
+		}
+
+		// it.setPanelEmail("dakhilesh95@gmail.com");
+		// it.setCandidateEmail("deshmukha816@gmail.com");
 		System.out.println(it);
 		Event event = new Event();
-	    event.setSummary("Interview Call From GSlab is rescheduled reason:- "+reason+" , give response in the form of yes or no")
-	    .setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
-	    .setDescription("Interview for software Engg");
+		event.setSummary("Interview Call From GSlab is rescheduled reason:- " + reason
+				+ " , give response in the form of yes or no")
+				.setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
+				.setDescription("Interview for software Engg");
 
-	DateTime startDateTime = new DateTime(it.getScheduledOn());
-	EventDateTime start = new EventDateTime()
-	    .setDateTime(startDateTime)
-	    .setTimeZone("Asia/Kolkata");
-	
-	event.setStart(start);
-	
-	DateTime endDateTime = new DateTime(it.getScheduledEndTime());
-	EventDateTime end = new EventDateTime()
-	    .setDateTime(endDateTime)
-	    .setTimeZone("Asia/Kolkata");
-	 event.setEnd(end);
+		DateTime startDateTime = new DateTime(it.getScheduledOn());
+		EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("Asia/Kolkata");
 
-	String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=1"};
-	event.setRecurrence(Arrays.asList(recurrence));
+		event.setStart(start);
 
-	EventAttendee[] attendees = new EventAttendee[] {
-		//new EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
-	    //new EventAttendee().setEmail("dakhilesh95@gmail.com"),
-	    //new EventAttendee().setEmail("deshmukha816@gmail.com"),
-			new EventAttendee().setOrganizer(true).setEmail(it.getHrEmail()),
-		    new EventAttendee().setEmail(it.getPanelEmail()),
-		    new EventAttendee().setEmail(it.getCandidateEmail()),
-	};
-	
-	event.setAttendees(Arrays.asList(attendees));
-	
-	event.setOriginalStartTime(start);
-	event.setVisibility("private");
-	event.setGuestsCanModify(false);
-	event.setGuestsCanInviteOthers(false);
-	
-	EventReminder[] reminderOverrides = new EventReminder[] {
-	    new EventReminder().setMethod("email").setMinutes(24 * 60),
-	    new EventReminder().setMethod("popup").setMinutes(10),
-	};
-	
-	Event.Reminders reminders = new Event.Reminders()
- 	     .setUseDefault(false)
-	    .setOverrides(Arrays.asList(reminderOverrides));
-	 event.setReminders(reminders);
+		DateTime endDateTime = new DateTime(it.getScheduledEndTime());
+		EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone("Asia/Kolkata");
+		event.setEnd(end);
 
-	 //event.setStatus("confirmed");
-	String calendarId = "primary";
-	System.out.println(event.getId());
-	Event eventOutput=null; 
-	 try {
-	    eventOutput=client.events().insert(calendarId, event).setSendNotifications(true).execute();
-	} catch (IOException e) {
-		e.printStackTrace();
+		String[] recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=1" };
+		event.setRecurrence(Arrays.asList(recurrence));
+
+		EventAttendee[] attendees = new EventAttendee[] {
+				// new
+				// EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
+				// new EventAttendee().setEmail("dakhilesh95@gmail.com"),
+				// new EventAttendee().setEmail("deshmukha816@gmail.com"),
+				new EventAttendee().setOrganizer(true).setEmail(it.getHrEmail()),
+				new EventAttendee().setEmail(it.getPanelEmail()),
+				new EventAttendee().setEmail(it.getCandidateEmail()), };
+
+		event.setAttendees(Arrays.asList(attendees));
+
+		event.setOriginalStartTime(start);
+		event.setVisibility("private");
+		event.setGuestsCanModify(false);
+		event.setGuestsCanInviteOthers(false);
+
+		EventReminder[] reminderOverrides = new EventReminder[] {
+				new EventReminder().setMethod("email").setMinutes(24 * 60),
+				new EventReminder().setMethod("popup").setMinutes(10), };
+
+		Event.Reminders reminders = new Event.Reminders().setUseDefault(false)
+				.setOverrides(Arrays.asList(reminderOverrides));
+		event.setReminders(reminders);
+
+		// event.setStatus("confirmed");
+		String calendarId = "primary";
+		System.out.println(event.getId());
+		Event eventOutput = null;
+		try {
+			eventOutput = client.events().insert(calendarId, event).setSendNotifications(true).execute();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		System.out.printf("Event created: %s\n", eventOutput.getId());
+		it.setCalEventId(eventOutput.getId());
+		it.setCandidateResponseStatus("needsAction");
+		it.setPanelResponseStatus("needsAction");
+		it.setInterviewStatus("waiting");
+		it.setMeetLink(eventOutput.getHangoutLink());
+		interviewRepository.save(it);
+		System.out.printf("Event created: %s\n", eventOutput.getStart());
+
 	}
-	 
-	System.out.printf("Event created: %s\n", eventOutput.getId());	
-	it.setCalEventId(eventOutput.getId());
-	it.setCandidateResponseStatus("needsAction");
-	it.setPanelResponseStatus("needsAction");
-	it.setInterviewStatus("waiting");
-	interviewRepository.save(it);
-	System.out.printf("Event created: %s\n", eventOutput.getStart());
-	
-	
-	}
-	
+
 }
