@@ -14,14 +14,27 @@ public class Feature {
 	Boolean candidate;
 	Boolean userList;
 	Boolean dashboard;
+	Boolean level;
 	
+	public Boolean getLevel() {
+		return level;
+	}
+
+
+
+	public void setLevel(Boolean level) {
+		this.level = level;
+	}
+
+
+
 	public Feature() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	
 
-	public Feature(Integer id, String roles, Boolean vacancy, Boolean candidate, Boolean userList, Boolean dashboard) {
+	public Feature(Integer id, String roles, Boolean vacancy, Boolean candidate, Boolean userList, Boolean dashboard,Boolean level) {
 		super();
 		this.id = id;
 		this.roles = roles;
@@ -29,6 +42,7 @@ public class Feature {
 		this.candidate = candidate;
 		this.userList = userList;
 		this.dashboard = dashboard;
+		this.level = level;
 	}
 
 
