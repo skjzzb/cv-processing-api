@@ -88,6 +88,9 @@ public class CandidateController {
 //			candidateObj.setFinalStatus("NOT_SELECTED");
 		if(candidateObj.getInterviewStatus() == null)
 			candidateObj.setInterviewStatus("Not scheduled any round");
+		if(candidateObj.getFinalStatus() == "" || candidateObj.getFinalStatus() == null)
+			candidateObj.setFinalStatus("NOT_SELECTED");
+		System.out.println(candidateObj);
 		ServiceObj.createCandidate(candidateObj,id);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path(Constant.GET_CANDIDATE_BY_ID).buildAndExpand(candidateObj.getId()).toUri());
