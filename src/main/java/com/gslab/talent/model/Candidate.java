@@ -251,7 +251,9 @@ public class Candidate {
 				+ ", technologyStackMatchingPercent=" + technologyStackMatchingPercent
 				+ ", shortSummaryMatchingPercent=" + shortSummaryMatchingPercent + ", interviewStatus="
 				+ interviewStatus + ", yearOfExperience=" + yearOfExperience + ", employmentStatus=" + employmentStatus
-				+ "]";
+				+ ", finalStatus=" + finalStatus + ", resumeURL=" + resumeURL + ", vacancy=" + vacancy + "]";
 	}
+
+	
 
 }
