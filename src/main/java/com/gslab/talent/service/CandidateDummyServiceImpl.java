@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gslab.talent.model.Candidate;
 import com.gslab.talent.model.CandidateDummy;
 import com.gslab.talent.repository.CandidateDummyRepository;
 import com.gslab.talent.repository.CandidateRepository;
@@ -24,4 +25,16 @@ public class CandidateDummyServiceImpl implements CandidateDummyService{
 		candidateSummyRepoObj.save(candidateDummy);
 	}
 
+
+	@Override
+	public void deleteDummyCandidate(long id) {
+		candidateSummyRepoObj.deleteById(id);
+	}
+
+
+	@Override
+	public List<CandidateDummy> getAllCandidate() {
+		return (List<CandidateDummy>) candidateSummyRepoObj.findAll();
+	}
+	
 }
