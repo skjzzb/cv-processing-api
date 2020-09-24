@@ -15,4 +15,5 @@ public interface VacancyService {
 	public String getLevelList(int vacancyId);
 	void createNewVacancy(Vacancy vacancy);
 	public HashMap<String, Integer> getCountOfVacancyForProject(String str);
+	public Vacancy findByJobTitleAndProjectName(String jobTitle, String projectName);
 }
