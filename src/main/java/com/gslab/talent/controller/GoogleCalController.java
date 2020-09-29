@@ -219,6 +219,7 @@ public class GoogleCalController {
 		System.out.println(it);
 		Event event = new Event();
 		event.setSummary("Interview Call From GSlab, give response in the form of YES or NO")
+		        .setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
 				.setDescription("https://meet.google.com/zoh-fysq-mhq")
 				.setHangoutLink("https://meet.google.com/zoh-fysq-mhq");
 
@@ -346,6 +347,7 @@ public class GoogleCalController {
 		Event event = new Event();
 		event.setSummary("Interview Call From GSlab is rescheduled reason:- " + reason
 				+ " , give response in the form of YES or NO")
+	        	.setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
 				.setDescription("https://meet.google.com/zoh-fysq-mhq")
 				.setHangoutLink("https://meet.google.com/zoh-fysq-mhq");
 
@@ -362,10 +364,6 @@ public class GoogleCalController {
 		event.setRecurrence(Arrays.asList(recurrence));
 
 		EventAttendee[] attendees = new EventAttendee[] {
-				// new
-				// EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
-				// new EventAttendee().setEmail("dakhilesh95@gmail.com"),
-				// new EventAttendee().setEmail("deshmukha816@gmail.com"),
 				new EventAttendee().setOrganizer(true).setEmail(it.getHrEmail()),
 				new EventAttendee().setEmail(it.getPanelEmail()),
 				new EventAttendee().setEmail(it.getCandidateEmail()), };
@@ -384,8 +382,6 @@ public class GoogleCalController {
 		Event.Reminders reminders = new Event.Reminders().setUseDefault(false)
 				.setOverrides(Arrays.asList(reminderOverrides));
 		event.setReminders(reminders);
-
-		// event.setStatus("confirmed");
 		String calendarId = "primary";
 		System.out.println(event.getId());
 		
