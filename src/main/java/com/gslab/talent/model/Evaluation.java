@@ -5,11 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="Evaluation")
-public class EvaluationReport {
+public class Evaluation {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,17 +21,22 @@ public class EvaluationReport {
 
 	String averageRating;
 	
+	String interviewLevel;
+	
 	int candidateId;
 	
-	EvaluationReport(){
+	String feedback;
+	
+	Evaluation(){
 		
 	}
 	
-	EvaluationReport(int id,String question,String averageRating,int cacandidateId){
+	Evaluation(int id,String question,String averageRating,int candidateId,String feedback){
 		this.id = id;
 		this.question = question;
 		this.averageRating = averageRating;
 		this.candidateId = candidateId;
+		this.feedback = feedback;
 	}
 
 	public int getId() {
@@ -55,13 +62,29 @@ public class EvaluationReport {
 	public void setAverageRating(String averageRating) {
 		this.averageRating = averageRating;
 	}
-
+	
 	public int getCandidateId() {
 		return candidateId;
 	}
 
 	public void setCandidateId(int candidateId) {
 		this.candidateId = candidateId;
+	}
+
+	public String getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+
+	public String getInterviewLevel() {
+		return interviewLevel;
+	}
+
+	public void setInterviewLevel(String interviewLevel) {
+		this.interviewLevel = interviewLevel;
 	}
 	
 	@Override

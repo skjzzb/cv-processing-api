@@ -17,4 +17,6 @@ public interface InterviewService {
 
 	public TreeMap<String, TreeMap<String, Integer>> getCountOfInterviewLevelForProject();
 
+	TreeMap<Integer, Integer> getTotalInterviewMonthly();
+
 }

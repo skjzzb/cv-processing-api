@@ -16,8 +16,8 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name="Candidate")
-public class Candidate {
+@Table(name="CandidateDummy")
+public class CandidateDummy {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -71,12 +71,6 @@ public class Candidate {
 	public void setFinalStatus(String finalStatus) {
 		this.finalStatus = finalStatus;
 	}
-
-	
-
-	@ManyToOne
-	@JoinColumn(name = "vacancyId")
-	private Vacancy vacancy;
 	
 	public long getId() {
 		return id;
@@ -110,14 +104,6 @@ public class Candidate {
 		this.technologyStack = technologyStack;
 	}
 
-	public Vacancy getVacancy() {
-		return vacancy;
-	}
-
-	public void setVacancy(Vacancy vacancy) {
-		this.vacancy = vacancy;
-	}
-	
 	public String getEmail() {
 		return email;
 	}
@@ -174,7 +160,7 @@ public class Candidate {
 		this.shortSummaryMatchingPercent = shortSummaryMatchingPercent;
 	}
 
-	public Candidate(long id, String candidateName, String contactNo, String email, String employmentStatus) {
+	public CandidateDummy(long id, String candidateName, String contactNo, String email, String employmentStatus) {
 		super();
 		this.id = id;
 		this.candidateName = candidateName;
@@ -187,7 +173,7 @@ public class Candidate {
 	
 	
 
-	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
+	public CandidateDummy(long id, String candidateName, String contactNo, String email, String technologyStack,
 			Integer reqMatchingPercent, Integer technologyStackMatchingPercent, Integer shortSummaryMatchingPercent,
 			Integer yearOfExperience) {
 		super();
@@ -202,7 +188,7 @@ public class Candidate {
 		this.yearOfExperience = yearOfExperience;
 	}
 
-	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
+	public CandidateDummy(long id, String candidateName, String contactNo, String email, String technologyStack,
 			Integer reqMatchingPercent, Integer technologyStackMatchingPercent, Integer shortSummaryMatchingPercent,
 			String interviewStatus, Integer yearOfExperience, String employmentStatus) {
 		super();
@@ -221,9 +207,9 @@ public class Candidate {
 	
 	
 
-	public Candidate(long id, String candidateName, String contactNo, String email, String technologyStack,
+	public CandidateDummy(long id, String candidateName, String contactNo, String email, String technologyStack,
 			Integer reqMatchingPercent, Integer technologyStackMatchingPercent, Integer shortSummaryMatchingPercent,
-			String interviewStatus, Integer yearOfExperience, String employmentStatus, String finalStatus,Vacancy vacancy) {
+			String interviewStatus, Integer yearOfExperience, String employmentStatus, String finalStatus) {
 		super();
 		this.id = id;
 		this.candidateName = candidateName;
@@ -237,10 +223,9 @@ public class Candidate {
 		this.yearOfExperience = yearOfExperience;
 		this.employmentStatus = employmentStatus;
 		this.finalStatus = finalStatus;
-		this.vacancy = vacancy;
 	}
 
-	public Candidate() {
+	public CandidateDummy() {
 		super();
 	}
 
@@ -251,9 +236,7 @@ public class Candidate {
 				+ ", technologyStackMatchingPercent=" + technologyStackMatchingPercent
 				+ ", shortSummaryMatchingPercent=" + shortSummaryMatchingPercent + ", interviewStatus="
 				+ interviewStatus + ", yearOfExperience=" + yearOfExperience + ", employmentStatus=" + employmentStatus
-				+ ", finalStatus=" + finalStatus + ", resumeURL=" + resumeURL + ", vacancy=" + vacancy + "]";
+				+ "]";
 	}
-
-	
 
 }
