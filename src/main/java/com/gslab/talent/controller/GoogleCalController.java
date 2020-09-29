@@ -218,9 +218,10 @@ public class GoogleCalController {
 		// it.setCandidateEmail("deshmukha816@gmail.com");
 		System.out.println(it);
 		Event event = new Event();
-		event.setSummary("Interview Call From GSlab, give response in the form of yes or no")
-				.setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
-				.setDescription("Interview for software Engg");
+		event.setSummary("Interview Call From GSlab, give response in the form of YES or NO")
+				.setLocation("https://meet.google.com/zoh-fysq-mhq")
+				.setDescription("Interview for software Engg")
+				.setHangoutLink("https://meet.google.com/zoh-fysq-mhq");
 
 		DateTime startDateTime = new DateTime(it.getScheduledOn());
 		EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("Asia/Kolkata");
@@ -416,9 +417,10 @@ public class GoogleCalController {
 		System.out.println(it);
 		Event event = new Event();
 		event.setSummary("Interview Call From GSlab is rescheduled reason:- " + reason
-				+ " , give response in the form of yes or no")
-				.setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
-				.setDescription("Interview for software Engg");
+				+ " , give response in the form of YES or NO")
+				.setLocation("https://meet.google.com/zoh-fysq-mhq")
+				.setDescription("Interview for software Engg")
+				.setHangoutLink("https://meet.google.com/zoh-fysq-mhq");
 
 		DateTime startDateTime = new DateTime(it.getScheduledOn());
 		EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("Asia/Kolkata");
