@@ -218,8 +218,8 @@ public class GoogleCalController {
 	public String setMeeting(@RequestBody Interview it) {
 		System.out.println(it);
 		Event event = new Event();
-		event.setSummary("Interview Call From GSlab, give response in the form of yes or no")
-				.setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
+		event.setSummary("Interview Call From GSlab, give response in the form of YES or NO")
+				.setLocation("https://meet.google.com/zoh-fysq-mhq")
 				.setDescription("Interview for software Engg")
 				.setHangoutLink("https://meet.google.com/zoh-fysq-mhq");
 
@@ -346,8 +346,8 @@ public class GoogleCalController {
 		System.out.println(it);
 		Event event = new Event();
 		event.setSummary("Interview Call From GSlab is rescheduled reason:- " + reason
-				+ " , give response in the form of yes or no")
-				.setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
+				+ " , give response in the form of YES or NO")
+				.setLocation("https://meet.google.com/zoh-fysq-mhq")
 				.setDescription("Interview for software Engg")
 				.setHangoutLink("https://meet.google.com/zoh-fysq-mhq");
 
