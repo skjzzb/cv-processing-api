@@ -2,6 +2,7 @@ package com.gslab.talent.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,6 +37,7 @@ public class Interview {
 	  
 	  Integer vacancyId;
 	  
+	  @Column(columnDefinition = "varchar(255) default 'https://meet.google.com/zoh-fysq-mhq'")
 	  String meetLink;
 	  
 	  public String getMeetLink() {

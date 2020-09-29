@@ -135,4 +135,10 @@ public class VacancyController {
 		return new ResponseEntity<HashMap<String,Integer>>(vacancyServiceObj.getCountOfVacancyForProject(str), HttpStatus.OK);
 
 	}
+	
+	@GetMapping("/getVacancyByProjectAndPosition/{projName}/{posName}")
+	public ResponseEntity<?> getVacancyByProjectAndPositionName(@PathVariable String projName, @PathVariable String posName ){
+		return new ResponseEntity<>(vacancyServiceObj.findByJobTitleAndProjectName(posName, projName), HttpStatus.OK);
+	}
+	
 }

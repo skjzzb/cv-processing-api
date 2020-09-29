@@ -33,45 +33,40 @@ public class VacancyServiceImpl implements VacancyService {
 
 	@Autowired
 	LevelRepository levelRepository;
-	
+
 	@PersistenceUnit
 	private EntityManagerFactory emf;
-	
+
 	@Override
 	public List<Vacancy> getAllVacancy(String sort) {
-		List<Vacancy> list1=new ArrayList<Vacancy>();
-		
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
-		   LocalDateTime now = LocalDateTime.now();
-		
-		   List<Vacancy> list=vacancyRepoObj.findAll();
-		
-		if(sort.equalsIgnoreCase("avalible")) {
-			System.out.println(sort); 
-			   
-			   for(Vacancy l:list)
-			   {
-				   if(dtf.format(now).compareTo(l.getPosOnBoardDate().toString())<=0)
-				   {
-					   list1.add(l);
-				   }
-			   }
+		List<Vacancy> list1 = new ArrayList<Vacancy>();
+
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDateTime now = LocalDateTime.now();
+
+		List<Vacancy> list = vacancyRepoObj.findAll();
+
+		if (sort.equalsIgnoreCase("avalible")) {
+			System.out.println(sort);
+
+			for (Vacancy l : list) {
+				if (dtf.format(now).compareTo(l.getPosOnBoardDate().toString()) <= 0) {
+					list1.add(l);
+				}
+			}
 			return list1;
-		}else if(sort.equalsIgnoreCase("closed"))
-		{
-			System.out.println(sort);  
-			   for(Vacancy l:list)
-			   {
-				   if(dtf.format(now).compareTo(l.getPosOnBoardDate().toString())>0)
-				   {
-					   list1.add(l);
-				   }
-			   }
+		} else if (sort.equalsIgnoreCase("closed")) {
+			System.out.println(sort);
+			for (Vacancy l : list) {
+				if (dtf.format(now).compareTo(l.getPosOnBoardDate().toString()) > 0) {
+					list1.add(l);
+				}
+			}
 			return list1;
-		}else {
-			return list;		
+		} else {
+			return list;
 		}
-		
+
 	}
 
 	@Override
@@ -81,7 +76,7 @@ public class VacancyServiceImpl implements VacancyService {
 
 	@Override
 	public void createNewVacancy(Vacancy vacancy) {
-	    vacancyRepoObj.save(vacancy);
+		vacancyRepoObj.save(vacancy);
 	}
 
 	@Override
@@ -96,31 +91,30 @@ public class VacancyServiceImpl implements VacancyService {
 
 	@Override
 	public void updateVacancyList(String levelList) {
-		 vacancyRepoObj.save(levelList);
+		vacancyRepoObj.save(levelList);
 	}
 
 	@Override
 	public String getLevelList(int vacancyId) {
 		return vacancyRepoObj.findByLevelList(vacancyId);
 	}
-	
+
 	@Override
-	public HashMap<String,Integer> getCountOfVacancyForProject(String str){
+	public HashMap<String, Integer> getCountOfVacancyForProject(String str) {
 		List<Vacancy> listOfVacancy = vacancyRepoObj.findAll();
-		HashMap<String,Integer> hashmap = new HashMap<String,Integer>();
-		
+		HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
+
 		for (Vacancy vacancy : listOfVacancy) {
 			String projectName = vacancy.getProjectName();
 			hashmap.put(projectName, 0);
 		}
-		
-		
-		switch(str) {
-		
+
+		switch (str) {
+
 		case "year": {
 			for (Vacancy vacancy : listOfVacancy) {
 				String projectName = vacancy.getProjectName();
-				
+
 				if (hashmap.containsKey(projectName)) {
 					hashmap.put(projectName, hashmap.get(projectName) + 1);
 				} else
@@ -128,7 +122,7 @@ public class VacancyServiceImpl implements VacancyService {
 			}
 			break;
 		}
-		
+
 		case "month": {
 			long millis = System.currentTimeMillis();
 			java.sql.Date date = new java.sql.Date(millis);
@@ -156,5 +150,11 @@ public class VacancyServiceImpl implements VacancyService {
 		}
 		return hashmap;
 
+	}
+
+	@Override
+	public Vacancy findByJobTitleAndProjectName(String jobTitle, String projectName) {
+		// TODO Auto-generated method stub
+		return vacancyRepoObj.findByJobTitleAndProjectName(jobTitle, projectName);
 	}
 }
