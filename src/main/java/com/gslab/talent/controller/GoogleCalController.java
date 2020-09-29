@@ -59,6 +59,7 @@ import com.google.api.services.calendar.model.CreateConferenceRequest;
 
 @RestController
 @CrossOrigin(allowedHeaders = "*")
+@RequestMapping("/v1")
 public class GoogleCalController {
 
 	private final static Log logger = LogFactory.getLog(GoogleCalController.class);
@@ -218,8 +219,9 @@ public class GoogleCalController {
 	public String setMeeting(@RequestBody Interview it) {
 		System.out.println(it);
 		Event event = new Event();
-		event.setSummary("Interview Call From GSlab, give response in the form of YES or NO")
-				.setDescription("https://meet.google.com/zoh-fysq-mhq")
+		event.setSummary("Interview Call From GSlab, give response in the form of yes or no")
+				.setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
+				.setDescription("Interview for software Engg")
 				.setHangoutLink("https://meet.google.com/zoh-fysq-mhq");
 
 		DateTime startDateTime = new DateTime(it.getScheduledOn());
@@ -345,8 +347,9 @@ public class GoogleCalController {
 		System.out.println(it);
 		Event event = new Event();
 		event.setSummary("Interview Call From GSlab is rescheduled reason:- " + reason
-				+ " , give response in the form of YES or NO")
-				.setDescription("https://meet.google.com/zoh-fysq-mhq")
+				+ " , give response in the form of yes or no")
+				.setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
+				.setDescription("Interview for software Engg")
 				.setHangoutLink("https://meet.google.com/zoh-fysq-mhq");
 
 		DateTime startDateTime = new DateTime(it.getScheduledOn());

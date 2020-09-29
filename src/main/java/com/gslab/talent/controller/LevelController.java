@@ -28,7 +28,7 @@ import com.gslab.talent.service.UserService;
 
 @RestController
 @CrossOrigin(allowedHeaders = "*")
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/v1")
 public class LevelController {
 
 	@Autowired

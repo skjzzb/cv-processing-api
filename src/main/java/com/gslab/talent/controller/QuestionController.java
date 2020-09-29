@@ -28,7 +28,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(allowedHeaders = "*")
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/v1")
 public class QuestionController {
 
 	@Autowired
