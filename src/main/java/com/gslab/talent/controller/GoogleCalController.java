@@ -220,7 +220,8 @@ public class GoogleCalController {
 		Event event = new Event();
 		event.setSummary("Interview Call From GSlab, give response in the form of yes or no")
 				.setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
-				.setDescription("Interview for software Engg");
+				.setDescription("Interview for software Engg")
+				.setHangoutLink("https://meet.google.com/zoh-fysq-mhq");
 
 		DateTime startDateTime = new DateTime(it.getScheduledOn());
 		EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("Asia/Kolkata");
@@ -279,7 +280,7 @@ public class GoogleCalController {
 		it.setCandidateResponseStatus("needsAction");
 		it.setPanelResponseStatus("needsAction");
 		it.setInterviewStatus("waiting");
-		it.setMeetLink(eventOutput.getHangoutLink());
+		it.setMeetLink("https://meet.google.com/zoh-fysq-mhq");
 		interviewRepository.save(it);
 		System.out.printf("Event created: %s\n", eventOutput.getStart());
 		System.out.print("Hangout Links : -"+eventOutput.getHangoutLink());
@@ -347,7 +348,8 @@ public class GoogleCalController {
 		event.setSummary("Interview Call From GSlab is rescheduled reason:- " + reason
 				+ " , give response in the form of yes or no")
 				.setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
-				.setDescription("Interview for software Engg");
+				.setDescription("Interview for software Engg")
+				.setHangoutLink("https://meet.google.com/zoh-fysq-mhq");
 
 		DateTime startDateTime = new DateTime(it.getScheduledOn());
 		EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("Asia/Kolkata");
@@ -412,7 +414,7 @@ public class GoogleCalController {
 		it.setCandidateResponseStatus("needsAction");
 		it.setPanelResponseStatus("needsAction");
 		it.setInterviewStatus("waiting");
-		it.setMeetLink(eventOutput.getHangoutLink());
+		it.setMeetLink("https://meet.google.com/zoh-fysq-mhq");
 		interviewRepository.save(it);
 		System.out.printf("Event created: %s\n", eventOutput.getStart());
 
