@@ -219,8 +219,7 @@ public class GoogleCalController {
 		System.out.println(it);
 		Event event = new Event();
 		event.setSummary("Interview Call From GSlab, give response in the form of YES or NO")
-				.setLocation("https://meet.google.com/zoh-fysq-mhq")
-				.setDescription("Interview for software Engg")
+				.setDescription("https://meet.google.com/zoh-fysq-mhq")
 				.setHangoutLink("https://meet.google.com/zoh-fysq-mhq");
 
 		DateTime startDateTime = new DateTime(it.getScheduledOn());
@@ -347,8 +346,7 @@ public class GoogleCalController {
 		Event event = new Event();
 		event.setSummary("Interview Call From GSlab is rescheduled reason:- " + reason
 				+ " , give response in the form of YES or NO")
-				.setLocation("https://meet.google.com/zoh-fysq-mhq")
-				.setDescription("Interview for software Engg")
+				.setDescription("https://meet.google.com/zoh-fysq-mhq")
 				.setHangoutLink("https://meet.google.com/zoh-fysq-mhq");
 
 		DateTime startDateTime = new DateTime(it.getScheduledOn());
