@@ -16,6 +16,7 @@ import javax.websocket.server.PathParam;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -47,16 +48,21 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.DateTime;
+import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.Calendar.Events;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventAttendee;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.EventReminder;
+import com.google.api.services.calendar.model.CalendarListEntry;
+import com.google.api.services.calendar.model.ConferenceData;
+import com.google.api.services.calendar.model.ConferenceSolutionKey;
+import com.google.api.services.calendar.model.CreateConferenceRequest;
 
 @RestController
 @CrossOrigin(allowedHeaders = "*")
-@RequestMapping(value = "/v1")
+//@RequestMapping("/v1")
 public class GoogleCalController {
 
 	private final static Log logger = LogFactory.getLog(GoogleCalController.class);
@@ -103,7 +109,7 @@ public class GoogleCalController {
 			Events events = client.events();
 			eventList = events.list("primary").setTimeMin(date1).setTimeMax(date2).execute();
 			message = eventList.getItems().toString();
-			// System.out.println("My:" + eventList.getItems());
+		    System.out.println("My:" + eventList.getItems());
 		} catch (Exception e) {
 			logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."
 					+ " Redirecting to google connection status page.");
@@ -214,8 +220,6 @@ public class GoogleCalController {
 
 	@RequestMapping(value = "/setMeeting", method = RequestMethod.POST)
 	public String setMeeting(@RequestBody Interview it) {
-		// it.setPanelEmail("dakhilesh95@gmail.com");
-		// it.setCandidateEmail("deshmukha816@gmail.com");
 		System.out.println(it);
 		Event event = new Event();
 		event.setSummary("Interview Call From GSlab, give response in the form of YES or NO")
@@ -236,10 +240,7 @@ public class GoogleCalController {
 		event.setRecurrence(Arrays.asList(recurrence));
 
 		EventAttendee[] attendees = new EventAttendee[] {
-				// new
-				// EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
-				// new EventAttendee().setEmail("dakhilesh95@gmail.com"),
-				// new EventAttendee().setEmail("deshmukha816@gmail.com"),
+
 				new EventAttendee().setOrganizer(true).setEmail(it.getHrEmail()),
 				new EventAttendee().setEmail(it.getPanelEmail()),
 				new EventAttendee().setEmail(it.getCandidateEmail()), };
@@ -258,11 +259,11 @@ public class GoogleCalController {
 		Event.Reminders reminders = new Event.Reminders().setUseDefault(false)
 				.setOverrides(Arrays.asList(reminderOverrides));
 		event.setReminders(reminders);
-
-		// event.setStatus("confirmed");
+		
 		String calendarId = "primary";
 		System.out.println(event.getId());
 		Event eventOutput = null;
+		
 		try {
 			eventOutput = client.events().insert(calendarId, event).setSendNotifications(true).execute();
 		} catch (IOException e) {
@@ -274,91 +275,13 @@ public class GoogleCalController {
 		it.setCandidateResponseStatus("needsAction");
 		it.setPanelResponseStatus("needsAction");
 		it.setInterviewStatus("waiting");
+		it.setMeetLink("https://meet.google.com/zoh-fysq-mhq");
 		interviewRepository.save(it);
 		System.out.printf("Event created: %s\n", eventOutput.getStart());
-
+		System.out.print("Hangout Links : -"+eventOutput.getHangoutLink());
 		return "event created";
 	}
 
-	@RequestMapping(value = "/UpdateMeeting", method = RequestMethod.POST)
-	public String rescheduleMeeting(@RequestBody Interview it) {
-		Events events = client.events();
-		Interview i = interviewRepository.findById(it.getInterviewId()).get();
-		String eventId = i.getCalEventId();
-		Event event = null;
-		try {
-			event = events.get("primary", eventId).execute();
-		} catch (IOException exp) {
-			exp.printStackTrace();
-		}
-		System.out.println(event);
-
-		event.setSummary("Interview Call From GSlab, give response in the form of yes or no")
-				.setLocation("Amar Arma Genesis, Baner Rd, Baner, Pune, Maharashtra 411045")
-				.setDescription("Interview for software Engg");
-
-		DateTime startDateTime = new DateTime(it.getScheduledOn());
-		EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("Asia/Kolkata");
-
-		event.setStart(start);
-
-		DateTime endDateTime = new DateTime(it.getScheduledEndTime());
-		EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone("Asia/Kolkata");
-		event.setEnd(end);
-
-		String[] recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=1" };
-		event.setRecurrence(Arrays.asList(recurrence));
-
-		EventAttendee[] attendees = new EventAttendee[] {
-				// new
-				// EventAttendee().setOrganizer(true).setEmail("akhilesh.deshmukh@gslab.com"),
-				// new EventAttendee().setEmail("dakhilesh95@gmail.com"),
-				// new EventAttendee().setEmail("deshmukha816@gmail.com"),
-				new EventAttendee().setOrganizer(true).setEmail(it.getHrEmail()),
-				new EventAttendee().setEmail(it.getPanelEmail()),
-				new EventAttendee().setEmail(it.getCandidateEmail()), };
-
-		event.setAttendees(Arrays.asList(attendees));
-
-		event.setOriginalStartTime(start);
-		event.setVisibility("private");
-		event.setGuestsCanModify(false);
-		event.setGuestsCanInviteOthers(false);
-
-//		EventReminder[] reminderOverrides = new EventReminder[] {
-//		    new EventReminder().setMethod("email").setMinutes(24 * 60),
-//		    new EventReminder().setMethod("popup").setMinutes(10),
-//		};
-//		
-//		Event.Reminders reminders = new Event.Reminders()
-//			     .setUseDefault(false)
-//		    .setOverrides(Arrays.asList(reminderOverrides));
-//		 event.setReminders(reminders);
-
-		// event.setStatus("confirmed");
-		String calendarId = "primary";
-		System.out.println(event.getId());
-		Event eventOutput = null;
-		try {
-			eventOutput = client.events().update(calendarId, eventId, event).setSendNotifications(true).execute();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		System.out.printf("Event created: %s\n", eventOutput.getId());
-		i.setPanelEmail(it.getPanelEmail());
-		i.setCandidateEmail(it.getCandidateEmail());
-		i.setScheduledOn(it.getScheduledOn());
-		i.setScheduledEndTime(it.getScheduledEndTime());
-		i.setCalEventId(eventOutput.getId());
-		i.setCandidateResponseStatus("needsAction");
-		i.setPanelResponseStatus("needsAction");
-		i.setInterviewStatus("waiting");
-		interviewRepository.save(i);
-		System.out.printf("Event created: %s\n", eventOutput.getStart());
-
-		return "event updated";
-	}
 
 	@DeleteMapping("/deleteMeeting/{interviewId}")
 	public void deleteEvent(@PathVariable(value = "interviewId") Long interviewId) {
@@ -384,10 +307,11 @@ public class GoogleCalController {
 		});
 		return list;
 	}
+
 	@GetMapping(value = "/interview/{interviewId}")
 	public Optional<Interview> getInterviewByInterviewID(@PathVariable long interviewId) {
-		
-		 return interviewRepository.findById(interviewId);
+
+		return interviewRepository.findById(interviewId);
 	}
 
 	@GetMapping("/interview/confirmed")
@@ -412,12 +336,10 @@ public class GoogleCalController {
 			exp.printStackTrace();
 		}
 
-		// it.setPanelEmail("dakhilesh95@gmail.com");
-		// it.setCandidateEmail("deshmukha816@gmail.com");
 		System.out.println(it);
 		Event event = new Event();
-		event.setSummary("Interview Call From GSlab is rescheduled reason:- " + reason
-				+ " , give response in the form of YES or NO")
+		event.setSummary("Interview Call From GSlab is Rescheduled, reason:- " + reason
+				+ " , give response in the form of yes or no")
 				.setLocation("https://meet.google.com/zoh-fysq-mhq")
 				.setDescription("Interview for software Engg")
 				.setHangoutLink("https://meet.google.com/zoh-fysq-mhq");
@@ -458,24 +380,28 @@ public class GoogleCalController {
 				.setOverrides(Arrays.asList(reminderOverrides));
 		event.setReminders(reminders);
 
-		// event.setStatus("confirmed");
 		String calendarId = "primary";
 		System.out.println(event.getId());
+		
+		
 		Event eventOutput = null;
+
 		try {
 			eventOutput = client.events().insert(calendarId, event).setSendNotifications(true).execute();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+   
 		System.out.printf("Event created: %s\n", eventOutput.getId());
 		it.setCalEventId(eventOutput.getId());
 		it.setCandidateResponseStatus("needsAction");
 		it.setPanelResponseStatus("needsAction");
 		it.setInterviewStatus("waiting");
+		it.setMeetLink("https://meet.google.com/zoh-fysq-mhq");
 		interviewRepository.save(it);
 		System.out.printf("Event created: %s\n", eventOutput.getStart());
 
 	}
+
 
 }
