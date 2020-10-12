@@ -175,7 +175,7 @@ public class GoogleCalController {
 
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-	@Scheduled(cron = "0 */59 * * * *")
+	@Scheduled(cron = "0 */1 * * * *")
 	@RequestMapping(value = "/setresponse", method = RequestMethod.GET)
 	public void setResponse() {
 
